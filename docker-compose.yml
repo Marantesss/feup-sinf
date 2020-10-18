@@ -1,0 +1,49 @@
+version: '3'
+
+services:
+  # eventually
+  #database:
+    #image: postgres
+    #restart: unless-stopped
+    #expose: [5432]
+    #env_file: 
+    #  - database/postgres.env
+    #ports:
+    #  - 5432:5432
+
+  backend:
+    image: scope/scope-backend
+    restart: unless-stopped
+    build:
+      context: ./scope-backend
+      dockerfile: Dockerfile
+    volumes:
+      - ./scope-backend/:/app
+      - /app/node_modules
+    ports:
+      - 8000:${APP_BACKEND_DEV_PORT}
+    environment:
+      APP_NAME: ${APP_NAME}
+      APP_BACKEND_DEV_PORT: ${APP_BACKEND_DEV_PORT}
+      DB_CONNECTION: ${DB_CONNECTION}
+      DB_HOST: ${DB_HOST}
+      DB_PORT: ${DB_PORT}
+      DB_DATABASE: ${DB_DATABASE}
+      DB_USERNAME: ${DB_USERNAME}
+      DB_PASSWORD: ${DB_PASSWORD}
+
+  frontend:
+    image: scope/scope-frontend
+    restart: unless-stopped
+    build:
+      context: ./scope-frontend
+      dockerfile: Dockerfile
+    volumes:
+      - ./scope-frontend/:/app
+      - /app/node_modules
+    ports:
+      - 8080:${APP_FRONTEND_DEV_PORT}
+    environment:
+      APP_NAME: ${APP_NAME}
+      APP_FRONTEND_DEV_PORT: ${APP_FRONTEND_DEV_PORT}
+

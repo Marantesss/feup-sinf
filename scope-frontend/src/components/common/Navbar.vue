@@ -4,8 +4,14 @@
     <v-app-bar app color="secondary" dark clipped-left flat>
       <div class="d-flex align-center">
         <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
-
-        Scope Logo Here
+        <v-img
+          alt="Scope Logo"
+          class="shrink ms-2"
+          contain
+          :src="require('../../assets/scope-logo-white.svg')"
+          transition="scale-transition"
+          width="100"
+        />
       </div>
 
       <v-spacer></v-spacer>

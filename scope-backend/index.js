@@ -1,26 +1,8 @@
-/**
- * Required External Modules
- */
-const express = require("express");
-const path = require("path");
-/**
- * App Variables
- */
-const app = express();
-const port = process.env.PORT || "8000";
-/**
- *  App Configuration
- */
+const app = require('./app');
+const config = require('./config');
 
-/**
- * Routes Definitions
- */
-app.get("/", (req, res) => {
-  res.status(200).json({message: 'Hello from the backend side'});
-});
-/**
- * Server Activation
- */
+const { port } = config.express;
+
 app.listen(port, () => {
-  console.log(`Listening to requests on http://localhost:${port}`);
+  console.log(`Listening on port ${port}`);
 });

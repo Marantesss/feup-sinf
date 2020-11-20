@@ -5,7 +5,9 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "dev": "nodemon ./index.js"
+    "dev": "nodemon ./index.js",
+    "lint": "echo 'Running backend linter'",
+    "test": "echo 'Running backend tests'"
   },
   "devDependencies": {
     "nodemon": "^2.0.5"

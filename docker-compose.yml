@@ -1,15 +1,27 @@
 version: '3'
 
 services:
-  # eventually
-  #database:
-    #image: postgres
-    #restart: unless-stopped
-    #expose: [5432]
-    #env_file: 
-    #  - database/postgres.env
-    #ports:
-    #  - 5432:5432
+  database:
+    image: postgres:13.0-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${DB_DATABASE}
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    ports:
+      - ${DB_PORT}:${DB_PORT}
+
+  pgAdmin:
+    image: dpage/pgadmin4:4.27
+    restart: unless-stopped
+    depends_on:
+      - database
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD}
+    ports:
+      - ${PGADMIN_PORT}:80
+
 
   backend:
     image: scope/scope-backend
@@ -21,7 +33,7 @@ services:
       - ./scope-backend/:/app
       - /app/node_modules
     ports:
-      - 8000:${APP_BACKEND_DEV_PORT}
+      - ${APP_BACKEND_DEV_PORT}:${APP_BACKEND_DEV_PORT}
     environment:
       APP_NAME: ${APP_NAME}
       APP_BACKEND_DEV_PORT: ${APP_BACKEND_DEV_PORT}
@@ -42,7 +54,7 @@ services:
       - ./scope-frontend/:/app
       - /app/node_modules
     ports:
-      - 8080:${APP_FRONTEND_DEV_PORT}
+      - ${APP_FRONTEND_DEV_PORT}:${APP_FRONTEND_DEV_PORT}
     environment:
       VUE_APP_NAME: ${APP_NAME}
       VUE_APP_FRONTEND_DOMAIN: ${APP_FRONTEND_DOMAIN}

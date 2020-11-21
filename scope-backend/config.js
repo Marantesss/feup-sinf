@@ -11,6 +11,7 @@ config.express = {
 };
 
 config.db = {
+  client: process.env.DB_CLIENT,
   host: process.env.DB_HOST,
   database: process.env.DATABASE,
   user: process.env.DB_USER,

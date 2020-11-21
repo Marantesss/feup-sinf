@@ -1,7 +1,7 @@
 const db = require('./config.js').db;
 
 module.exports = {
-  client: 'postgresql',
+  client: db.client,
   connection: {
     host: db.host,
     database: db.database,

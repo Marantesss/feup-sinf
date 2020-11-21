@@ -1,5 +1,5 @@
 ---
-name: "🐛 Bug report"
+name: "🛠️ Feature Request"
 about: Report an issue with Scope App
 title: ''
 labels: bug

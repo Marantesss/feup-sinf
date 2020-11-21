@@ -37,7 +37,7 @@ services:
     environment:
       APP_NAME: ${APP_NAME}
       PORT: ${APP_BACKEND_DEV_PORT}
-      DB_CONNECTION: ${DB_CONNECTION}
+      DB_CLIENT: ${DB_CLIENT}
       DB_HOST: ${DB_HOST}
       DB_PORT: ${DB_PORT}
       DB_DATABASE: ${DB_DATABASE}

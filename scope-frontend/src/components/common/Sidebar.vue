@@ -18,12 +18,19 @@
         </v-list-item>
       </router-link>
     </v-list>
-  </v-navigation-drawer>
+    <Datepicker/>
+  </v-navigation-drawer >
 </template>
 
 <script>
+import Datepicker from './Datepicker.vue';
+
 export default {
   name: "Sidebar",
+
+  components: {
+    Datepicker,
+  },
   
   props: {
     show: Boolean,

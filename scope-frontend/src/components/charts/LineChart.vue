@@ -7,7 +7,16 @@ export default {
   props: {
     chartData: {
       type: Array
-    }
+    }/*,
+    label: {
+      type: String
+    },ptions: {
+      type: Object
+    },
+    chartColors: {
+      type: Object
+    }*/
+
   },
   mounted () {
     this.renderChart(this.chartdata)

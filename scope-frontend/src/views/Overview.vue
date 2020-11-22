@@ -14,7 +14,7 @@
             Sales by Store
           </v-col>
           <v-col md='4' class='card-table'>
-            <simple-table />
+            <simple-table title='Top Sales All-Time'/>
           </v-col>
         </v-row>
       </v-col>
@@ -26,7 +26,7 @@
             Sales by Store
           </v-col>
           <v-col md='4' class='card-table'>
-            <simple-table />
+            <simple-table title='Top Sales All-Time'/>
           </v-col>
         </v-row>
       </v-col>

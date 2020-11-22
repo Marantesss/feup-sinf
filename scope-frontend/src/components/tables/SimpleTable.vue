@@ -1,7 +1,7 @@
 <template>
   <div id='simple-table' class='simple-table pt-2'>
     <div class='pb-1'>
-      <span id="simple-table-title" class='pl-2'>Top Sales All-Time</span>
+      <span id="simple-table-title" class='pl-2'>{{title}}</span>
     </div>
     <v-data-table
       :headers='headers'
@@ -23,6 +23,7 @@
 <script>
 export default {
   name: "SimpleTable",
+  props: ['title'],
 
   data: (() => {
     return {

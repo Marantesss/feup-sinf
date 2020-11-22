@@ -21,7 +21,7 @@
       v-model="dateFrom"
       v-if="pickingFrom"
       @change="pickingFrom=false"
-      width=260
+      width=220
       header-color="secondary"
       color="secondary"
       light
@@ -34,7 +34,7 @@
       v-model="dateTo"
       v-if="pickingTo"
       @change="pickingTo=false"
-      width=260
+      width=220
       header-color="secondary"
       color="secondary"
       light

@@ -4,6 +4,8 @@ services:
   database:
     image: postgres:13.0-alpine
     restart: unless-stopped
+    volumes:
+      - dbdata:/var/lib/postgresql/data
     environment:
       POSTGRES_DB: ${DB_DATABASE}
       POSTGRES_USER: ${DB_USERNAME}
@@ -62,4 +64,5 @@ services:
       VUE_APP_BACKEND_DOMAIN: ${APP_BACKEND_DOMAIN}
       VUE_APP_BACKEND_PORT: ${APP_BACKEND_DEV_PORT}
       
-
+volumes:
+  dbdata:

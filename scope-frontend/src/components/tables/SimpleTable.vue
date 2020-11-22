@@ -1,11 +1,11 @@
 <template>
   <div id='simple-table' class='simple-table pt-2'>
     <div class='pb-1'>
-      <span id="simple-table-title" class='pl-2'>{{title}}</span>
+      <span id="simple-table-title" class='pl-2'>{{data.title}}</span>
     </div>
     <v-data-table
-      :headers='headers'
-      :items='sales'
+      :headers=data.headers
+      :items=data.sales
       items-per-page='10'
       hide-default-header='true'
       :footer-props='{
@@ -23,63 +23,7 @@
 <script>
 export default {
   name: "SimpleTable",
-  props: ['title'],
-
-  data: (() => {
-    return {
-      headers: [
-        {
-          text: 'Top Sales All-Time',
-          align: 'start',
-          sortable: false,
-          value: 'name',
-        },
-        { text: 'Sales', value: 'sales' },
-      ],
-      sales: [
-        {
-          name: 'Store 1',
-          sales: '340.1',
-        },
-        {
-          name: 'Store 2',
-          sales: '341.1',
-        },
-        {
-          name: 'Store 3',
-          sales: '342.1',
-        },
-        {
-          name: 'Store 4',
-          sales: '343.1',
-        },
-        {
-          name: 'Store 5',
-          sales: '344.1',
-        },
-        {
-          name: 'Store 6',
-          sales: '339.1',
-        },
-        {
-          name: 'Store 7',
-          sales: '338.1',
-        },
-        {
-          name: 'Store 8',
-          sales: '337.1',
-        },
-        {
-          name: 'Store 9',
-          sales: '336.1',
-        },
-        {
-          name: 'Store 10',
-          sales: '335.1',
-        },
-      ]
-    }
-  })
+  props: ['data'],
 }
 </script>
 

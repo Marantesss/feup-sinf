@@ -6,7 +6,10 @@ router.get('/', (req, res) => {
 });
 
 router.get('/login', (req, res) => {
-  return res.json({ status: 200, message: 'logg in'});
+
+
+  return res.json({ status: 200, message: ""});
 });
+
 
 module.exports = router;

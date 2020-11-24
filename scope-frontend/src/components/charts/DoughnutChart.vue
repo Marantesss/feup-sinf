@@ -2,8 +2,8 @@
 import { Doughnut } from "vue-chartjs";
 
 export default {
-  name: "DoughnutChart",
-  extends: Line,
+  name: " DoughnutChart",
+  extends: Doughnut,
   props: {
     chartData: {
       type: Array
@@ -22,7 +22,7 @@ export default {
     this.renderChart(this.chartdata)
   }
 }
-
+ 
 </script>
 
 <style>

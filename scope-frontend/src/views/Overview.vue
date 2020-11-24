@@ -5,6 +5,7 @@
         <v-row class='elevation-10 mx-1'>
           <v-col class='pa-2'>
             Inventory by Category - Purchases vs Sales
+            <BarChart/>
           </v-col>
         </v-row>
       </v-col>
@@ -12,6 +13,8 @@
         <v-row no-gutters class='elevation-10 mx-1'>
           <v-col md='8' class='pa-2'>
             Sales by Store
+            <DoughnutChart />
+            <LineChart />
           </v-col>
           <v-col md='4' class='card-table'>
             <simple-table
@@ -26,6 +29,8 @@
         <v-row no-gutters class='elevation-10 mx-1'>
           <v-col md='8' class='pa-2'>
             Sales by Store
+            <DoughnutChart />
+            <LineChart />
           </v-col>
           <v-col md='4' class='card-table'>
             <simple-table
@@ -38,6 +43,7 @@
         <v-row class='elevation-10 mx-1'>
           <v-col class='pa-2'>
             Purchases and Sales Cashflow
+            <LineChart />
           </v-col>
         </v-row>
       </v-col>
@@ -47,8 +53,11 @@
 
 <script>
 import SimpleTable from '@/components/tables/SimpleTable'
+import LineChart from '@/components/charts/LineChart'
+import BarChart from '@/components/charts/BarChart'
+import DoughnutChart from '@/components/charts/DoughnutChart'
 export default {
-  components: { SimpleTable },
+  components: { SimpleTable, LineChart, BarChart, DoughnutChart},
   name: "Overview",
   data: (() => {
     return {

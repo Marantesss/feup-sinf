@@ -3,7 +3,7 @@ import { Bar } from "vue-chartjs";
 
 export default {
   name: "BarChart",
-  extends: Line,
+  extends: Bar,
   props: {
     chartData: {
       type: Array

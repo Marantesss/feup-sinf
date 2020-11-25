@@ -5,7 +5,7 @@
         <v-row class='elevation-10 mx-1'>
           <v-col class='pa-2'>
             Inventory by Category - Purchases vs Sales
-            <BarChart/>
+            <chart-wrapper/>
           </v-col>
         </v-row>
       </v-col>
@@ -13,8 +13,8 @@
         <v-row no-gutters class='elevation-10 mx-1'>
           <v-col md='8' class='pa-2'>
             Sales by Store
-            <DoughnutChart />
-            <LineChart />
+            <doughnut-chart />
+            <line-chart />
           </v-col>
           <v-col md='4' class='card-table'>
             <simple-table
@@ -29,8 +29,8 @@
         <v-row no-gutters class='elevation-10 mx-1'>
           <v-col md='8' class='pa-2'>
             Sales by Store
-            <DoughnutChart />
-            <LineChart />
+            <doughnut-chart />
+            <line-chart />
           </v-col>
           <v-col md='4' class='card-table'>
             <simple-table
@@ -43,7 +43,7 @@
         <v-row class='elevation-10 mx-1'>
           <v-col class='pa-2'>
             Purchases and Sales Cashflow
-            <LineChart />
+            <line-chart />
           </v-col>
         </v-row>
       </v-col>
@@ -54,11 +54,13 @@
 <script>
 import SimpleTable from '@/components/tables/SimpleTable'
 import LineChart from '@/components/charts/LineChart'
-import BarChart from '@/components/charts/BarChart'
+//import BarChart from '@/components/charts/BarChart'
 import DoughnutChart from '@/components/charts/DoughnutChart'
+import ChartWrapper from '../components/common/ChartWrapper.vue'
 export default {
-  components: { SimpleTable, LineChart, BarChart, DoughnutChart},
+  components: { SimpleTable, LineChart, DoughnutChart,ChartWrapper},
   name: "Overview",
+
   data: (() => {
     return {
       salesByStore: {

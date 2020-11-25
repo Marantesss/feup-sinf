@@ -1,13 +1,13 @@
 <script>
-import { Bar } from "vue-chartjs";
+import { Bar } from 'vue-chartjs'
 
 export default {
-  name: "BarChart",
   extends: Bar,
   props: {
     chartData: {
-      type: Array
-    }/*,
+      type: Object,
+      default: () => {return }
+    },/*
     label: {
       type: String
     },ptions: {
@@ -15,14 +15,18 @@ export default {
     },
     chartColors: {
       type: Object
-    }*/
+    },*/
+    options: {
+      type: Object,
+      default: () => {return {responsive: true}}
+    }
 
   },
+
   mounted () {
-    this.renderChart(this.chartdata)
+    this.renderChart(this.chartData, this.options)
   }
 }
-
 </script>
 
 <style>

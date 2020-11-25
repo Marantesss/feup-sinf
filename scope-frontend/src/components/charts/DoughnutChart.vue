@@ -19,7 +19,7 @@ export default {
 
   },
   mounted () {
-    this.renderChart(this.chartdata)
+    this.renderChart(this.chartData)
   }
 }
  

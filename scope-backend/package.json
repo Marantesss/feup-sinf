@@ -9,7 +9,9 @@
     "dev": "nodemon ./index.js",
     "lint": "echo 'Running backend linter'",
     "test": "echo 'Running backend tests'",
-    "knex": "knex"
+    "knex": "knex",
+    "migrate": "knex migrate:latest",
+    "seed": "knex seed:run"
   },
   "devDependencies": {
     "nodemon": "^2.0.5"

@@ -5,6 +5,7 @@
         <v-row class='elevation-10 mx-1'>
           <v-col class='pa-2'>
             Inventory by Category - Purchases vs Sales
+            <chart-wrapper/>
           </v-col>
         </v-row>
       </v-col>
@@ -12,6 +13,8 @@
         <v-row no-gutters class='elevation-10 mx-1'>
           <v-col md='8' class='pa-2'>
             Sales by Store
+            <dougnut-wrapper/>
+            <line-wrapper />
           </v-col>
           <v-col md='4' class='card-table'>
             <simple-table
@@ -26,6 +29,8 @@
         <v-row no-gutters class='elevation-10 mx-1'>
           <v-col md='8' class='pa-2'>
             Sales by Store
+            <dougnut-wrapper />
+            <line-wrapper />
           </v-col>
           <v-col md='4' class='card-table'>
             <simple-table
@@ -38,6 +43,7 @@
         <v-row class='elevation-10 mx-1'>
           <v-col class='pa-2'>
             Purchases and Sales Cashflow
+            <line-wrapper />
           </v-col>
         </v-row>
       </v-col>
@@ -47,9 +53,13 @@
 
 <script>
 import SimpleTable from '@/components/tables/SimpleTable'
+import ChartWrapper from '@/components/common/ChartWrapper.vue'
+import DougnutWrapper from '@/components/common/DougnutWrapper.vue'
+import LineWrapper from '@/components/common/LineWrapper.vue'
 export default {
-  components: { SimpleTable },
+  components: { SimpleTable,ChartWrapper, DougnutWrapper, LineWrapper},
   name: "Overview",
+
   data: (() => {
     return {
       salesByStore: {

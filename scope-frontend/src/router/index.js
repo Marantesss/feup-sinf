@@ -7,17 +7,19 @@ import Sales from '../views/Sales.vue'
 import Purchases from '../views/Purchases.vue'
 import Inventory from '../views/Inventory.vue'
 import Accounts from '../views/Accounts.vue'
+import Login from '../views/Login.vue'
 
 Vue.use(VueRouter)
 
 const routes = [
-  /* TODO LATER
   {
     path: '/login',
     name: 'Login',
-    component: Login
+    component: Login,
+    meta: {
+      plainLayout: true
+    },
   },
-  */
   {
     path: '/',
     name: 'Home',

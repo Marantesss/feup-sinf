@@ -1,5 +1,11 @@
 <template>
-  <v-app>
+  <v-app v-if="$route.meta.plainLayout">
+    <v-main>
+      <router-view></router-view>
+    </v-main>
+  </v-app>
+
+  <v-app v-else>
     <Navbar />
 
     <v-main>

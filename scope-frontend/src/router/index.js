@@ -9,6 +9,8 @@ import Inventory from '../views/Inventory.vue'
 import Accounts from '../views/Accounts.vue'
 import Login from '../views/Login.vue'
 
+import store from '../store';
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -57,5 +59,18 @@ const router = new VueRouter({
   base: process.env.BASE_URL,
   routes
 })
+
+/**
+ * Authenticated routes
+ */
+router.beforeEach((to, from, next) => {
+  if (to.name !== 'Login' && !store.state.user.loggedIn) {
+    next({ name: 'Login' });
+  } else if(to.name === 'Login' && store.state.user.loggedIn) {
+    next({ name: 'Overview'});
+  } else {
+    next();
+  }
+});
 
 export default router

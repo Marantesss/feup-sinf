@@ -21,7 +21,14 @@
               @input="$v.email.$touch()"
               @blur="$v.email.$touch()"
             ></v-text-field>
-            <v-btn color="primary" :loading="this.loading" rounded block class="my-4" @click="submit">
+            <v-btn
+              color="primary"
+              :loading="this.loading"
+              rounded
+              block
+              class="my-4"
+              @click="submit"
+            >
               Login
             </v-btn>
 
@@ -78,13 +85,19 @@ export default {
         password: this.password,
       };
       this.loading = true;
+      this.error = false;
       api.login(
         body,
         (res) => {
-          console.log(res);
           this.loading = false;
           if (res.data.status == 200) {
-            console.log(res);
+            // send login action to user module
+            this.$store.dispatch({
+              type: "user/logIn",
+              jwtToken: res.data.token,
+            });
+            // redirect to dashboard
+            this.$router.replace('/');
           } else {
             this.error = true;
           }
@@ -97,6 +110,7 @@ export default {
     clear() {
       this.$v.$reset();
       this.email = "";
+      this.password = "";
     },
   },
 

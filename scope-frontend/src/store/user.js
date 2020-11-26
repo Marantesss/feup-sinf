@@ -16,18 +16,18 @@ const mutations = {
     // update state
     state.loggedIn = true;
     // update local storage
-    window.localStorage.setItem('JWT_TOKEN', payload.jwt_token);
+    window.localStorage.setItem('JWT_TOKEN', payload.jwtToken);
   }
 };
 
 // actions
 const actions = {
-  changeLanguage(context, payload) {
-    context.commit('changeLanguage', payload)
+  logIn(context, payload) {
+    context.commit('logIn', payload);
   },
 };
 
-export const user = {
+export default {
   namespaced: true,
   state,
   actions,

@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import LineChart from '../charts/LineChart.vue';
+import LineChart from '@/components/charts/LineChart.vue';
 
 export default {
   name: "ChartWrapper",
@@ -13,8 +13,8 @@ export default {
     LineChart,
   },
 
-  data: () => {
-    return {
+  data: () => (
+     {
       chartData: {
         labels: [
           "January",
@@ -46,7 +46,7 @@ export default {
         ],
       },
 
-      ooptions: {
+      options: {
 				responsive: true,
 				plugins: {
 					title: {
@@ -79,8 +79,8 @@ export default {
 					}
 				}
 			},
-    };
-  },
+    }
+  ),
 };
 </script>
 

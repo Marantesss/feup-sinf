@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import DoughnutChart from '../charts/DoughnutChart.vue';
+import DoughnutChart from '@/components/charts/DoughnutChart.vue';
 
 export default {
   name: "ChartWrapper",
@@ -13,8 +13,8 @@ export default {
     DoughnutChart,
   },
 
-  data: () => {
-    return {
+  data: () => (
+     {
       chartData: {
         labels: [
           "January",
@@ -47,8 +47,8 @@ export default {
       options: {
         
       },
-    };
-  },
+    }
+  ),
 };
 </script>
 

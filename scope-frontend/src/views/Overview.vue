@@ -53,9 +53,9 @@
 
 <script>
 import SimpleTable from '@/components/tables/SimpleTable'
-import ChartWrapper from '../components/common/ChartWrapper.vue'
-import DougnutWrapper from '../components/common/DougnutWrapper.vue'
-import LineWrapper from '../components/common/LineWrapper.vue'
+import ChartWrapper from '@/components/common/ChartWrapper.vue'
+import DougnutWrapper from '@/components/common/DougnutWrapper.vue'
+import LineWrapper from '@/components/common/LineWrapper.vue'
 export default {
   components: { SimpleTable,ChartWrapper, DougnutWrapper, LineWrapper},
   name: "Overview",

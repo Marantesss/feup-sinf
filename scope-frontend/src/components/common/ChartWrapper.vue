@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import BarChart from "../charts/BarChart.vue";
+import BarChart from "@/components/charts/BarChart.vue";
 
 export default {
   name: "ChartWrapper",
@@ -13,8 +13,8 @@ export default {
     BarChart,
   },
 
-  data: () => {
-    return {
+  data: () => (
+     {
       chartData: {
         labels: [
           "January",
@@ -58,8 +58,8 @@ export default {
           ],
         },
       },
-    };
-  },
+    }
+  )
 };
 </script>
 

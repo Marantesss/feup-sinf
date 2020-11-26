@@ -3,11 +3,20 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
 const { jwtSecret } = require('../config');
-const middlewares = require('../middlewares');
+const { authenticate, validate } = require('../middlewares');
+const { login } = require('../schemas')
 
 const router = express.Router();
 
+/**
+ * Login route
+ * - validate middleware makes sure that the request body is in the correct format { emmail. password }
+ * - route does some verifications (users exsists, password matches, ...)
+ * - signs new jwt token and creates new session
+ * - sends token to client
+ */
 router.post('/login',
+  validate(login),
   async (req, res) => {
     const { email, password } = req.body;
 
@@ -43,8 +52,14 @@ router.post('/login',
   },
 );
 
+/**
+ * Logout route
+ * - authenticate middleware makes sure that the user is authenticated before logging in
+ * - route does some verifications (users exists
+ * - destroys session
+ */
 router.post('/logout',
-  middlewares.authenticate,
+  authenticate,
   async (req, res) => {
     const { user } = req;
 

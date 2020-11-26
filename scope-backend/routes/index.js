@@ -1,15 +1,12 @@
 const express = require('express');
 const router = express.Router();
 
+const authRouter = require('./auth');
+
 router.get('/', (req, res) => {
   return res.json({ status: 200, message: 'alive' });
 });
 
-router.get('/login', (req, res) => {
-
-
-  return res.json({ status: 200, message: ""});
-});
-
+router.use('/', authRouter);
 
 module.exports = router;

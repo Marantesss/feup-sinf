@@ -65,12 +65,12 @@ export default {
             this.$store.dispatch({
               type: "user/logOut",
             });
-            // redirect to login
-            this.$router.push("/login");
             this.$store.dispatch({
               type: "alerts/addSuccessAlert",
               message: "Logout Successfull",
             });
+            // redirect to login
+            this.$router.push("/login");
           } else {
             this.$store.dispatch({
               type: "alerts/addDangerAlert",

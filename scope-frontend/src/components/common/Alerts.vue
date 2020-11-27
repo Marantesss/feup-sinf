@@ -2,9 +2,10 @@
   <div class="my-alert-container">
     <v-alert
       v-for="alert in alerts"
-      :key="alert"
+      :key="alert.id"
       :type="alert.type"
       class="my-alert"
+      v-model="alert.show"
       dismissible
     >
       {{ alert.message }}

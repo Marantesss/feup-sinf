@@ -1,6 +1,26 @@
 <template>
   <div>
-    <Sidebar :show="showSidebar" />
+    <v-navigation-drawer color="primary" dark v-model="drawer" app clipped>
+      <v-list dense>
+        <router-link
+          v-for="item in items"
+          :key="item.text"
+          :to="{ name: item.route }"
+        >
+          <v-list-item link>
+            <v-list-item-action>
+              <v-icon>{{ item.icon }}</v-icon>
+            </v-list-item-action>
+            <v-list-item-content>
+              <v-list-item-title>
+                {{ item.text }}
+              </v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+        </router-link>
+      </v-list>
+      <Datepicker />
+    </v-navigation-drawer>
     <v-app-bar app color="secondary" dark clipped-left flat>
       <div class="d-flex align-center">
         <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
@@ -24,14 +44,14 @@
 </template>
 
 <script>
-import Sidebar from "@/components/common/Sidebar";
+import Datepicker from "@/components/common/Datepicker.vue";
 import api from "@/services/api";
 
 export default {
   name: "Navbar",
 
   components: {
-    Sidebar,
+    Datepicker,
   },
 
   methods: {
@@ -59,16 +79,37 @@ export default {
     },
   },
 
-  computed: {
-    showSidebar() {
-      return this.drawer;
-    },
-  },
-
   data: () => ({
     drawer: true,
     loading: false,
     error: false,
+    items: [
+      {
+        icon: "mdi-finance",
+        text: "Overview",
+        route: "Overview",
+      },
+      {
+        icon: "mdi-truck",
+        text: "Sales Orders",
+        route: "Sales",
+      },
+      {
+        icon: "mdi-cart",
+        text: "Purchases",
+        route: "Purchases",
+      },
+      {
+        icon: "mdi-cube-scan",
+        text: "Inventory",
+        route: "Inventory",
+      },
+      {
+        icon: "mdi-account-check",
+        text: "Accounts Payable",
+        route: "Accounts",
+      },
+    ],
   }),
 };
 </script>

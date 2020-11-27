@@ -85,7 +85,6 @@ export default {
         password: this.password,
       };
       this.loading = true;
-      this.error = false;
       api.login(
         body,
         (res) => {
@@ -96,10 +95,17 @@ export default {
               type: "user/logIn",
               jwtToken: res.data.token,
             });
+            this.$store.dispatch({
+              type: "alerts/addSuccessAlert",
+              message: "Login Successfull",
+            });
             // redirect to dashboard
             this.$router.replace('/');
           } else {
-            this.error = true;
+            this.$store.dispatch({
+              type: "alerts/addWarningAlert",
+              message: "Credentials do not match our logs",
+            });
           }
         },
         (err) => {
@@ -117,7 +123,6 @@ export default {
   data: () => ({
     email: "",
     password: "",
-    error: false,
     loading: false,
   }),
 };

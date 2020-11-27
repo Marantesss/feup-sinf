@@ -57,7 +57,6 @@ export default {
   methods: {
     submit() {
       this.loading = true;
-      this.error = false;
       api.logout(
         (res) => {
           this.loading = false;
@@ -68,8 +67,15 @@ export default {
             });
             // redirect to login
             this.$router.push("/login");
+            this.$store.dispatch({
+              type: "alerts/addSuccessAlert",
+              message: "Logout Successfull",
+            });
           } else {
-            this.error = true;
+            this.$store.dispatch({
+              type: "alerts/addDangerAlert",
+              message: "Request was not successfull.",
+            });
           }
         },
         (err) => {
@@ -82,7 +88,6 @@ export default {
   data: () => ({
     drawer: true,
     loading: false,
-    error: false,
     items: [
       {
         icon: "mdi-finance",

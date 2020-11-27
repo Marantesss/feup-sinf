@@ -3,6 +3,7 @@
     <v-main>
       <router-view></router-view>
     </v-main>
+    <Alerts />
   </v-app>
 
   <v-app v-else>
@@ -11,18 +12,21 @@
     <v-main>
       <router-view></router-view>
     </v-main>
+
+    <Alerts />
   </v-app>
 </template>
 
 <script>
 import Navbar from "@/components/common/Navbar";
+import Alerts from "@/components/common/Alerts";
 
 export default {
   name: "App",
 
   components: {
     Navbar,
-
+    Alerts,
   },
 
   data: () => ({

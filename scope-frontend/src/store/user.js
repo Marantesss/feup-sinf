@@ -12,18 +12,27 @@ const getters = {
 
 // mutations
 const mutations = {
-  logIn(state, payload) {
-    // update state
+  logIn(state) {
     state.loggedIn = true;
-    // update local storage
-    window.localStorage.setItem('JWT_TOKEN', payload.jwtToken);
+  },
+  logOut(state) {
+    state.loggedIn = false;
   }
 };
 
 // actions
 const actions = {
   logIn(context, payload) {
-    context.commit('logIn', payload);
+    // commit state change
+    context.commit('logIn');
+    // update local storage
+    window.localStorage.setItem('JWT_TOKEN', payload.jwtToken);
+  },
+  logOut(context) {
+    // commit state change
+    context.commit('logOut');
+    // update local storage
+    window.localStorage.removeItem('JWT_TOKEN');
   },
 };
 

@@ -7,17 +7,21 @@ import Sales from '../views/Sales.vue'
 import Purchases from '../views/Purchases.vue'
 import Inventory from '../views/Inventory.vue'
 import Accounts from '../views/Accounts.vue'
+import Login from '../views/Login.vue'
+
+import store from '../store';
 
 Vue.use(VueRouter)
 
 const routes = [
-  /* TODO LATER
   {
     path: '/login',
     name: 'Login',
-    component: Login
+    component: Login,
+    meta: {
+      plainLayout: true
+    },
   },
-  */
   {
     path: '/',
     name: 'Home',
@@ -55,5 +59,18 @@ const router = new VueRouter({
   base: process.env.BASE_URL,
   routes
 })
+
+/**
+ * Authenticated routes
+ */
+router.beforeEach((to, from, next) => {
+  if (to.name !== 'Login' && !store.state.user.loggedIn) {
+    next({ name: 'Login' });
+  } else if(to.name === 'Login' && store.state.user.loggedIn) {
+    next({ name: 'Overview'});
+  } else {
+    next();
+  }
+});
 
 export default router

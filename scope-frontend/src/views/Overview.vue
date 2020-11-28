@@ -114,6 +114,18 @@ export default {
             name: 'Store 10',
             sales: '335.1',
           },
+          {
+            name: 'Store 11',
+            sales: '334.1',
+          },
+          {
+            name: 'Store 12',
+            sales: '333.1',
+          },
+          {
+            name: 'Store 13',
+            sales: '332.1',
+          },
         ]
       }
     }

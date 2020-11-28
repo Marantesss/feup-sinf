@@ -1,7 +1,7 @@
 <template>
-  <div id='simple-table' class='simple-table pt-2'>
-    <div class='pb-1'>
-      <span id="simple-table-title" class='pl-2'>{{data.title}}</span>
+  <div id='simple-table' class='simple-table'>
+    <div class='header-tab'>
+      <span id="simple-table-title" class='py-2 pl-2'>{{data.title}}</span>
     </div>
     <v-data-table
       :headers=data.headers
@@ -29,46 +29,70 @@ export default {
 
 <style>
 
-#simple-table #simple-table-title {
+/* Table */
+#simple-table {
+  height: 100%;
+}
+
+/* Table Title Container */
+#simple-table > div.header-tab {
+  display: flex;
+  align-items: center;
+}
+
+/* Table Title Text */
+#simple-table > div.header-tab > span#simple-table-title {
   font-size: 1em;
 }
 
+#simple-table .v-data-table__wrapper {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+/* Table Content */
 #simple-table .v-data-table {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
   border-top: 1px solid #969696;
 }
 
+/* Table Footer */
 #simple-table .v-data-footer {
+  display: flex;
+  flex-grow: 0;
   border-top: 1px solid #969696;
   padding-left: 16px;
   padding-right: 16px;
-  align-content: center;
+  align-items: center;
   justify-content: space-between;
 }
 
+/* Pagination text */
 .v-application--is-ltr #simple-table .v-data-footer__pagination {
   margin: 0;
   font-size: 0.75em;
 }
 
+/* Button to go to previous page (this places it before the text) */
 .v-application--is-ltr #simple-table .v-data-footer__icons-before {
     order: -1;
 }
 
+/* Selector for items per page */
 #simple-table div.v-data-footer__select {
   display: none;
-  flex: 1;
 }
 
+/* Table rows */
 #simple-table .v-data-table > .v-data-table__wrapper > table > tbody > tr > td.text-start {
-  height: 30px;
+  height: 34px;
   font-size: 0.7em;
 }
 
-#simple-table .v-data-table > .v-data-table__wrapper > table > thead > tr > th span {
-  font-size: 1em;
-  height: 40px;
-}
-
+/* Table pagination buttons */
 .v-application--is-ltr #simple-table .v-data-footer .v-btn {
   width: 20px;
   margin: 0;

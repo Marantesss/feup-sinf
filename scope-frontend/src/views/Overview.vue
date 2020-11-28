@@ -1,6 +1,6 @@
 <template>
   <v-container fluid class='grey lighten-5 mx-2 my-2'>
-    <v-row>
+    <v-row id='core-view-row'>
       <v-col md='6'>
         <v-row class='elevation-10 mx-1'>
           <v-col class='pa-2'>
@@ -24,7 +24,7 @@
         </v-row>
       </v-col>
     </v-row>
-    <v-row>
+    <v-row id='core-view-row'>
       <v-col md='6'>
         <v-row no-gutters class='elevation-10 mx-1'>
           <v-col md='8' class='pa-2'>
@@ -125,6 +125,22 @@ export default {
 
 .card-table {
   border-left: 1px solid #969696;
+}
+
+div.v-main__wrap > div.container {
+  height: 100%;
+}
+
+div.v-main__wrap > div.container > .row#core-view-row {
+  height: 50%;
+}
+
+div.v-main__wrap > div.container > .row#core-view-row > .col {
+  height: 100%;
+}
+
+div.v-main__wrap > div.container > .row#core-view-row > .col > .row {
+  height: 100%;
 }
 
 </style>

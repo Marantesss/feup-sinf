@@ -1,0 +1,15 @@
+{
+  "name": "parser-saft",
+  "version": "1.0.0",
+  "description": "SAF-T file parser and seeder",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "knex": "^0.21.12",
+    "pg": "^8.5.1"
+  }
+}

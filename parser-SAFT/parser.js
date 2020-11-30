@@ -1,8 +1,17 @@
 
-fs = require('fs');
-var parser = require('xml2json');
+const fs = require('fs');
+const xml2js = require('xml2js');
 
-fs.readFile( './SAFT_2019.xml', function(err, data) {
-    var json = parser.toJson(data);
-    //data has saft in json
- });
+const saftPath = './SAFT_2019.xml';
+
+async function readFile() {
+  // read xml content (as string/buffer)
+  const data = fs.readFileSync(saftPath);
+  // return data
+  return await xml2js.parseStringPromise(data);
+};
+
+module.exports = {
+  saftPath,
+  readFile
+};

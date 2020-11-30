@@ -16,6 +16,10 @@
           <v-card-text>
             <v-form>
               <v-text-field
+                outlined
+                rounded
+                clearable
+                dense
                 v-model="email"
                 :error-messages="emailErrors"
                 label="E-mail"
@@ -24,6 +28,10 @@
                 @blur="$v.email.$touch()"
               ></v-text-field>
               <v-text-field
+                outlined
+                rounded
+                clearable
+                dense
                 v-model="password"
                 :error-messages="passwordErrors"
                 label="Password"
@@ -48,7 +56,12 @@
         </v-card>
       </v-col>
 
-      <v-col lg="9" md="7" sm="0" class="login-image-container d-none d-md-flex">
+      <v-col
+        lg="9"
+        md="7"
+        sm="0"
+        class="login-image-container d-none d-md-flex"
+      >
         <v-img
           class="login-image"
           :src="require('@/assets/img/login.jpg')"

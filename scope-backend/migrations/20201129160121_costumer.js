@@ -4,11 +4,11 @@ exports.up = function (knex) {
     //table with costumer details excetp adresses
     table.string('id').notNullable().primary().defaultTo('Consumidor Final');
     // reference to account
-    table.integer('accountId').references('id').inTable('account');
+    table.integer('accountId').unsigned().references('id').inTable('account');
 
     // reference to address
-    table.integer('billingAddress').references('id').inTable('address');
-    table.integer('shipToAddress').references('id').inTable('address');
+    table.integer('billingAddress').unsigned().references('id').inTable('address');
+    table.integer('shipToAddress').unsigned().references('id').inTable('address');
 
 
     table.string('taxId').notNullable().defaultTo('999999990');

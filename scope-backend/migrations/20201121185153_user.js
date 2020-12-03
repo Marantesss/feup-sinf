@@ -2,10 +2,10 @@
 exports.up = function (knex) {
   return knex.schema.createTable('user', (table) => {
     // Create Id column of type integer
-    table.integer('id').notNullable().primary();
+    table.increments('id').notNullable().primary();
 
     // reference to address
-    table.integer('address').references('id').inTable('address');
+    table.integer('address').unsigned().references('id').inTable('address');
 
     table.string('name').notNullable().unique();
     table.string('businessName').notNullable();
@@ -13,7 +13,7 @@ exports.up = function (knex) {
     table.string('fax').notNullable();
     // create email column
     table.string('email').notNullable().unique();
-    // create passwword column
+    // create password column
     table.string('password').notNullable();
     // create created at column
     table.timestamp('createdAt', { useTz: true }).defaultTo(knex.fn.now());

@@ -2,7 +2,7 @@
 exports.up = function (knex) {
   return knex.schema.createTable('address', (table) => {
     // Create Id column of type integer
-    table.integer('id').notNullable().primary();
+    table.increments('id').notNullable().primary();
 
     // not mandatory
     table.string('buildingNumber');

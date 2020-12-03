@@ -3,6 +3,10 @@ exports.up = function (knex) {
   return knex.schema.createTable('user', (table) => {
     // Create Id column of type integer
     table.integer('id').notNullable().primary();
+
+    // reference to address
+    table.integer('address').references('id').inTable('address');
+
     table.string('name').notNullable().unique();
     table.string('businessName').notNullable();
     table.string('telephone').notNullable();

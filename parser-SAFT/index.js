@@ -55,10 +55,41 @@ app.seedAccounts = async () => {
   await app.knex('account').insert(accounts);
 };
 
+app.seedCustomers = async () => {
+  const customers = app.data.masterFiles.customer;
+
+  customers.forEach(async (customer) => {
+    // insert addresses
+    const billingAddress = customer.billingAddress;
+    const shipToAddress = customer.shipToAddress;
+    const [billingId, shipId] = await app.knex('address').insert([billingAddress, shipToAddress]).returning('id');
+    
+    // TODO: Place this in parser
+    // customer might not have an account
+    customer.accountID = customer.accountID === 'Desconhecido' ? null : customer.accountID;
+    
+    // insert customer
+    await app.knex('customer').insert({
+      id: customer.customerID,
+      accountId: customer.accountID,
+      billingAddress: billingId,
+      shipToAddress: shipId,
+      taxId: customer.customerTaxID,
+      companyName: customer.companyName,
+      telephone: customer.telephone,
+      fax: customer.fax,
+      email: customer.email,
+      website: customer.website,
+      selfBillingIndicator: customer.selfBillingIndicator,
+    });
+  });
+};
+
 const main = async () => {
   await app.parseData();
   await app.seedUser();
   await app.seedAccounts();
+  await app.seedCustomers();
   return 'Completed';
 };
 

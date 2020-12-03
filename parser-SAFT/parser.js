@@ -15,7 +15,7 @@ const nameProcessor = (name) => {
     if (+match === 0) return ""; // or if (/\s+/.test(match)) for white spaces
     return index === 0 ? match.toLowerCase() : match.toUpperCase();
   });
-}
+};
 
 // https://www.npmjs.com/package/xml2js#options
 const parserOptions = {

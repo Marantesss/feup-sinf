@@ -4,11 +4,11 @@ exports.up = function(knex) {
         //table with SAFT supplier details except adresses
         table.integer('id').notNullable().primary();
         // reference to account
-        table.integer('accountID').notNullable().references('account');
+        table.integer('accountID').notNullable().references('id').inTable('account');
         
         // reference to address
-        table.integer('billingAddress').references('address');
-        table.integer('shipToAddress').references('address');
+        table.integer('billingAddress').references('id').inTable('address');
+        table.integer('shipToAddress').references('id').inTable('address');
 
         table.integer('taxId').notNullable();
         table.string('companyName').notNullable();

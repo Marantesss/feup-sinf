@@ -2,7 +2,7 @@
 exports.up = function (knex) {
   return knex.schema.createTable('supplier', (table) => {
     //table with SAFT supplier details except adresses
-    table.integer('id').notNullable().primary();
+    table.bigInteger('id').notNullable().primary();
     // reference to account
     table.integer('accountID').unsigned().notNullable().references('id').inTable('account').onDelete('CASCADE');
 

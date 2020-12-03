@@ -3,7 +3,7 @@ exports.up = function (knex) {
   return knex.schema.createTable('transaction', (table) => {
     table.string('id').notNullable().primary();
     // reference to journal
-    table.integer('journalID').unsigned().notNullable().references('id').inTable('journal').onDelete('CASCADE');
+    table.bigInteger('journalID').notNullable().references('id').inTable('journal').onDelete('CASCADE');
 
     table.integer('period').notNullable();
     table.date('date', { useTz: true }).notNullable();

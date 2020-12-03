@@ -2,11 +2,18 @@
 exports.up = function(knex) {
     return knex.schema.createTable('supplier', (table) => {
         //table with SAFT supplier details except adresses
-        table.integer('supplier_id').notNullable();
-        table.integer('acountID').notNullable().references('account.account_id');
-        table.integer('tax_id').notNullable();
+        table.integer('id').notNullable().primary();
+        // reference to account
+        table.integer('accountID').notNullable().references('account');
+        
+        // reference to address
+        table.integer('billingAddress').references('address');
+        table.integer('shipToAddress').references('address');
+
+        table.integer('taxId').notNullable();
+        table.string('companyName').notNullable();
         table.string('phone').notNullable();
-        table.integer('self_billing_indicator').notNullable();
+        table.integer('selfBillingIndicator').notNullable();
     });
 };
 

@@ -18,17 +18,19 @@ app.parseData = async () => {
 
 app.seedUser = async () => {
   const header = app.data.header;
-  console.log(header);
-  console.log(header.companyAddress);
-  // create user address
-  await app.knex('address').insert({
-    id: 1,
-    ...header.companyAddress,
-  });
+  // create user address and return id for referencing
+  const [addressId] = await app.knex('address').insert(header.companyAddress).returning('id');
   // create user
-  //await app.knex('user').insert({
-
-  //});
+  await app.knex('user').insert({
+    id: header.companyID,
+    name: header.companyName,
+    businessName: header.businessName,
+    telephone: header.telephone,
+    fax: header.fax,
+    email: header.email,
+    password: bcrypt.hashSync('password', 10),
+    address: addressId,
+  });
 }
 
 const main = async () => {

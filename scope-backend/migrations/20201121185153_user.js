@@ -5,7 +5,7 @@ exports.up = function (knex) {
     table.increments('id').notNullable().primary();
 
     // reference to address
-    table.integer('address').unsigned().references('id').inTable('address');
+    table.integer('address').unsigned().references('id').inTable('address').onDelete('SET NULL');
 
     table.string('name').notNullable().unique();
     table.string('businessName').notNullable();

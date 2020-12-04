@@ -2,27 +2,29 @@
 import { Bar } from 'vue-chartjs'
 
 export default {
+  name: "BarChart",
   extends: Bar,
   props: {
     chartData: {
       type: Object,
-      default: () => {return }
+      default: () => { return }
     },/*
     label: {
       type: String
-    },ptions: {
-      type: Object
     },
     chartColors: {
       type: Object
     },*/
     options: {
       type: Object,
-      default: () => {return {responsive: true}}
+      default: () => {
+        return {
+          responsive: true,
+          maintainAspectRatio: false
+        }
+      }
     }
-
   },
-
   mounted () {
     this.renderChart(this.chartData, this.options)
   }
@@ -30,4 +32,7 @@ export default {
 </script>
 
 <style>
-</style
+/* canvas#bar-chart {
+    max-height: 40vh;
+} */
+</style>

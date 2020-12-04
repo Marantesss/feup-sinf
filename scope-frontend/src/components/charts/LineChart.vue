@@ -7,25 +7,27 @@ export default {
   props: {
     chartData: {
       type: Object,
-      default: () => {return }
+      default: () => { return }
     },/*
     label: {
       type: String
-    },ptions: {
-      type: Object
     },
     chartColors: {
       type: Object
     },*/
     options: {
       type: Object,
-      default: () => {return {responsive: true}}
+      default: () => {
+        return {
+          responsive: true,
+          maintainAspectRatio: false
+        }
+      }
     }
 
   },
   mounted () {
-    this.renderChart(this.chartData)
-
+    this.renderChart(this.chartData, this.options)
   }
 }
 

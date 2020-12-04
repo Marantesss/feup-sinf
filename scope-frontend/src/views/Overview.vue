@@ -3,7 +3,7 @@
     <v-row id='core-view-row'>
       <v-col md='6'>
         <v-row class='elevation-10 mx-1'>
-          <v-col class='pa-2'>
+          <v-col class='pa-2 left-col'>
             <span class='title'>
               Inventory by Category - Purchases vs Sales
             </span>
@@ -178,10 +178,6 @@ div.container > .row#core-view-row > .col > .row > .col {
   height: 100%;
 }
 
-div.top-half, div.bottom-half {
-  height: 50%;
-}
-
 div.left-col {
   display: flex;
   flex-direction: column;
@@ -189,18 +185,22 @@ div.left-col {
 
 div.charts {
   flex-grow: 1;
+  display: block;
+}
+
+div.top-half, div.bottom-half {
+  height: 50%;
+  display: block;
 }
 
 div.top-half {
-  border-bottom: 1px solid #205662;
-  height: 50%;
-  display: block;
+  padding-bottom: 5px;
+  border-bottom: 1px solid #969696;
 }
 
 div.bottom-half {
-  border-top: 1px solid #205662;
-  height: 50%;
-  display: block;
+  padding-top: 5px;
+  border-top: 1px solid #969696;
 }
 
 </style>

@@ -58,16 +58,17 @@ app.seedAccounts = async () => {
 app.seedCustomers = async () => {
   const customers = app.data.masterFiles.customer;
 
+  await app.knex('customer').del();
   customers.forEach(async (customer) => {
     // insert addresses
     const billingAddress = customer.billingAddress;
     const shipToAddress = customer.shipToAddress;
     const [billingId, shipId] = await app.knex('address').insert([billingAddress, shipToAddress]).returning('id');
-    
+
     // TODO: Place this in parser
     // customer might not have an account
     customer.accountID = customer.accountID === 'Desconhecido' ? null : customer.accountID;
-    
+
     // insert customer
     await app.knex('customer').insert({
       id: customer.customerID,
@@ -85,11 +86,46 @@ app.seedCustomers = async () => {
   });
 };
 
+app.seedJournalsTransactions = async () => {
+  const journals = app.data.generalLedgerEntries.journal;
+
+  await app.knex('journal').del();
+  await app.knex('transaction').del();
+  await app.knex('line').del();
+  journals.forEach(async (journal) => {
+    // insert journal entry
+    await app.knex('journal').insert({ id: journal.journalID, description: journal.description })
+
+    const transactions = journal.transaction;
+    transactions.forEach(async (transaction) => {
+      // insert transaction entry
+      await app.knex('transaction').insert({
+        id: transaction.transactionID,
+        journalId: journal.journalID,
+        period: transaction.period,
+        date: transaction.transactionDate,
+        sourceId: transaction.sourceId,
+        description: transaction.description,
+        docArchivalNumber: transaction.docArchivalNumber,
+        type: transaction.type,
+        GLPostingDate: transaction.gLPostingDate
+      });
+
+      const creditLine = transaction.lines.creditLine;
+      
+
+      const debitLine = transaction.lines.debitLine;
+    });
+    console.log(transactions);
+  });
+};
+
 const main = async () => {
   await app.parseData();
   await app.seedUser();
   await app.seedAccounts();
   await app.seedCustomers();
+  await app.seedJournalsTransactions();
   return 'Completed';
 };
 

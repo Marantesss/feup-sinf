@@ -32,6 +32,7 @@ export default {
 /* Table */
 #simple-table {
   height: 100%;
+  border-left: 1px solid #969696;
 }
 
 /* Table Title Container */
@@ -88,7 +89,7 @@ export default {
 
 /* Table rows */
 #simple-table .v-data-table > .v-data-table__wrapper > table > tbody > tr > td.text-start {
-  height: 34px;
+  height: 33px;
   font-size: 0.7em;
 }
 

@@ -1,24 +1,34 @@
 <template>
-  <v-container fluid class='grey lighten-5 mx-2 my-2'>
+  <v-container fluid class='grey lighten-5'>
     <v-row id='core-view-row'>
       <v-col md='6'>
         <v-row class='elevation-10 mx-1'>
           <v-col class='pa-2'>
-            Inventory by Category - Purchases vs Sales
+            <span class='title'>
+              Inventory by Category - Purchases vs Sales
+            </span>
             <chart-wrapper/>
           </v-col>
         </v-row>
       </v-col>
       <v-col md='6'>
         <v-row no-gutters class='elevation-10 mx-1'>
-          <v-col md='8' class='pa-2'>
-            Sales by Store
-            <dougnut-wrapper/>
-            <line-wrapper />
+          <v-col md='8' class='left-col pa-2'>
+            <span class='title'>
+              Sales by Store
+            </span>
+            <div class='charts'>
+              <div class='top-half'>
+                <doughnut-wrapper />
+              </div>
+              <div class='bottom-half'>
+                <line-wrapper />
+              </div>
+            </div>
           </v-col>
           <v-col md='4' class='card-table'>
             <simple-table
-              :data=salesByStore
+                :data=salesByStore
             />
           </v-col>
         </v-row>
@@ -27,14 +37,22 @@
     <v-row id='core-view-row'>
       <v-col md='6'>
         <v-row no-gutters class='elevation-10 mx-1'>
-          <v-col md='8' class='pa-2'>
-            Sales by Store
-            <dougnut-wrapper />
-            <line-wrapper />
+          <v-col md='8' class='left-col pa-2'>
+            <span class='title'>
+              Sales by Store
+            </span>
+            <div class='charts'>
+              <div class='top-half'>
+                <doughnut-wrapper />
+              </div>
+              <div class='bottom-half'>
+                <line-wrapper />
+              </div>
+            </div>
           </v-col>
           <v-col md='4' class='card-table'>
             <simple-table
-              :data=salesByStore
+                :data=salesByStore
             />
           </v-col>
         </v-row>
@@ -42,7 +60,9 @@
       <v-col md='6'>
         <v-row class='elevation-10 mx-1'>
           <v-col class='pa-2'>
-            Purchases and Sales Cashflow
+            <span class='title'>
+              Purchases and Sales Cashflow
+            </span>
             <line-wrapper />
           </v-col>
         </v-row>
@@ -54,10 +74,10 @@
 <script>
 import SimpleTable from '@/components/tables/SimpleTable'
 import ChartWrapper from '@/components/common/ChartWrapper.vue'
-import DougnutWrapper from '@/components/common/DougnutWrapper.vue'
+import DoughnutWrapper from '@/components/common/DoughnutWrapper.vue'
 import LineWrapper from '@/components/common/LineWrapper.vue'
 export default {
-  components: { SimpleTable,ChartWrapper, DougnutWrapper, LineWrapper},
+  components: { SimpleTable,ChartWrapper, DoughnutWrapper, LineWrapper},
   name: "Overview",
 
   data: (() => {
@@ -133,26 +153,54 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 
-.card-table {
-  border-left: 1px solid #969696;
+div.container {
+  height: 100%;
+  padding: 0;
+  padding-left: 10px;
 }
 
-div.v-main__wrap > div.container {
+div.container > .row#core-view-row {
+  height: 50%;
+  width: 100%;
+}
+
+div.container > .row#core-view-row > .col {
   height: 100%;
 }
 
-div.v-main__wrap > div.container > .row#core-view-row {
+div.container > .row#core-view-row > .col > .row {
+  height: 100%;
+}
+
+div.container > .row#core-view-row > .col > .row > .col {
+  height: 100%;
+}
+
+div.top-half, div.bottom-half {
   height: 50%;
 }
 
-div.v-main__wrap > div.container > .row#core-view-row > .col {
-  height: 100%;
+div.left-col {
+  display: flex;
+  flex-direction: column;
 }
 
-div.v-main__wrap > div.container > .row#core-view-row > .col > .row {
-  height: 100%;
+div.charts {
+  flex-grow: 1;
+}
+
+div.top-half {
+  border-bottom: 1px solid #205662;
+  height: 50%;
+  display: block;
+}
+
+div.bottom-half {
+  border-top: 1px solid #205662;
+  height: 50%;
+  display: block;
 }
 
 </style>

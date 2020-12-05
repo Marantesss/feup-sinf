@@ -93,8 +93,8 @@ app.seedSuppliers = async () => {
   await app.knex('supplier').del();
   suppliers.forEach(async (supplier) => {
     const billingAddress = supplier.billingAddress;
-    const shipfromAddress = supplier.shipFromAddress;
-    const [billinId, shipingId] = await app.knex('address').insert([billingAddress, shipfromAddress]).return('id');
+    const shipFromAddress = supplier.shipFromAddress;
+    const [billingId, shippingId] = await app.knex('address').insert([billingAddress, shipFromAddress]).return('id');
 
     const supplier_taxId = null;
 
@@ -102,8 +102,8 @@ app.seedSuppliers = async () => {
       id: supplier.supplierID,
       accountID: supplier.accountID,
       companyName: supplier.companyName,
-      billingAddress: billinId,
-      shipToAddress: shipingId,
+      billingAddress: billingId,
+      shipToAddress: shippingId,
       phone: supplier.telephone,
       selfBillingIndicator: supplier.selfBillingIndicator,
       taxId: supplier_taxId,

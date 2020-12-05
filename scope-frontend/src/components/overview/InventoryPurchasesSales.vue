@@ -5,7 +5,7 @@
         <span class='title'>
           Inventory by Category - Purchases vs Sales
         </span>
-        <chart-wrapper/>
+        <chart-wrapper style='height: 359px;' />
       </v-col>
     </v-row>
   </v-col>

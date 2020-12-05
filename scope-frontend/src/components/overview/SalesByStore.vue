@@ -7,10 +7,10 @@
         </span>
         <div class='charts'>
           <div class='top-half'>
-            <div><doughnut-wrapper /></div>
+            <div class='hard-coded-height'><doughnut-wrapper style='height: 176px;' /></div>
           </div>
           <div class='bottom-half'>
-            <div><line-wrapper /></div>
+            <div class='hard-coded-height'><line-wrapper style='height: 176px;' /></div>
           </div>
         </div>
       </v-col>
@@ -115,14 +115,11 @@ export default {
       flex-direction: column;
       > div.charts {
         flex-grow: 1;
-        display: block;
         > div.top-half {
-          height: 50%;
           display: block;
           border-bottom: 1px solid #969696;
         }
         > div.bottom-half {
-          height: 50%;
           display: block;
           padding-top: 5px;
           border-top: 1px solid #969696;

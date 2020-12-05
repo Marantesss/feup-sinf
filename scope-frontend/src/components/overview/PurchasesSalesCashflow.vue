@@ -5,7 +5,7 @@
         <span class='title'>
           Purchases and Sales Cashflow
         </span>
-        <line-wrapper />
+        <line-wrapper style='height: 359px;' />
       </v-col>
     </v-row>
   </v-col>

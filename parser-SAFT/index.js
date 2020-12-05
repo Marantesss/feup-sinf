@@ -203,6 +203,21 @@ app.seedJournalsTransactions = async () => {
   });
 };
 
+app.seedTaxTableEntries = async () => {
+  const taxTableEntries = app.data.masterFiles.taxTable.taxTableEntry;
+
+  await app.knex('taxTableEntry').del();
+  taxTableEntries.forEach(async (entry) => {
+    await app.knex('taxTableEntry').insert({
+      type: entry.taxType,
+      countryRegion: entry.taxCountryRegion,
+      code: entry.taxCode,
+      description: entry.description,
+      percentage: entry.taxPercentage,
+    });
+  });
+};
+
 const main = async () => {
   await app.parseData();
   await app.seedUser();
@@ -210,6 +225,7 @@ const main = async () => {
   await app.seedCustomers();
   await app.seedSuppliers();
   await app.seedJournalsTransactions();
+  await app.seedTaxTableEntries();
   return 'Completed';
 };
 

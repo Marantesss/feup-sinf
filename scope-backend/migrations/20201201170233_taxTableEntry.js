@@ -1,7 +1,7 @@
 
 exports.up = function (knex) {
   return knex.schema.createTable('taxTableEntry', (table) => {
-    table.bigInteger('id').notNullable();
+    table.increments('id').primary().notNullable();
 
     // entry type ('IVA' or 'IS' or 'NS')
     table.string('type').notNullable();

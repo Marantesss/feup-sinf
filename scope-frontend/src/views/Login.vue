@@ -10,7 +10,7 @@
           <v-card-title>
             <v-img
               width="150"
-              :src="require('@/assets/scope-logo-black.svg')"
+              :src="require('@/assets/scope-logo-main-color.svg')"
             ></v-img
           ></v-card-title>
           <v-card-text>
@@ -78,7 +78,7 @@ import api from "@/services/api";
 
 export default {
   name: "Login",
-
+  created: (() => { document.title = 'scope - Login' }),
   mixins: [validationMixin],
 
   validations: {

@@ -1,6 +1,6 @@
 <template>
   <v-container id='chart-container'>
-    <doughnut-chart :chartData="chartData" :options=options />
+    <doughnut-chart :chartData="chartData" :options='options' />
   </v-container>
 </template>
 
@@ -31,9 +31,15 @@ export default {
           {
             label: 'Data One',
             backgroundColor: [
-              '#f27878', '#f7b777', '#f5ec71',
-              '#88e382', '#82edf5', '#7979e5',
-              '#ad70f4', '#ce75ef', '#fb96db'
+              '#f27878',
+              '#f7b777',
+              '#f5ec71',
+              '#88e382',
+              '#82edf5',
+              '#7979e5',
+              '#ad70f4',
+              '#ce75ef',
+              '#fb96db'
             ],
             data: [40, 20, 10, 55, 32, 32, 12, 54, 12],
             fill: false,
@@ -41,16 +47,21 @@ export default {
           {
             label: 'Data two',
             backgroundColor: [
-              '#f27878', '#f7b777', '#f5ec71',
-              '#88e382', '#82edf5', '#7979e5',
-              '#ad70f4', '#ce75ef', '#fb96db'
+              '#f27878',
+              '#f7b777',
+              '#f5ec71',
+              '#88e382',
+              '#82edf5',
+              '#7979e5',
+              '#ad70f4',
+              '#ce75ef',
+              '#fb96db'
             ],
             data: [10, 20, 5, 10, 32, 42, 20, 45, 5],
             fill: false,
           },
         ],
       },
-
       options: {
         responsive: true,
         maintainAspectRatio: false,
@@ -66,12 +77,12 @@ export default {
 <style scoped lang='scss'>
 
 #chart-container {
-    min-height: 0;
-    div {
-        position: relative;
-        max-height: 100%;
-        width: 100%;
-    }
+  min-height: 0;
+  div {
+    position: relative;
+    max-height: 100%;
+    width: 100%;
+  }
 }
 
 </style>

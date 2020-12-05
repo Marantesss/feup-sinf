@@ -32,7 +32,4 @@ export default {
 </script>
 
 <style>
-/* canvas#bar-chart {
-    max-height: 40vh;
-} */
 </style>

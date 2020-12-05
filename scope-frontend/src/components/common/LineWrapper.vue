@@ -1,6 +1,6 @@
 <template>
   <v-container class='chart-container'>
-    <line-chart :chartData='chartData' :options=options />
+    <line-chart :chartData='chartData' :options='options' />
   </v-container>
 </template>
 
@@ -12,7 +12,6 @@ export default {
   components: {
     LineChart,
   },
-
   data: () => (
     {
       chartData: {
@@ -38,7 +37,7 @@ export default {
             fill: false,
           },
           {
-            label: 'Data two',
+            label: 'Data Two',
             borderColor: '#ffc857',
             data: [10, 20, 5, 10, 32, 42, 20, 45, 20, 30, 20, 2],
             fill: false,
@@ -91,12 +90,12 @@ export default {
 <style scoped lang='scss'>
 
 .chart-container {
-    min-height: 0;
-    div {
-        position: relative;
-        max-height: 100%;
-        width: 100%;
-    }
+  min-height: 0;
+  div {
+    position: relative;
+    max-height: 100%;
+    width: 100%;
+  }
 }
 
 </style>

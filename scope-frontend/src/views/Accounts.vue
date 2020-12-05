@@ -5,7 +5,7 @@
 <script>
 export default {
   name: 'Home',
-
+  created: (() => { document.title = 'scope - Accounts' }),
   data: () => ({
     //
   }),

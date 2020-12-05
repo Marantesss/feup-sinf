@@ -4,8 +4,8 @@
 
 <script>
 export default {
-  name: "Sales",
-
+  name: 'Sales',
+  created: (() => { document.title = 'scope - Sales' }),
   data: () => ({
     //
   }),

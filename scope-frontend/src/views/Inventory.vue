@@ -4,8 +4,8 @@
 
 <script>
 export default {
-  name: "Inventory",
-
+  name: 'Inventory',
+  created: (() => { document.title = 'scope - Inventory' }),
   data: () => ({
     //
   }),

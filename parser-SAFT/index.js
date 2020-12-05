@@ -94,19 +94,21 @@ app.seedSuppliers = async () => {
   suppliers.forEach(async (supplier) => {
     const billingAddress = supplier.billingAddress;
     const shipFromAddress = supplier.shipFromAddress;
-    const [billingId, shippingId] = await app.knex('address').insert([billingAddress, shipFromAddress]).return('id');
+    const [billingId, shippingId] = await app.knex('address').insert([billingAddress, shipFromAddress]).returning('id');
 
-    const supplier_taxId = null;
+    // TODO: Place this in parser
+    // customer might not have an account
+    supplier.accountID = supplier.accountID === 'Desconhecido' ? null : supplier.accountID;
 
     await app.knex('supplier').insert({
       id: supplier.supplierID,
-      accountID: supplier.accountID,
+      accountId: supplier.accountID,
       companyName: supplier.companyName,
       billingAddress: billingId,
       shipToAddress: shippingId,
       phone: supplier.telephone,
       selfBillingIndicator: supplier.selfBillingIndicator,
-      taxId: supplier_taxId,
+      taxId: supplier.supplierTaxID,
     });
   });
 };

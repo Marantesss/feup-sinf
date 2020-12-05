@@ -10,10 +10,13 @@ exports.up = function (knex) {
     // reference to account
     table.bigInteger('accountId').references('id').inTable('account').onDelete('CASCADE'); // same as references('account.id')
 
-    table.string('sourceDocumentId').notNullable();
+    table.string('sourceDocumentId');
     table.timestamp('systemEntryDate', { useTz: true }).notNullable();
     table.string('description').notNullable();
     table.float('amount', 6).notNullable();
+
+    // composite primary key
+    table.primary(['id', 'transactionId']);
   });
 };
 

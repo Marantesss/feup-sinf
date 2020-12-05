@@ -1,5 +1,6 @@
 const app = require('./app');
 const config = require('./config');
+const jasmin = require('./util/jasmin');
 
 const { port } = config.express;
 
@@ -7,20 +8,13 @@ app.listen(port, () => {
   console.log(`Listening on port ${port}`);
 });
 
+const test = jasmin.requestAccessToken();
 
 
-axios.post('https://identity.primaverabss.com/connect/token', {
-  grant_type: 'client_credentials',
-  client_id: 'SCOPEJS',
-  client_secret: process.env.CLIENT_SECRET,
-  scope: application
-})
-.then(function (response) {
-  console.log(response);
-})
-.catch(function (error) {
-  console.log(error);
-});
+//Check if  request token works
+test.then(
+  (response) => {console.log(response)}
+)
 
 
 

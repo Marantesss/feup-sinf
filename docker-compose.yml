@@ -45,6 +45,7 @@ services:
       DB_DATABASE: ${DB_DATABASE}
       DB_USERNAME: ${DB_USERNAME}
       DB_PASSWORD: ${DB_PASSWORD}
+      JM_CLIENT_SECRET: ${JM_CLIENT_SECRET}
 
   frontend:
     image: scope/scope-frontend

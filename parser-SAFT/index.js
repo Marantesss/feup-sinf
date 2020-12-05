@@ -112,36 +112,92 @@ app.seedSuppliers = async () => {
 };
 
 app.seedJournalsTransactions = async () => {
-  const journals = app.data.generalLedgerEntries.journal;
 
-  await app.knex('journal').del();
-  await app.knex('transaction').del();
-  await app.knex('line').del();
+  const deleteTableEntries = async () => {
+    await app.knex('journal').del();
+    await app.knex('transaction').del();
+    await app.knex('line').del();
+  }
+
+  /**
+   * 
+   * @param {Object} journal 
+   */
+  const seedJournal = async (journal) => {
+    await app.knex('journal').insert({ id: journal.journalID, description: journal.description });
+  };
+
+  /**
+   * 
+   * @param {Integer} journalId 
+   * @param {Object} transaction 
+   */
+  const seedTransaction = async (journalId, transaction) => {
+    await app.knex('transaction').insert({
+      id: transaction.transactionID,
+      journalId,
+      period: transaction.period,
+      date: transaction.transactionDate,
+      sourceId: transaction.sourceID,
+      description: transaction.description,
+      docArchivalNumber: transaction.docArchivalNumber,
+      type: transaction.transactionType,
+      GLPostingDate: transaction.gLPostingDate
+    });
+  };
+
+  /**
+   * 
+   * @param {String} type 
+   * @param {Integer} transactionId 
+   * @param {Object} line 
+   */
+  const seedLine = async (type, transactionId, line) => {
+    const amount = type === 'debit' ? line.debitAmount : line.creditAmount;
+
+    await app.knex('line').insert({
+      id: line.recordID,
+      transactionId,
+      accountId: line.accountID,
+      type,
+      sourceDocumentId: line.sourceDocumentID,
+      systemEntryDate: line.systemEntryDate,
+      description: line.description,
+      amount,
+    });
+  };
+
+  // delete all table entries
+  await deleteTableEntries();
+  // get journal object
+  const journals = app.data.generalLedgerEntries.journal;
+  // iterate over journals
   journals.forEach(async (journal) => {
     // insert journal entry
-    await app.knex('journal').insert({ id: journal.journalID, description: journal.description })
-
+    await seedJournal(journal);
+    // get journal's transactions
     const transactions = journal.transaction;
+    // iterate over transactions
     transactions.forEach(async (transaction) => {
       // insert transaction entry
-      await app.knex('transaction').insert({
-        id: transaction.transactionID,
-        journalId: journal.journalID,
-        period: transaction.period,
-        date: transaction.transactionDate,
-        sourceId: transaction.sourceId,
-        description: transaction.description,
-        docArchivalNumber: transaction.docArchivalNumber,
-        type: transaction.type,
-        GLPostingDate: transaction.gLPostingDate
+      await seedTransaction(journal.journalID, transaction);
+      // we are concatenating with an empty array because we might get an array or an object
+      // from the debitLine attribute
+      // https://www.samanthaming.com/tidbits/49-2-ways-to-merge-arrays/
+      const debitLines = [].concat(transaction.lines.debitLine);
+      // iterate over debitLines
+      debitLines.forEach(async (line) => {
+        // insert debitLine
+        await seedLine('debit', transaction.transactionID, line)
       });
-
-      const creditLine = transaction.lines.creditLine;
       
-
-      const debitLine = transaction.lines.debitLine;
+      const creditLines = [].concat(transaction.lines.creditLine);
+      // iterate over creditLines
+      creditLines.forEach(async (line) => {
+        // insert creditLine
+        await seedLine('credit', transaction.transactionID, line)
+      });
     });
-    console.log(transactions);
   });
 };
 

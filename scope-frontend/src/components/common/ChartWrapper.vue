@@ -5,14 +5,12 @@
 </template>
 
 <script>
-import BarChart from '@/components/charts/BarChart.vue';
-
+import BarChart from '@/components/charts/BarChart.vue'
 export default {
   name: 'ChartWrapper',
   components: {
     BarChart,
   },
-
   data: () => (
      {
       chartData: {

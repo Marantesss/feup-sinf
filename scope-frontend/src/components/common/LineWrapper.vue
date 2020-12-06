@@ -5,8 +5,7 @@
 </template>
 
 <script>
-import LineChart from '@/components/charts/LineChart.vue';
-
+import LineChart from '@/components/charts/LineChart.vue'
 export default {
   name: 'ChartWrapper',
   components: {

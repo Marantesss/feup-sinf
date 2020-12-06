@@ -3,20 +3,25 @@
     <v-row class='elevation-10 mx-1'>
       <v-col class='pa-2'>
         <span class='title'>
-          Inventory by Category - Purchases vs Sales
+          {{ title }}
         </span>
-        <chart-wrapper style='height: 359px;' />
+        <line-wrapper style='height: 359px;' />
       </v-col>
     </v-row>
   </v-col>
 </template>
 
 <script>
-import ChartWrapper from '@/components/common/ChartWrapper.vue'
+import LineWrapper from '@/components/common/LineWrapper.vue'
 export default {
-  components: { ChartWrapper },
-  name: 'Inventory Purchases vs Sales',
-  data: (() => { return }) 
+  components: { LineWrapper },
+  name: 'Simple LineChart with Title',
+  props: ['title'],
+  data: (() => {
+    return {
+      title: this.title,
+    }
+  })  
 }
 </script>
 

@@ -6,7 +6,7 @@ import Overview from '../views/Overview.vue'
 import Sales from '../views/Sales.vue'
 import Purchases from '../views/Purchases.vue'
 import Inventory from '../views/Inventory.vue'
-import Accounts from '../views/Accounts.vue'
+import Finances from '../views/Finances.vue'
 
 Vue.use(VueRouter)
 
@@ -44,9 +44,9 @@ const routes = [
     component: Inventory
   },
   {
-    path: '/accounts',
-    name: 'Accounts',
-    component: Accounts
+    path: '/finances',
+    name: 'Finances',
+    component: Finances
   }
 ]
 

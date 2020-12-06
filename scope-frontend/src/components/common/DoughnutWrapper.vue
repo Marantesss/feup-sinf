@@ -5,14 +5,12 @@
 </template>
 
 <script>
-import DoughnutChart from '@/components/charts/DoughnutChart.vue';
-
+import DoughnutChart from '@/components/charts/DoughnutChart.vue'
 export default {
   name: "ChartWrapper",
   components: {
     DoughnutChart,
   },
-
   data: () => (
      {
       chartData: {

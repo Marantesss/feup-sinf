@@ -23,19 +23,15 @@
 </template>
 
 <script>
-import Datepicker from './Datepicker.vue';
-
+import Datepicker from '@/components/common/Datepicker.vue'
 export default {
   name: "Sidebar",
-
   components: {
     Datepicker,
   },
-  
   props: {
     show: Boolean,
   },
-
   data: () => ({
     items: [
       {
@@ -59,9 +55,9 @@ export default {
         route: "Inventory",
       },
       {
-        icon: "mdi-account-check",
-        text: "Accounts Payable",
-        route: "Accounts",
+        icon: "mdi-cash-usd-outline",
+        text: "Finances",
+        route: "Finances",
       },
     ],
   }),

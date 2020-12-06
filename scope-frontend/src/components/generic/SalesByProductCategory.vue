@@ -3,7 +3,7 @@
     <v-row no-gutters class='elevation-10 mx-1'>
       <v-col md='8' class='left-col pa-2'>
         <span class='title'>
-          Sales by Store
+          Sales by Product Category
         </span>
         <div class='charts'>
           <div class='top-half'>
@@ -16,7 +16,7 @@
       </v-col>
       <v-col md='4' class='card-table'>
         <simple-table
-            :data=salesByStore
+            :data=salesByProductCategory
         />
       </v-col>
     </v-row>
@@ -24,15 +24,15 @@
 </template>
 
 <script>
-import SimpleTable from '@/components/tables/SimpleTable'
-import DoughnutWrapper from '@/components/common/DoughnutWrapper.vue'
-import LineWrapper from '@/components/common/LineWrapper.vue'
+import SimpleTable      from '@/components/tables/SimpleTable'
+import DoughnutWrapper  from '@/components/common/DoughnutWrapper.vue'
+import LineWrapper      from '@/components/common/LineWrapper.vue'
 export default {
   components: { SimpleTable, DoughnutWrapper, LineWrapper },
-  name: 'Sales By Store',
+  name: 'Sales By Product Category',
   data: (() => {
     return {
-      salesByStore: {
+      salesByProductCategory: {
         title: 'Top Sales All-Time',
         headers: [
           {
@@ -45,55 +45,55 @@ export default {
         ],
         sales: [
           {
-            name: 'Store 1',
+            name: 'Product 1',
             sales: '340.1',
           },
           {
-            name: 'Store 2',
+            name: 'Product 2',
             sales: '341.1',
           },
           {
-            name: 'Store 3',
+            name: 'Product 3',
             sales: '342.1',
           },
           {
-            name: 'Store 4',
+            name: 'Product 4',
             sales: '343.1',
           },
           {
-            name: 'Store 5',
+            name: 'Product 5',
             sales: '344.1',
           },
           {
-            name: 'Store 6',
+            name: 'Product 6',
             sales: '339.1',
           },
           {
-            name: 'Store 7',
+            name: 'Product 7',
             sales: '338.1',
           },
           {
-            name: 'Store 8',
+            name: 'Product 8',
             sales: '337.1',
           },
           {
-            name: 'Store 9',
+            name: 'Product 9',
             sales: '336.1',
           },
           {
-            name: 'Store 10',
+            name: 'Product 10',
             sales: '335.1',
           },
           {
-            name: 'Store 11',
+            name: 'Product 11',
             sales: '334.1',
           },
           {
-            name: 'Store 12',
+            name: 'Product 12',
             sales: '333.1',
           },
           {
-            name: 'Store 13',
+            name: 'Product 13',
             sales: '332.1',
           },
         ]

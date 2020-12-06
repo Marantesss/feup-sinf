@@ -1,9 +1,9 @@
 <template>
-  <v-col md='6'>
+  <v-col>
     <v-row class='elevation-10 mx-1'>
       <v-col class='pa-2'>
         <span class='title'>
-          Purchases and Sales Cashflow
+          {{ title }}
         </span>
         <line-wrapper style='height: 359px;' />
       </v-col>
@@ -15,8 +15,13 @@
 import LineWrapper from '@/components/common/LineWrapper.vue'
 export default {
   components: { LineWrapper },
-  name: 'Purchases and Sales Cashflow',
-  data: (() => { return })  
+  name: 'Simple LineChart with Title',
+  props: ['title'],
+  data: (() => {
+    return {
+      title: this.title,
+    }
+  })  
 }
 </script>
 

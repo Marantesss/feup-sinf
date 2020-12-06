@@ -28,6 +28,8 @@
                 @blur="$v.email.$touch()"
               ></v-text-field>
               <v-text-field
+                type="password"
+                password
                 outlined
                 rounded
                 clearable

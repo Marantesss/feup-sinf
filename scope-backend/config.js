@@ -21,4 +21,8 @@ config.db = {
   port: process.env.DB_PORT,
 };
 
+config.jasmin = {
+  clientSecret: process.env.JM_CLIENT_SECRET
+}
+
 module.exports = config;

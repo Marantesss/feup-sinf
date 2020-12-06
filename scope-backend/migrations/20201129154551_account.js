@@ -13,6 +13,8 @@ exports.up = function (knex) {
     // can be null
     table.integer('groupingCode');
     table.integer('taxonomyCode');
+
+    table.timestamp('createdAt', { useTz: true }).defaultTo(knex.fn.now());
   });
 };
 

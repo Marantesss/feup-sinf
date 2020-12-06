@@ -12,8 +12,6 @@ app.data = {};
 
 app.parseData = async () => {
   app.data = await app.parser.readFile();
-  console.log('Completed Parser');
-  console.log(app.data);
 };
 
 app.seedUser = async () => {
@@ -33,6 +31,8 @@ app.seedUser = async () => {
     password: bcrypt.hashSync('password', 10),
     address: addressId,
   });
+
+  console.log(`Seeded User!`);
 };
 
 app.seedAccounts = async () => {
@@ -51,9 +51,10 @@ app.seedAccounts = async () => {
     delete account['accountDescription'];
   });
   // seed database with new data
-  console.log(accounts[0]);
   await app.knex('account').del();
   await app.knex('account').insert(accounts);
+
+  console.log(`Seeded ${accounts.length} Accounts!`);
 };
 
 app.seedCustomers = async () => {
@@ -85,6 +86,8 @@ app.seedCustomers = async () => {
       selfBillingIndicator: customer.selfBillingIndicator,
     });
   });
+
+  console.log(`Seeded ${customers.length} Customers!`);
 };
 
 app.seedSuppliers = async () => {
@@ -111,6 +114,8 @@ app.seedSuppliers = async () => {
       taxId: supplier.supplierTaxID,
     });
   });
+
+  console.log(`Seeded ${suppliers.length} Customers!`);
 };
 
 app.seedJournalsTransactions = async () => {
@@ -173,34 +178,46 @@ app.seedJournalsTransactions = async () => {
   await deleteTableEntries();
   // get journal object
   const journals = app.data.generalLedgerEntries.journal;
+  const counter = { journals: 0, transactions: 0, debitLines: 0, creditLines: 0 };
   // iterate over journals
-  journals.forEach(async (journal) => {
+  // https://stackoverflow.com/questions/37576685/using-async-await-with-a-foreach-loop
+  await Promise.all(journals.map(async (journal) => {
     // insert journal entry
     await seedJournal(journal);
+    counter.journals += 1;
     // get journal's transactions
     const transactions = journal.transaction;
     // iterate over transactions
-    transactions.forEach(async (transaction) => {
+    await Promise.all(transactions.map(async (transaction) => {
       // insert transaction entry
       await seedTransaction(journal.journalID, transaction);
+      counter.transactions++;
       // we are concatenating with an empty array because we might get an array or an object
       // from the debitLine attribute
       // https://www.samanthaming.com/tidbits/49-2-ways-to-merge-arrays/
       const debitLines = [].concat(transaction.lines.debitLine);
       // iterate over debitLines
-      debitLines.forEach(async (line) => {
+      await Promise.all(debitLines.map(async (line) => {
         // insert debitLine
         await seedLine('debit', transaction.transactionID, line)
-      });
-      
+        counter.debitLines++;
+      }));
+
       const creditLines = [].concat(transaction.lines.creditLine);
       // iterate over creditLines
-      creditLines.forEach(async (line) => {
+      await Promise.all(creditLines.map(async (line) => {
         // insert creditLine
         await seedLine('credit', transaction.transactionID, line)
-      });
-    });
-  });
+        counter.creditLines++;
+      }));
+    }));
+  }));
+
+  console.log(`Seeded ${counter.journals} Journals!`);
+  console.log(`Seeded ${counter.transactions} Transactions!`);
+  console.log(`Seeded ${counter.debitLines} Debit Lines!`);
+  console.log(`Seeded ${counter.creditLines} Credit Lines!`);
+
 };
 
 app.seedTaxTableEntries = async () => {
@@ -216,22 +233,33 @@ app.seedTaxTableEntries = async () => {
       percentage: entry.taxPercentage,
     });
   });
+
+  console.log(`Seeded ${taxTableEntries.length} Tax Table Entries!`);
 };
 
 const main = async () => {
+  console.log('Parsing SAF-T...');
   await app.parseData();
+  console.log('Done.');
+
+  console.log(`Seeding Database ${process.env.DB_DATABASE} at ${process.env.DB_HOST}:${process.env.DB_PORT}...`)
   await app.seedUser();
   await app.seedAccounts();
   await app.seedCustomers();
   await app.seedSuppliers();
   await app.seedJournalsTransactions();
   await app.seedTaxTableEntries();
+  console.log('Done.');
+
   return 'Completed';
 };
 
 main()
-  .then(r => console.log(r))
-  .catch(err => console.log(err));
-
-// TODO: Delete this
-console.log('isto vai fazer log primeiro que os logs do main');
+  .then((r) => {
+    console.log(r);
+    process.exit(0);
+  })
+  .catch((err) => {
+    console.log(err);
+    process.exit(1);
+  });

@@ -4,12 +4,6 @@ dotenv.config();
 
 config = {};
 
-config.express = {
-  port: process.env.PORT || 8001,
-  timeout: 20000,
-  maxAge: 600
-};
-
 config.db = {
   client: process.env.DB_CLIENT,
   host: process.env.DB_HOST,

@@ -14,6 +14,8 @@ exports.up = function (knex) {
     table.string('companyName').notNullable();
     table.integer('selfBillingIndicator').notNullable();
     table.string('phone');
+
+    table.timestamp('createdAt', { useTz: true }).defaultTo(knex.fn.now());
   });
 };
 

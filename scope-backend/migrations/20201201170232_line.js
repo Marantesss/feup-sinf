@@ -14,9 +14,12 @@ exports.up = function (knex) {
     table.timestamp('systemEntryDate', { useTz: true }).notNullable();
     table.string('description').notNullable();
     table.float('amount', 6).notNullable();
+    
+    table.timestamp('createdAt', { useTz: true }).defaultTo(knex.fn.now());
 
     // composite primary key
     table.primary(['id', 'transactionId']);
+
   });
 };
 

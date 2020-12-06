@@ -12,6 +12,8 @@ exports.up = function (knex) {
     table.integer('docArchivalNumber').notNullable();
     table.string('type').notNullable();
     table.string('GLPostingDate').notNullable();
+
+    table.timestamp('createdAt', { useTz: true }).defaultTo(knex.fn.now());
   });
 };
 

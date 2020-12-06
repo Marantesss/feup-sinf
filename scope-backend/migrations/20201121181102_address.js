@@ -13,6 +13,8 @@ exports.up = function (knex) {
     table.string('city').notNullable();
     table.string('postalCode').notNullable();
     table.string('country').notNullable();
+
+    table.timestamp('createdAt', { useTz: true }).defaultTo(knex.fn.now());
   });
 };
 

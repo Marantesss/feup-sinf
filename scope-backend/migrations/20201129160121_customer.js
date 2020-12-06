@@ -18,6 +18,8 @@ exports.up = function (knex) {
     table.string('fax');
     table.string('email');
     table.string('website');
+
+    table.timestamp('createdAt', { useTz: true }).defaultTo(knex.fn.now());
   });
 };
 

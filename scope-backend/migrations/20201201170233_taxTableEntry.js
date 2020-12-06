@@ -10,6 +10,8 @@ exports.up = function (knex) {
     table.string('code').notNullable();
     table.string('description').notNullable();
     table.float('percentage', 6).notNullable();
+
+    table.timestamp('createdAt', { useTz: true }).defaultTo(knex.fn.now());
   });
 };
 

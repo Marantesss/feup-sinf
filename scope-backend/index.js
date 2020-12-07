@@ -13,7 +13,7 @@ const test = jasmin.requestAccessToken();
 
 //Check if  request token works
 test.then(
-  (response) => {console.log(response)}
+  //(response) => {console.log(response)}
 )
 
 

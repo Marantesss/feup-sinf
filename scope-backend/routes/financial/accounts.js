@@ -63,7 +63,7 @@ router.get('/:id/sum',
     const { totalCredit } = await req.app.knex('line')
       .join('transaction', 'line.transactionId', 'transaction.id')
       .whereBetween('transaction.date', [startDate, endDate])
-      .andWhere('line.accountId', accountId)
+      .andWhere('line.accountId', 'like', `${accountId}%`)
       .andWhere('line.type', 'credit')
       .sum({ totalCredit: 'amount' })
       .first();
@@ -72,7 +72,7 @@ router.get('/:id/sum',
     const { totalDebit } = await req.app.knex('line')
       .join('transaction', 'line.transactionId', 'transaction.id')
       .whereBetween('transaction.date', [startDate, endDate])
-      .andWhere('line.accountId', accountId)
+      .andWhere('line.accountId', 'like', `${accountId}%`)
       .andWhere('line.type', 'debit')
       .sum({ totalDebit: 'amount' })
       .first();

@@ -52,12 +52,16 @@ router.get('/:id',
  *  - endDate
  */
 router.get('/:id/sum',
-  validateAccount,
   async (req, res) => {
     const accountId = req.params.id;
 
     const startDate = req.query.startDate ? req.query.startDate : '2019-01-01';
     const endDate = req.query.endDate ? req.query.endDate : '2019-12-31';
+
+    // see if accountId is valid
+    if (accountId < 1 || accountId > 9) {
+      return res.json({ status: 404, message: `Account ${accountId} not found` });
+    }
 
     // get all credit lines
     const { totalCredit } = await req.app.knex('line')

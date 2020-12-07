@@ -14,7 +14,7 @@ router.get('/', async (req, res) => {
       .first();
   };
 
-  const balanceSheet = [
+  const accountDescriptions = [
     {
       id: 11,
       description: "Caixa",
@@ -246,12 +246,11 @@ router.get('/', async (req, res) => {
   ];
 
   // pupulating accounts in paralel
-  const accounts = await Promise.all(balanceSheet.map(async (account) => {
-    const balance = await getAccountBalance(account.id);
+  const accounts = await Promise.all(accountDescriptions.map(async (account) => {
     return {
       id: account.id,
       description: account.description,
-      ...balance
+      ...await getAccountBalance(account.id)
     };
   }));
 

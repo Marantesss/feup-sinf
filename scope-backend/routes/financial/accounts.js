@@ -40,10 +40,6 @@ router.get('/:id',
       .where('id', accountId)
       .first();
 
-    const sncAccount = sncAccounts.find(account => account.id = accountId);
-    account.description = sncAccount.description;
-    account.id = sncAccount.id;
-
     return res.json({ status: 200, account });
   }
 );

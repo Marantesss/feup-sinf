@@ -115,7 +115,7 @@ app.seedSuppliers = async () => {
     });
   });
 
-  console.log(`Seeded ${suppliers.length} Customers!`);
+  console.log(`Seeded ${suppliers.length} Suppliers!`);
 };
 
 app.seedJournalsTransactions = async () => {

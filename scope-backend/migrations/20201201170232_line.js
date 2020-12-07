@@ -8,7 +8,7 @@ exports.up = function (knex) {
     // reference to transaction
     table.string('transactionId').notNullable().references('id').inTable('transaction').onDelete('CASCADE');
     // reference to account
-    table.bigInteger('accountId').references('id').inTable('account').onDelete('CASCADE'); // same as references('account.id')
+    table.string('accountId').references('id').inTable('account').onDelete('CASCADE'); // same as references('account.id')
 
     table.string('sourceDocumentId');
     table.timestamp('systemEntryDate', { useTz: true }).notNullable();

@@ -60,7 +60,7 @@ router.get('/:id/sum',
     const endDate = req.query.endDate ? req.query.endDate : '2019-12-31';
 
     // see if accountId is valid
-    if (accountId < 1 || accountId > 9) {
+    if (accountId[0] < 1 || accountId[0] > 9) {
       return res.json({ status: 404, message: `Account ${accountId} not found` });
     }
 

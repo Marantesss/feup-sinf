@@ -1,7 +1,8 @@
 const express = require('express');
 
 const router = express.Router();
-const { validateAccount } = require('../../middlewares')
+const { validateAccount } = require('../../middlewares');
+const { join } = require('../../util/SNCAccounts');
 const sncAccounts = require('../../util/SNCAccounts');
 
 /**
@@ -118,5 +119,32 @@ router.get('/:id/monthly',
     return res.json({ status: 200, data });
   }
 );
+
+
+/**
+ * Get specific account's total debit and credit by taxonomy
+ * 
+ * Query Strings
+ *  - startDate
+ *  - endDate
+ */
+router.get('/taxonomy/:taxo',
+    async (req, res) => {
+      const TaxonmyId = req.params.taxo;
+
+      const startDate = req.query.startDate ? req.query.startDate : '2019-01-01';
+      const endDate = req.query.endDate ? req.query.endDate : '2019-12-31';
+
+      //get id's
+       const Ids = await req.app.knex('account')
+      .select('id')
+      .where('taxonomyCode', TaxonmyId)
+      .then(rows => rows);
+
+    //now sum all amounts in line table that corespond with each account id
+  
+      return res.json({ status: 200, totalCredit, totalDebit });
+    }
+  );
 
 module.exports = router;

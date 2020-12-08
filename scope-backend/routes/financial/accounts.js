@@ -138,12 +138,21 @@ router.get('/taxonomy/:taxo',
       //get id's
        const Ids = await req.app.knex('account')
       .select('id')
-      .where('taxonomyCode', TaxonmyId)
-      .then(rows => rows);
+      .where('taxonomyCode', TaxonmyId);
 
+       
     //now sum all amounts in line table that corespond with each account id
+   
+     const  {sumCredit} = await req.app.knex('line')
+     .join('transaction', 'line.transactionId', 'transaction.id')
+     .where('line.accountId', 507)
+     .andWhere('line.type', 'credit')
+     .sum({ sumCredit: 'amount' })
+     .first();
+    console.log("sumcredit: ", sumCredit);
+    return res.json({ status: 200, sumCredit });
   
-      return res.json({ status: 200, totalCredit, totalDebit });
+     
     }
   );
 

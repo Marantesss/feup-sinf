@@ -47,9 +47,7 @@ export default {
 }
 
 #simple-table .v-data-table__wrapper {
-  display: flex;
-  flex-direction: column;
-  flex-grow: 1;
+  height: 330px;
 }
 
 /* Table Content */

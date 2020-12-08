@@ -12,6 +12,7 @@
       <v-col md='6' class='full-height single-element'>
         <v-row class='full-height'>
           <balance-sheet />
+          <test />
         </v-row>
       </v-col>
     </v-row>
@@ -30,6 +31,7 @@ export default {
   },
   name: 'Accounts',
   created: (() => { document.title = 'scope - Accounts' }),
+    data: (() => {}),
 }
 </script>
 

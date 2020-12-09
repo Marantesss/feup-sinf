@@ -3,7 +3,7 @@ const app = require('../../app');
 
 const router = express.Router();
 
-const { balanceSheet } = require('../../util/financial');
+const { profitAndLoss } = require('../../util/financial');
 
 /**
  * Get balance sheet data
@@ -90,26 +90,14 @@ router.get('/', async (req, res) => {
     return response;
   }
 
-  // calculate equity
-  const equity = await calculateForm(balanceSheet.equity);
-  // calculate assets
-  const nonCurrentAssets = await calculateForm(balanceSheet.assets.nonCurrent);
-  const currentAssets = await calculateForm(balanceSheet.assets.current);
-  const assets = {
-    nonCurrentAssets,
-    currentAssets,
-    total: nonCurrentAssets.total + currentAssets.total,
-  };
-  // calculate liabilities
-  const nonCurrentLiabilities = await calculateForm(balanceSheet.assets.nonCurrent);
-  const currentLiabilities = await calculateForm(balanceSheet.assets.current);
-  const liabilities = {
-    nonCurrentLiabilities,
-    currentLiabilities,
-    total: nonCurrentLiabilities.total + currentLiabilities.total,
-  };
+  const revenue = await calculateForm(profitAndLoss.revenue);
+  const expenses = await calculateForm(profitAndLoss.expenses);
+  const depreciation = await calculateForm(profitAndLoss.depreciation);
+  const interest = await calculateForm(profitAndLoss.interest);
+  const taxes = await calculateForm(profitAndLoss.taxes);
+  
 
-  return res.json({ status: 200, equity, assets, liabilities });
+  return res.json({ status: 200, revenue, expenses, depreciation, interest, taxes });
 
 });
 

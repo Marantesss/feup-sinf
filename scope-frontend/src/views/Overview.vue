@@ -1,27 +1,27 @@
 <template>
   <v-container fluid class='grey lighten-5'>
     <v-row id='core-view-row'>
-      <bar-chart-with-title :title="'Inventory by Category - Purchases vs Sales'" />
-      <sales-by-store/>
+      <sales-kpis />
+      <purchase-kpis />
     </v-row>
     <v-row id='core-view-row'>
       <sales-by-product-category/>
-      <line-chart-with-title :title="'Purchases and Sales Cashflow'"/>
+      <financial-kpis />
     </v-row>
   </v-container>
 </template>
 
 <script>
-import BarChartWithTitle      from '@/components/generic/BarChartWithTitle.vue'
-import SalesByStore           from '@/components/generic/SalesByStore.vue'
-import LineChartWithTitle     from '@/components/generic/LineChartWithTitle.vue'
+import SalesKpis          from '@/components/sales-orders/SalesKpis.vue'
+import PurchaseKpis           from '@/components/purchases/PurchaseKpis.vue'
+import FinancialKpis          from '@/components/finances/FinancialKpis.vue'
 import SalesByProductCategory from '@/components/generic/SalesByProductCategory.vue'
 export default {
   components: { 
-    BarChartWithTitle,
-    SalesByStore,
+    SalesKpis,
+    PurchaseKpis,
     SalesByProductCategory,
-    LineChartWithTitle
+    FinancialKpis
   },
   name: 'Overview',
   created: (() => { document.title = 'scope - Overview' }),

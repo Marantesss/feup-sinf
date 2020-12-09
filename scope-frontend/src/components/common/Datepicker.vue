@@ -20,6 +20,7 @@
         readonly
         ></v-text-field>
         <v-date-picker
+          type="month"
           v-model="dateFrom"
           v-if="pickingFrom"
           @change="pickingFrom=false"
@@ -33,6 +34,7 @@
           :show-current="true"
         ></v-date-picker>
         <v-date-picker
+          type="month"
           v-model="dateTo"
           v-if="pickingTo"
           @change="pickingTo=false"
@@ -58,9 +60,9 @@ export default {
 
   data: () => ({
     pickingFrom: false,
-    dateFrom: "2020-11-01",
+    dateFrom: "2020-10",
     pickingTo: false,
-    dateTo: "2020-11-10",
+    dateTo: "2020-11",
   }),
 
   computed: {

@@ -1,6 +1,8 @@
 
 
 //Assumes it gets an item in the  array return in   /materialscore/materialsitems
+
+/*
 const getStockQuantity = (item) => {
 
     return item.materialsItemWarehouses.reduce((accumulator, currValue) => {
@@ -16,12 +18,22 @@ const getUnitPrice = (item) =>{
         return accumulator;
     }, 0) / item.materialsItemWarehouses.length);
 }
+*/
+const getStockValue = (item) => {
+
+    return item.materialsItemWarehouses.reduce((accumulator,currValue) =>{
+        accumulator += (currValue.stockBalance * currValue.calculatedUnitCost.amount);
+        return accumulator;
+    }, 0);
+
+}
+
+
 
 ///
 
 module.exports = {
-    getStockQuantity,
-    getUnitPrice
+    getStockValue
 
 
 }

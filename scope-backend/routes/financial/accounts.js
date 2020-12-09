@@ -2,8 +2,7 @@ const express = require('express');
 
 const router = express.Router();
 const { validateAccount } = require('../../middlewares');
-const { join } = require('../../util/SNCAccounts');
-const sncAccounts = require('../../util/SNCAccounts');
+const { SNCAccounts } = require('../../util/financial');
 
 /**
  * Get all accounts information
@@ -16,8 +15,8 @@ router.get('/', async (req, res) => {
       .first();
   };
 
-  // pupulating accounts in paralel
-  const accounts = await Promise.all(sncAccounts.map(async (account) => {
+  // populating accounts in parallel
+  const accounts = await Promise.all(SNCAccounts.map(async (account) => {
     return {
       id: account.id,
       description: account.description,

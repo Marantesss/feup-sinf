@@ -22,7 +22,9 @@ config.db = {
 };
 
 config.jasmin = {
-  clientSecret: process.env.JM_CLIENT_SECRET
+  clientSecret: process.env.JM_CLIENT_SECRET,
+  subscription: process.env.JM_SUBSCRIPTION,
+  account: process.env.JM_ACCOUNT
 }
 
 module.exports = config;

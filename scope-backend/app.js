@@ -7,7 +7,8 @@ const config = require('./config').express;
 const middlewares = require('./middlewares');
 const indexRouter = require('./routes');
 const financialRouter = require('./routes/financial');
-const inventoryRouter = require('./routes/inventory')
+const inventoryRouter = require('./routes/inventory');
+const salesRouter = require('./routes/sales');
 
 const app = express();
 
@@ -24,6 +25,7 @@ app.use(middlewares.timeout);
 app.use('/', indexRouter);
 app.use('/financial', financialRouter);
 app.use('/inventory',inventoryRouter);
+app.use('/sales',salesRouter);
 app.use(middlewares.notFound);
 
 /* Handlers */

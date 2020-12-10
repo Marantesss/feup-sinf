@@ -99,10 +99,14 @@ router.get('/', async (req, res) => {
   // 18 = (1 + 2 + ... + 5 - 6 - ... - 14 + 15 + 16 - 17)
   // 21=>ebit
   // 
-  ebitda = revenue.entries.reduce((prev, curr) => prev + curr.balance, 0) - expenses.entries.reduce((prev, curr) => prev + curr.balance, 0);
-  ebit = ebitda - depreciation.entries.reduce((prev, curr) => prev + curr.balance, 0);
+  const ebitda = revenue.entries.reduce((prev, curr) => prev + curr.balance, 0) - expenses.entries.reduce((prev, curr) => prev + curr.balance, 0);
+  const ebit = ebitda - depreciation.entries.reduce((prev, curr) => prev + curr.balance, 0);
+
+  const incomeInterest = interest.entries.find(entry => entry.name === 'Juros e rendimentos similares obtidos').balance;
+  const expenseInterest = interest.entries.find(entry => entry.name === 'Juros e gastos similares suportados').balance;
+  const netIncome = ebit + incomeInterest - expenseInterest - taxes.entries.reduce((prev, curr) => prev + curr.balance, 0);
   
-  return res.json({ status: 200, revenue, expenses, depreciation, interest, taxes, ebit, ebitda });
+  return res.json({ status: 200, revenue, expenses, depreciation, interest, taxes, ebit, ebitda, netIncome });
 
 });
 

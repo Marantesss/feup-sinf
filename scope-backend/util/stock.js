@@ -19,6 +19,7 @@ const getItemInfo = (item) => {
     info.itemKey = item.itemKey;
     info.description = item.description;
     info.baseUnitDescription = item.baseUnitDescription;
+    info.minStock = item.minStock;
     info.warehouses = [];
 
     

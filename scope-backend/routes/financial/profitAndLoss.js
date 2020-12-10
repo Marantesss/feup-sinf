@@ -10,11 +10,43 @@ const { profitAndLoss } = require('../../util/financial');
 router.get('/', async (req, res) => {
 
   const getAccountsByTaxonomy = async (taxonomy) => {
+    /*
+    Dos dados mestre de contas, vocês só podem considerar os valores de abertura, o resto dos valores terão que ir à transactions!
+    Os saldos de abertura das contas 6 e 7, naturalmente terão que ser 0, pois estas contas são saldadas no processo de apuramento de resultados.
     const result = await req.app.knex('account')
       .select(req.app.knex.raw('id, "closingDebitBalance" - "closingCreditBalance" as "balance"'))
       .where('taxonomyCode', taxonomy);
 
     return result;
+    */
+    const creditResult = await req.app.knex('line')
+      .select('account.id')
+      .sum({ totalCredit: 'line.amount' })
+      .join('account', 'account.id', 'line.accountId')
+      .where('account.taxonomyCode', taxonomy)
+      .andWhere('line.type', 'credit')
+      .groupBy('account.id');
+
+    // get all totalDebit lines
+    const debitResult = await req.app.knex('line')
+      .select('account.id')
+      .sum({ totalDebit: 'line.amount' })
+      .join('account', 'account.id', 'line.accountId')
+      .where('account.taxonomyCode', taxonomy)
+      .andWhere('line.type', 'debit')
+      .groupBy('account.id');
+
+    const result = [];
+
+    creditResult.forEach((elem, index) => {
+      result.push({
+        id: elem.id,
+        balance: debitResult[index].totalDebit - elem.totalCredit
+      });
+    });
+
+    return result;
+
   };
 
   const calculateForm = async (form) => {
@@ -104,7 +136,7 @@ router.get('/', async (req, res) => {
   const incomeInterest = interest.entries.find(entry => entry.name === 'Juros e rendimentos similares obtidos').balance;
   const expenseInterest = interest.entries.find(entry => entry.name === 'Juros e gastos similares suportados').balance;
   const netIncome = ebit + incomeInterest - expenseInterest - taxes.entries.reduce((prev, curr) => prev + curr.balance, 0);
-  
+
   return res.json({ status: 200, revenue, expenses, depreciation, interest, taxes, ebit, ebitda, netIncome });
 
 });

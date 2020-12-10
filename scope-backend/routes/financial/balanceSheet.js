@@ -100,8 +100,8 @@ router.get('/', async (req, res) => {
     total: nonCurrentAssets.total + currentAssets.total,
   };
   // calculate liabilities
-  const nonCurrentLiabilities = await calculateForm(balanceSheet.assets.nonCurrent);
-  const currentLiabilities = await calculateForm(balanceSheet.assets.current);
+  const nonCurrentLiabilities = await calculateForm(balanceSheet.liabilities.nonCurrent);
+  const currentLiabilities = await calculateForm(balanceSheet.liabilities.current);
   const liabilities = {
     nonCurrentLiabilities,
     currentLiabilities,

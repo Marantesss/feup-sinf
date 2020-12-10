@@ -95,9 +95,14 @@ router.get('/', async (req, res) => {
   const depreciation = await calculateForm(profitAndLoss.depreciation);
   const interest = await calculateForm(profitAndLoss.interest);
   const taxes = await calculateForm(profitAndLoss.taxes);
-  
 
-  return res.json({ status: 200, revenue, expenses, depreciation, interest, taxes });
+  // 18 = (1 + 2 + ... + 5 - 6 - ... - 14 + 15 + 16 - 17)
+  // 21=>ebit
+  // 
+  ebitda = revenue.entries.reduce((prev, curr) => prev + curr.balance, 0) - expenses.entries.reduce((prev, curr) => prev + curr.balance, 0);
+  ebit = ebitda - depreciation.entries.reduce((prev, curr) => prev + curr.balance, 0);
+  
+  return res.json({ status: 200, revenue, expenses, depreciation, interest, taxes, ebit, ebitda });
 
 });
 

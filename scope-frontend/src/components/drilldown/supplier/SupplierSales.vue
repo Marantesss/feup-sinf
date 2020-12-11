@@ -4,52 +4,46 @@
       <v-col class='pa-2'>
         <div class='main-kpi'>
           <div class='kpi-label'>
-            Total Profits
+            Total Purchased
           </div>
-          <div class='kpi-big'>
-            12,345.67
+          <div class='kpi-big money'>
+            {{ sales.totalPurchased }}
           </div>
         </div>
         <v-row class='secondary-kpis'>
           <v-col class='left-half secondary-kpis-container'>
-            <div class='store-label'>
-              Online Shop
+            <div class='secondary-kpi'>
+              <div class='kpi-label'>
+                Average Cost per Order
+              </div>
+              <div class='kpi-big money'>
+                {{ sales.avgCostPerOrder }}
+              </div>
             </div>
             <div class='secondary-kpi'>
               <div class='kpi-label'>
-                Revenue from Sales
+                Pending Purchase Values
               </div>
-              <div class='kpi-big'>
-                12,345.67
-              </div>
-            </div>
-            <div class='secondary-kpi'>
-              <div class='kpi-label'>
-                Cost of Goods Sold
-              </div>
-              <div class='kpi-big'>
-                5,432.10
+              <div class='kpi-big money'>
+                {{ sales.pendingPurchaseValues }}
               </div>
             </div>
           </v-col>
           <v-col class='right-half secondary-kpis-container'>
-            <div class='store-label'>
-              Physical Shops
+            <div class='secondary-kpi'>
+              <div class='kpi-label'>
+                Total Purchase Orders
+              </div>
+              <div class='kpi-big'>
+                {{ sales.totalPurchaseOrders }}
+              </div>
             </div>
             <div class='secondary-kpi'>
               <div class='kpi-label'>
-                Revenue from Sales
+                Purchase Backlog
               </div>
-              <div class='kpi-big'>
-                12,345.67
-              </div>
-            </div>
-            <div class='secondary-kpi'>
-              <div class='kpi-label'>
-                Cost of Goods Sold
-              </div>
-              <div class='kpi-big'>
-                5,432.10
+              <div class='kpi-big money'>
+                {{ sales.purchaseBacklog }}
               </div>
             </div>
           </v-col>
@@ -61,8 +55,8 @@
 
 <script>
 export default {
-  name: 'Sales KPIs',
-  data: () => ({})
+  name: 'Supplier Sales',
+  props: [ 'sales' ],
 }
 </script>
 
@@ -90,14 +84,12 @@ export default {
   padding-left: 0;
   padding-top: 0;
   padding-bottom: 0;
-  border-right: 1px solid #969696;
 }
 
 .right-half {
   padding-right: 0;
   padding-top: 0;
   padding-bottom: 0;
-  border-left: 1px solid #969696;
 }
 
 .secondary-kpis-container {
@@ -122,10 +114,6 @@ export default {
   font-weight: 300;
 }
 
-.kpi-big:before {
-  content: "\20ac\00a0";
-}
-
 .main-kpi .kpi-label {
   font-size: 2em;
   padding: 5px 10px;
@@ -140,13 +128,7 @@ export default {
   align-items: center;
   height: 100%;
   width: 100%;
-  font-weight: 700;
   font-size: 2.5em;
-}
-
-.secondary-kpis .store-label {
-  font-weight: 300;
-  font-size: 2em;
 }
 
 .secondary-kpi .kpi-label {
@@ -155,10 +137,19 @@ export default {
 }
 
 .secondary-kpi .kpi-big {
+  position: absolute;
   display: flex;
+  top: 10%;
+  left: 0;
   justify-content: center;
+  align-items: center;
+  height: 90%;
   width: 100%;
-  font-size: 2em;
+  font-size: 2.5em;
+}
+
+.money::before {
+  content: '\20ac\00a0';
 }
 
 </style>

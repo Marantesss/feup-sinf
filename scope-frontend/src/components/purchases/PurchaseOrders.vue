@@ -25,11 +25,12 @@
                 ></v-text-field>
               </template>
               <template v-slot:item.paid='{ item }'>
-                {{
-                  item.paid   /* nao consegui mas e suposto ser mdi icons */
-                    ? 'green' /* material icon check-circle-outline       */
-                    : 'red'   /* material icon close-circle-outline       */
-                }}
+                <v-icon v-if='item.paid' color='green'>
+                  mdi-check-circle-outline
+                </v-icon>
+                <v-icon v-else color='red'>
+                  mdi-close-circle-outline
+                </v-icon>
               </template>
               <template v-slot:item.details='{ item }'>
                 <a :href="item.details">
@@ -114,7 +115,7 @@ export default {
           vendor: 'Acme Supplier Limited',
           numproducts: '345',
           total: '340.1M',
-          paid: true,
+          paid: false,
           details: 'https://elgoog.im/breakout/'
         },
         {

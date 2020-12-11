@@ -10,7 +10,6 @@
             <v-data-table
               :headers='headers'
               :items='entries'
-              item-key='description'
               :search='search'
               :custom-filter='filterTextSearch'
               items-per-page='12'

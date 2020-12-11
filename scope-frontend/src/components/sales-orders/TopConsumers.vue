@@ -10,7 +10,6 @@
             <v-data-table
               :headers='headers'
               :items='entries'
-              item-key='description'
               :search='search'
               :custom-filter='filterTextSearch'
               items-per-page='8'
@@ -25,11 +24,8 @@
                   class='mx-4'
                 ></v-text-field>
               </template>
-              <template v-slot:item.debit='{ item }'>
-                {{ '€ ' + item.debit }}
-              </template>
-              <template v-slot:item.credit='{ item }'>
-                {{ '€ ' + item.credit }}
+              <template v-slot:item.totalspent='{ item }'>
+                {{ '€ ' + item.totalspent }}
               </template>
               <template v-slot:body.append>
                 <div class='space-filler'></div>

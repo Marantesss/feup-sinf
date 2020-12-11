@@ -4,7 +4,8 @@ const router = express.Router();
 
 
 router.get('/', (_req, res) => {
-    return res.json({ status: 200, message: 'Sales Index' });
+    //return res.json({ status: 200, message: 'Sales Index' });
+    jasmin.jasminRequest('get', '/billing/invoices').then((data)=>{res.json(data)});
 });
 
 
@@ -53,10 +54,12 @@ router.get('/all', (_req, res) => {
             res.json(response);
 
         }).catch((error) => {
-
-
-
-            Promise.reject(error);
+            const err = new Error("Failed to fetch Sales");
+            err.status = 400;
+            res.status(400).json({
+                message: err.message,
+                error: err
+            });
         });
 
 

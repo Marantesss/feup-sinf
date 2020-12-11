@@ -16,6 +16,10 @@
         {{ item.sales + 'M €' }}
         </v-simple>
       </template>
+      <template v-slot:body.append>
+        <div class='space-filler'>
+        </div>
+      </template>
     </v-data-table>    
   </div>
 </template>
@@ -95,6 +99,10 @@ export default {
 .v-application--is-ltr #simple-table .v-data-footer .v-btn {
   width: 20px;
   margin: 0;
+}
+
+.space-filler {
+  flex-grow: 1;
 }
 
 </style>

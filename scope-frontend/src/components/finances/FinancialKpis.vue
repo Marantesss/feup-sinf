@@ -3,7 +3,7 @@
     <v-row no-gutters class='elevation-10 mx-1 main'>
       <v-col class='pa-2'>
         <span class='title'>
-          Financal KPIs
+          Financial KPIs
         </span>
         <v-container class='kpi-container'>
           <v-row class='kpi-row top'>

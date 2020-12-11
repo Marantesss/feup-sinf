@@ -19,11 +19,14 @@ router.get('/', async (req, res) => {
 
     return result;
     */
+    // filter out transactions of type 'A': Apuramento de resultados
     const creditResult = await req.app.knex('line')
       .select('account.id')
       .sum({ totalCredit: 'line.amount' })
       .join('account', 'account.id', 'line.accountId')
-      .where('account.taxonomyCode', taxonomy)
+      .join('transaction', 'transaction.id', 'line.transactionId')
+      .whereNot('transaction.type', 'A')
+      .andWhere('account.taxonomyCode', taxonomy)
       .andWhere('line.type', 'credit')
       .groupBy('account.id');
 
@@ -32,9 +35,14 @@ router.get('/', async (req, res) => {
       .select('account.id')
       .sum({ totalDebit: 'line.amount' })
       .join('account', 'account.id', 'line.accountId')
-      .where('account.taxonomyCode', taxonomy)
+      .join('transaction', 'transaction.id', 'line.transactionId')
+      .whereNot('transaction.type', 'A')
+      .andWhere('account.taxonomyCode', taxonomy)
       .andWhere('line.type', 'debit')
       .groupBy('account.id');
+
+    console.log(creditResult);
+    console.log(debitResult);
 
     const result = [];
 

@@ -10,6 +10,7 @@ const { balanceSheet } = require('../../util/financial');
 router.get('/', async (req, res) => {
 
   const getAccountsByTaxonomy = async (taxonomy) => {
+    // todo; fazer com as lines
     const result = await req.app.knex('account')
       .select(req.app.knex.raw('id, "closingDebitBalance" - "closingCreditBalance" as "balance"'))
       .where('taxonomyCode', taxonomy);

@@ -3,7 +3,7 @@
     <v-row no-gutters class='elevation-10 mx-1'>
       <v-col md='8' class='left-col pa-2'>
         <span class='title'>
-          Sales by Product Category
+          Low Stock Items
         </span>
         <div class='charts'>
           <div class='top-half'>
@@ -15,8 +15,8 @@
         </div>
       </v-col>
       <v-col md='4' class='card-table'>
-        <simple-table
-            :data=salesByProductCategory
+        <simple-table-flat
+            :data=lowStockItems
         />
       </v-col>
     </v-row>
@@ -24,77 +24,77 @@
 </template>
 
 <script>
-import SimpleTable      from '@/components/tables/SimpleTable'
-import DoughnutWrapper  from '@/components/common/DoughnutWrapper.vue'
-import LineWrapper      from '@/components/common/LineWrapper.vue'
+import SimpleTableFlat      from '@/components/tables/SimpleTableFlat'
+import DoughnutWrapper      from '@/components/common/DoughnutWrapper'
+import LineWrapper          from '@/components/common/LineWrapper'
 export default {
-  components: { SimpleTable, DoughnutWrapper, LineWrapper },
+  components: { SimpleTableFlat, DoughnutWrapper, LineWrapper },
   name: 'Sales By Product Category',
   data: (() => {
     return {
-      salesByProductCategory: {
-        title: 'All-Time Sales',
+      lowStockItems: {
+        title: 'Current Stock',
         headers: [
           {
-            text: 'Category',
+            text: 'Item',
             align: 'start',
             sortable: false,
             value: 'name',
           },
-          { text: 'Sales', value: 'value' },
+          { text: 'Sales', value: 'sales' },
         ],
         values: [
           {
-            name: 'Category 1',
-            value: '340.1',
+            name: 'Item 1',
+            sales: '340',
           },
           {
-            name: 'Category 2',
-            value: '341.1',
+            name: 'Item 2',
+            sales: '341',
           },
           {
-            name: 'Category 3',
-            value: '342.1',
+            name: 'Item 3',
+            sales: '342',
           },
           {
-            name: 'Category 4',
-            value: '343.1',
+            name: 'Item 4',
+            sales: '343',
           },
           {
-            name: 'Category 5',
-            value: '344.1',
+            name: 'Item 5',
+            sales: '344',
           },
           {
-            name: 'Category 6',
-            value: '339.1',
+            name: 'Item 6',
+            sales: '339',
           },
           {
-            name: 'Category 7',
-            value: '338.1',
+            name: 'Item 7',
+            sales: '338',
           },
           {
-            name: 'Category 8',
-            value: '337.1',
+            name: 'Item 8',
+            sales: '337',
           },
           {
-            name: 'Category 9',
-            value: '336.1',
+            name: 'Item 9',
+            sales: '336',
           },
           {
-            name: 'Category 10',
-            value: '335.1',
+            name: 'Item 10',
+            sales: '335',
           },
           {
-            name: 'Category 11',
-            value: '334.1',
+            name: 'Item 11',
+            sales: '334',
           },
           {
-            name: 'Category 12',
-            value: '333.1',
+            name: 'Item 12',
+            sales: '333',
           },
           {
-            name: 'Category 13',
-            value: '332.1',
+            name: 'Item 13',
+            sales: '332',
           },
         ]
       }

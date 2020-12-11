@@ -8,11 +8,15 @@
 import BarChart from '@/components/charts/BarChart.vue'
 export default {
   name: 'ChartWrapper',
+  props: [ 'stackedX', 'stackedY' ],
   components: {
     BarChart,
   },
-  data: () => (
-     {
+  // computed() {
+
+  // },
+  data() {
+    return {
       chartData: {
         labels: [
           'January',
@@ -50,18 +54,21 @@ export default {
         scales: {
           xAxes: [
             {
-              stacked: true,
+              stacked: this.stackedX,
             },
           ],
           yAxes: [
             {
-              stacked: true,
+              stacked: this.stackedY,
+              ticks: {
+                beginAtZero: true,
+              },
             },
           ],
         },
       },
     }
-  )
+  }
 };
 </script>
 

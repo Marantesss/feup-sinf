@@ -5,7 +5,8 @@
         <span class='title'>
           {{ title }}
         </span>
-        <chart-wrapper style='height: 359px;' />
+        <chart-wrapper style='height: 359px;'
+          :stackedX=true :stackedY=true />
       </v-col>
     </v-row>
   </v-col>

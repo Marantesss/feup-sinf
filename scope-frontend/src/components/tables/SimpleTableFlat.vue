@@ -10,9 +10,6 @@
       :footer-props='{
         showFirstLastPage: true,
       }'>
-      <template v-slot:item.value='{ item }'>
-        {{ '€ ' + item.value }}
-      </template>
       <template v-slot:body.append>
         <div class='space-filler'>
         </div>

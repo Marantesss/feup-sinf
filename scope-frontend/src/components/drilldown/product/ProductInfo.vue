@@ -60,16 +60,6 @@ a<template>
 export default {
   name: 'Product Info',
   props: [ 'name', 'main' ],
-  computed: {
-    suppliers() {
-      let suppLinks = [];
-      for (let supp of this.main.suppliers) {
-        let link = '<a href="/supplier>' + supp + '</a>'
-        suppLinks.push(link)
-      }
-      return suppLinks.join(', ');
-    }
-  }
 }
 </script>
 

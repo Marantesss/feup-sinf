@@ -2,7 +2,7 @@
   <v-container fluid class='grey lighten-5'>
     <v-row id='core-view-row'>
       <products-stock-variation />
-      <sales-by-product-category />
+      <low-stock-items />
     </v-row>
     <v-row id='core-view-row'>
       <total-stock-value />
@@ -13,13 +13,13 @@
 
 <script>
 import ProductsStockVariation from '@/components/inventory/ProductsStockVariation.vue'
-import SalesByProductCategory from '@/components/generic/SalesByProductCategory.vue'
+import LowStockItems          from '@/components/inventory/LowStockItems.vue'
 import TotalStockValue        from '@/components/inventory/TotalStockValue.vue'
 import MostValuableItems      from '@/components/inventory/MostValuableItems.vue'
 export default {
   components: {
     ProductsStockVariation,
-    SalesByProductCategory,
+    LowStockItems,
     TotalStockValue,
     MostValuableItems
   },

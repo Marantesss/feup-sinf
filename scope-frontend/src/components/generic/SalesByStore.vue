@@ -33,68 +33,68 @@ export default {
   data: (() => {
     return {
       salesByStore: {
-        title: 'Top Sales All-Time',
+        title: 'All-Time Sales',
         headers: [
           {
-            text: 'Top Sales All-Time',
+            text: 'Store',
             align: 'start',
             sortable: false,
             value: 'name',
           },
-          { text: 'Sales', value: 'sales' },
+          { text: 'Sales', value: 'value' },
         ],
-        sales: [
+        values: [
           {
             name: 'Store 1',
-            sales: '340.1',
+            value: '340.1',
           },
           {
             name: 'Store 2',
-            sales: '341.1',
+            value: '341.1',
           },
           {
             name: 'Store 3',
-            sales: '342.1',
+            value: '342.1',
           },
           {
             name: 'Store 4',
-            sales: '343.1',
+            value: '343.1',
           },
           {
             name: 'Store 5',
-            sales: '344.1',
+            value: '344.1',
           },
           {
             name: 'Store 6',
-            sales: '339.1',
+            value: '339.1',
           },
           {
             name: 'Store 7',
-            sales: '338.1',
+            value: '338.1',
           },
           {
             name: 'Store 8',
-            sales: '337.1',
+            value: '337.1',
           },
           {
             name: 'Store 9',
-            sales: '336.1',
+            value: '336.1',
           },
           {
             name: 'Store 10',
-            sales: '335.1',
+            value: '335.1',
           },
           {
             name: 'Store 11',
-            sales: '334.1',
+            value: '334.1',
           },
           {
             name: 'Store 12',
-            sales: '333.1',
+            value: '333.1',
           },
           {
             name: 'Store 13',
-            sales: '332.1',
+            value: '332.1',
           },
         ]
       }

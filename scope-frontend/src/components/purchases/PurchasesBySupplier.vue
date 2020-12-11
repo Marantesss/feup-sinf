@@ -3,7 +3,7 @@
     <v-row no-gutters class='elevation-10 mx-1'>
       <v-col md='8' class='left-col pa-2'>
         <span class='title'>
-          Sales by Product Category
+          Purchases By Supplier
         </span>
         <div class='charts'>
           <div class='top-half'>
@@ -16,7 +16,7 @@
       </v-col>
       <v-col md='4' class='card-table'>
         <simple-table
-            :data=salesByProductCategory
+            :data=purchases
         />
       </v-col>
     </v-row>
@@ -32,68 +32,68 @@ export default {
   name: 'Sales By Product Category',
   data: (() => {
     return {
-      salesByProductCategory: {
-        title: 'All-Time Sales',
+      purchases: {
+        title: 'All-Time Purchases',
         headers: [
           {
-            text: 'Category',
+            text: 'Supplier',
             align: 'start',
             sortable: false,
             value: 'name',
           },
-          { text: 'Sales', value: 'value' },
+          { text: 'Purchases', value: 'value' },
         ],
         values: [
           {
-            name: 'Category 1',
+            name: 'Supplier 1',
             value: '340.1',
           },
           {
-            name: 'Category 2',
+            name: 'Supplier 2',
             value: '341.1',
           },
           {
-            name: 'Category 3',
+            name: 'Supplier 3',
             value: '342.1',
           },
           {
-            name: 'Category 4',
+            name: 'Supplier 4',
             value: '343.1',
           },
           {
-            name: 'Category 5',
+            name: 'Supplier 5',
             value: '344.1',
           },
           {
-            name: 'Category 6',
+            name: 'Supplier 6',
             value: '339.1',
           },
           {
-            name: 'Category 7',
+            name: 'Supplier 7',
             value: '338.1',
           },
           {
-            name: 'Category 8',
+            name: 'Supplier 8',
             value: '337.1',
           },
           {
-            name: 'Category 9',
+            name: 'Supplier 9',
             value: '336.1',
           },
           {
-            name: 'Category 10',
+            name: 'Supplier 10',
             value: '335.1',
           },
           {
-            name: 'Category 11',
+            name: 'Supplier 11',
             value: '334.1',
           },
           {
-            name: 'Category 12',
+            name: 'Supplier 12',
             value: '333.1',
           },
           {
-            name: 'Category 13',
+            name: 'Supplier 13',
             value: '332.1',
           },
         ]

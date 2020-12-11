@@ -4,7 +4,7 @@
       <v-col class='pa-2'>
         <div class='main-kpi'>
           <div class='kpi-label'>
-            Total Profits
+            Total Net Sales
           </div>
           <div class='kpi-big'>
             12,345.67

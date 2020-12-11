@@ -2,10 +2,10 @@
   <v-container fluid class='grey lighten-5'>
     <v-row id='core-view-row'>
       <purchase-kpis />
-      <sales-by-product-category />
+      <purchases-by-product />
     </v-row>
     <v-row id='core-view-row'>
-      <sales-by-product-category />
+      <purchases-by-supplier />
       <purchase-orders />
     </v-row>
   </v-container>
@@ -13,12 +13,14 @@
 
 <script>
 import PurchaseKpis           from '@/components/purchases/PurchaseKpis.vue'
-import SalesByProductCategory from '@/components/generic/SalesByProductCategory.vue'
+import PurchasesByProduct     from '@/components/purchases/PurchasesByProduct.vue'
+import PurchasesBySupplier    from '@/components/purchases/PurchasesBySupplier.vue'
 import PurchaseOrders         from '@/components/purchases/PurchaseOrders.vue'
 export default {
   components: { 
     PurchaseKpis,
-    SalesByProductCategory,
+    PurchasesByProduct,
+    PurchasesBySupplier,
     PurchaseOrders
   },
   name: 'Purchases',

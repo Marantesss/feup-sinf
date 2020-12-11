@@ -10,6 +10,8 @@ config.express = {
   maxAge: 600
 };
 
+config.jwtSecret = process.env.JWT_SECRET || 'secretstring';
+
 config.db = {
   client: process.env.DB_CLIENT,
   host: process.env.DB_HOST,
@@ -18,5 +20,9 @@ config.db = {
   password: process.env.DB_PASSWORD,
   port: process.env.DB_PORT,
 };
+
+config.jasmin = {
+  clientSecret: process.env.JM_CLIENT_SECRET
+}
 
 module.exports = config;

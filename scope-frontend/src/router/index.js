@@ -10,17 +10,20 @@ import Finances   from '@/views/Finances.vue'
 import Product    from '@/views/drilldown/Product.vue'
 import Client     from '@/views/drilldown/Client.vue'
 import Supplier   from '@/views/drilldown/Supplier.vue'
+import Login      from '@/views/Login.vue'
+import store      from '@/store'
 
 Vue.use(VueRouter)
 
 const routes = [
-  /* TODO LATER
   {
     path: '/login',
     name: 'Login',
-    component: Login
+    component: Login,
+    meta: {
+      plainLayout: true
+    },
   },
-  */
   {
     path: '/',
     name: 'Home',
@@ -73,5 +76,18 @@ const router = new VueRouter({
   base: process.env.BASE_URL,
   routes
 })
+
+/**
+ * Authenticated routes
+ */
+router.beforeEach((to, from, next) => {
+  if (to.name !== 'Login' && !store.state.user.loggedIn) {
+    next({ name: 'Login' });
+  } else if(to.name === 'Login' && store.state.user.loggedIn) {
+    next({ name: 'Overview'});
+  } else {
+    next();
+  }
+});
 
 export default router

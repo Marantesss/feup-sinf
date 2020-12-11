@@ -8,21 +8,20 @@
         :sales="sales" />
     </v-row>
     <v-row id='core-view-row'>
-      <line-chart-with-title :title="'Purchases vs Sales'" />
-      <line-chart-with-title :title="'Product\'s Price Variation'" />
+      <wide-bar-chart-with-title :title="'Purchases Over Time'" />
     </v-row>
   </v-container>
 </template>
 
 <script>
-import ClientInfo           from '@/components/drilldown/client/ClientInfo.vue';
-import ClientSales          from '@/components/drilldown/client/ClientSales.vue'
-import LineChartWithTitle     from '@/components/generic/LineChartWithTitle.vue'
+import ClientInfo             from '@/components/drilldown/client/ClientInfo.vue';
+import ClientSales            from '@/components/drilldown/client/ClientSales.vue'
+import WideBarChartWithTitle  from '@/components/generic/WideBarChartWithTitle.vue'
 export default {
   components: {
     ClientInfo,
     ClientSales,
-    LineChartWithTitle
+    WideBarChartWithTitle
   },
   name: 'Client',
   created: (() => { document.title = 'scope - Client' }),

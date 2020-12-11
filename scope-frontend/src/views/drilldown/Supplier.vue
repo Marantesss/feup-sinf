@@ -8,8 +8,7 @@
         :sales="sales" />
     </v-row>
     <v-row id='core-view-row'>
-      <line-chart-with-title :title="'Purchases vs Sales'" />
-      <line-chart-with-title :title="'Product\'s Price Variation'" />
+      <wide-bar-chart-with-title :title="'Purchases Over Time'" />
     </v-row>
   </v-container>
 </template>
@@ -17,12 +16,12 @@
 <script>
 import SupplierInfo           from '@/components/drilldown/supplier/SupplierInfo.vue';
 import SupplierSales          from '@/components/drilldown/supplier/SupplierSales.vue'
-import LineChartWithTitle     from '@/components/generic/LineChartWithTitle.vue'
+import WideBarChartWithTitle  from '@/components/generic/WideBarChartWithTitle.vue'
 export default {
   components: {
     SupplierInfo,
     SupplierSales,
-    LineChartWithTitle
+    WideBarChartWithTitle
   },
   name: 'Supplier',
   created: (() => { document.title = 'scope - Supplier' }),

@@ -61,7 +61,7 @@
 
 <script>
 export default {
-  name: 'Sales KPIs',
+  name: 'SalesKPIs',
   data: () => ({})
 }
 </script>

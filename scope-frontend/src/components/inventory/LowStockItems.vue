@@ -29,7 +29,7 @@ import DoughnutWrapper      from '@/components/common/DoughnutWrapper'
 import LineWrapper          from '@/components/common/LineWrapper'
 export default {
   components: { SimpleTableFlat, DoughnutWrapper, LineWrapper },
-  name: 'Sales By Product Category',
+  name: 'LowStockItems',
   data: (() => {
     return {
       lowStockItems: {

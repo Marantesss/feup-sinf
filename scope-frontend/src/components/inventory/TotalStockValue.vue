@@ -28,7 +28,7 @@
 import ChartWrapper from '@/components/common/ChartWrapper.vue'
 export default {
   components: { ChartWrapper },
-  name: 'Total Stock Value',
+  name: 'TotalStockValue',
 }
 </script>
 

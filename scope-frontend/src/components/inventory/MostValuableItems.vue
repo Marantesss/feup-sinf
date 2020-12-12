@@ -26,7 +26,7 @@ export default {
     SimpleTable,
     ChartWrapper,
   },
-  name: 'Products Stock Variation',
+  name: 'MostValuableItems',
   data() {
     return {
       current: {

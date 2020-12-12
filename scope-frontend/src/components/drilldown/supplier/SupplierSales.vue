@@ -55,7 +55,7 @@
 
 <script>
 export default {
-  name: 'Supplier Sales',
+  name: 'SupplierSales',
   props: [ 'sales' ],
 }
 </script>

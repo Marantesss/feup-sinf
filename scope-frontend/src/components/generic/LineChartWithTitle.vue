@@ -2,7 +2,7 @@
   <v-col md='6'>
     <v-row class='elevation-10 mx-1'>
       <v-col class='pa-2'>
-        <span class='title'>
+        <span>
           {{ title }}
         </span>
         <line-wrapper style='height: 359px;' />
@@ -15,13 +15,11 @@
 import LineWrapper from '@/components/common/LineWrapper.vue'
 export default {
   components: { LineWrapper },
-  name: 'Simple LineChart with Title',
-  props: ['title'],
-  data: (() => {
-    return {
-      title: this.title,
-    }
-  })  
+  name: 'LineChartWithTitle',
+  props: {
+    title: String
+  },
+  data: () => ({})
 }
 </script>
 

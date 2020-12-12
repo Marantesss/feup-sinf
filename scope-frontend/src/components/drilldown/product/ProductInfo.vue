@@ -58,7 +58,7 @@ a<template>
 
 <script>
 export default {
-  name: 'Product Info',
+  name: 'ProductInfo',
   props: [ 'name', 'main' ],
 }
 </script>

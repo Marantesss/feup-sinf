@@ -16,7 +16,7 @@
 import ChartWrapper from '@/components/common/ChartWrapper.vue'
 export default {
   components: { ChartWrapper },
-  name: 'Bar Chart with Title',
+  name: 'BarChartWithTitle',
   props: ['title'],
   data: (() => { 
     return {

@@ -26,7 +26,7 @@ export default {
     SimpleTableFlat,
     ChartWrapper,
   },
-  name: 'Products Stock Variation',
+  name: 'ProductsStockVariation',
   data() {
     return {
       current: {

@@ -4,7 +4,7 @@ exports.up = function (knex) {
     //table with costumer details excetp adresses
     table.string('id').notNullable().primary().defaultTo('Consumidor Final');
     // reference to account
-    table.bigInteger('accountId').references('id').inTable('account').onDelete('CASCADE');
+    table.string('accountId').references('id').inTable('account').onDelete('CASCADE');
 
     // reference to address
     table.integer('billingAddress').unsigned().references('id').inTable('address').onDelete('SET NULL');

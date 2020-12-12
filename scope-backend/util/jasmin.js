@@ -57,9 +57,30 @@ axios.interceptors.response.use((response) => (response), (error) => {
 },
 );
 
+const ACCOUNT = config.jasmin.account;
+const SUBSCRIPTION = config.jasmin.subscription;
 
+const jasminPromise = (method, endpoint) => {
+  console.log("Jasmin Request at: ",endpoint);
 
+   return axios({
+      url: endpoint,
+      baseURL: `https://my.jasminsoftware.com/api/${ACCOUNT}/${SUBSCRIPTION}/`,
+      method: method,
+      headers: {
+          "Accept": "application/json",
+          "Content-Type": "multipart/form-data",
+      },
+  }) 
+};
+
+//I know this is spaghetti but trying to debug stuff at 1am 
+const jasminRequest = (method,endpoint) => (
+  jasminPromise(method, endpoint, {}).then(
+      (res) => (res.data),
+  )
+);
 
 module.exports = {
-  requestAccessToken
+  requestAccessToken,jasminRequest
 };

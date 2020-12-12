@@ -24,6 +24,10 @@ const http = (method, url, data) => {
 };
 
 
+
+
+
+
 const setToken = (token) => {
   axios.defaults.headers.common = { "Authorization": `bearer ${token}` };
 };

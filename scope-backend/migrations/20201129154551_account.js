@@ -2,7 +2,7 @@
 exports.up = function (knex) {
   return knex.schema.createTable('account', (table) => {
     //table with all SAFT account details
-    table.bigInteger('id').notNullable().primary();
+    table.string('id').notNullable().primary();
     table.string('description').notNullable();
     table.float('openingDebitBalance', 6).notNullable();
     table.float('openingCreditBalance', 6).notNullable();

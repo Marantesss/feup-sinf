@@ -115,7 +115,7 @@ app.seedSuppliers = async () => {
     });
   });
 
-  console.log(`Seeded ${suppliers.length} Customers!`);
+  console.log(`Seeded ${suppliers.length} Suppliers!`);
 };
 
 app.seedJournalsTransactions = async () => {
@@ -237,6 +237,48 @@ app.seedTaxTableEntries = async () => {
   console.log(`Seeded ${taxTableEntries.length} Tax Table Entries!`);
 };
 
+app.seedTaxonomySheet = async () => {
+  await app.knex('taxonomySheet').del();
+  // get distinct taxonomyCodes from all accounts
+  const distinctTaxonomyCodes = await app.knex('account')
+    .sum('openingDebitBalance as openingDebit')
+    .sum('openingCreditBalance as openingCredit')
+    .select('taxonomyCode as id')
+    .whereNotNull('taxonomyCode')
+    .groupBy('taxonomyCode');
+
+  // get all transactions
+  await Promise.all(distinctTaxonomyCodes.map(async (elem) => {
+    // get all credit line transactions
+    // filter out transactions of type 'A': Apuramento de resultados
+    const { credit } = await app.knex('line')
+      .sum({ credit: 'line.amount' })
+      .join('account', 'account.id', 'line.accountId')
+      .join('transaction', 'transaction.id', 'line.transactionId')
+      .whereNot('transaction.type', 'A')
+      .andWhere('account.taxonomyCode', elem.id)
+      .andWhere('line.type', 'credit')
+      .first();
+
+    // get all debit line transactions
+    const { debit } = await app.knex('line')
+      .sum({ debit: 'line.amount' })
+      .join('account', 'account.id', 'line.accountId')
+      .join('transaction', 'transaction.id', 'line.transactionId')
+      .whereNot('transaction.type', 'A')
+      .andWhere('account.taxonomyCode', elem.id)
+      .andWhere('line.type', 'debit')
+      .first();
+
+    await app.knex('taxonomySheet').insert({
+      ...elem,
+      credit: credit != null ? credit : undefined,
+      debit: debit != null ? debit : undefined,
+    });
+  }));
+
+};
+
 const main = async () => {
   console.log('Parsing SAF-T...');
   await app.parseData();
@@ -249,6 +291,9 @@ const main = async () => {
   await app.seedSuppliers();
   await app.seedJournalsTransactions();
   await app.seedTaxTableEntries();
+  console.log('Done.');
+  console.log('Seeding Taxonomy Sheet...');
+  await app.seedTaxonomySheet();
   console.log('Done.');
 
   return 'Completed';

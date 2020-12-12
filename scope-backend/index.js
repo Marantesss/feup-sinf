@@ -8,13 +8,8 @@ app.listen(port, () => {
   console.log(`Listening on port ${port}`);
 });
 
-const test = jasmin.requestAccessToken();
-
-
-//Check if  request token works
-test.then(
-  (response) => {console.log(response)}
-)
 
 
 
+const test = jasmin.jasminRequest('get','materialscore/materialsitems');
+ 

@@ -47,54 +47,67 @@ export default {
           {
             name: 'Item 1',
             sales: '340',
+            route: '/product'
           },
           {
             name: 'Item 2',
             sales: '341',
+            route: '/product'
           },
           {
             name: 'Item 3',
             sales: '342',
+            route: '/product'
           },
           {
             name: 'Item 4',
             sales: '343',
+            route: '/product'
           },
           {
             name: 'Item 5',
             sales: '344',
+            route: '/product'
           },
           {
             name: 'Item 6',
             sales: '339',
+            route: '/product'
           },
           {
             name: 'Item 7',
             sales: '338',
+            route: '/product'
           },
           {
             name: 'Item 8',
             sales: '337',
+            route: '/product'
           },
           {
             name: 'Item 9',
             sales: '336',
+            route: '/product'
           },
           {
             name: 'Item 10',
             sales: '335',
+            route: '/product'
           },
           {
             name: 'Item 11',
             sales: '334',
+            route: '/product'
           },
           {
             name: 'Item 12',
             sales: '333',
+            route: '/product'
           },
           {
             name: 'Item 13',
             sales: '332',
+            route: '/product'
           },
         ]
       }

@@ -11,7 +11,12 @@
         showFirstLastPage: true,
       }'>
       <template v-slot:item.value='{ item }'>
-        {{ '€ ' + item.value }}
+        <a href='item.route' v-if='item.route != undefined'>
+          {{ '€ ' + item.value }}
+        </a>
+        <span v-else>
+          {{ '€ ' + item.value }}
+        </span>
       </template>
       <template v-slot:body.append>
         <div class='space-filler'>

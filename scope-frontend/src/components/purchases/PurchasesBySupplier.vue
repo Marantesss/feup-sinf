@@ -47,54 +47,67 @@ export default {
           {
             name: 'Supplier 1',
             value: '340.1',
+            route: '/supplier'
           },
           {
             name: 'Supplier 2',
             value: '341.1',
+            route: '/supplier'
           },
           {
             name: 'Supplier 3',
             value: '342.1',
+            route: '/supplier'
           },
           {
             name: 'Supplier 4',
             value: '343.1',
+            route: '/supplier'
           },
           {
             name: 'Supplier 5',
             value: '344.1',
+            route: '/supplier'
           },
           {
             name: 'Supplier 6',
             value: '339.1',
+            route: '/supplier'
           },
           {
             name: 'Supplier 7',
             value: '338.1',
+            route: '/supplier'
           },
           {
             name: 'Supplier 8',
             value: '337.1',
+            route: '/supplier'
           },
           {
             name: 'Supplier 9',
             value: '336.1',
+            route: '/supplier'
           },
           {
             name: 'Supplier 10',
             value: '335.1',
+            route: '/supplier'
           },
           {
             name: 'Supplier 11',
             value: '334.1',
+            route: '/supplier'
           },
           {
             name: 'Supplier 12',
             value: '333.1',
+            route: '/supplier'
           },
           {
             name: 'Supplier 13',
             value: '332.1',
+            route: '/supplier'
           },
         ]
       }

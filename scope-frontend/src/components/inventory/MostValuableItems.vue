@@ -45,67 +45,83 @@ export default {
         values: [
           {
             name: 'Product 1',
-            value: '1200'
+            value: '1200',
+            route: '/product'
           },
           {
             name: 'Product 2',
-            value: '1200'
+            value: '1200',
+            route: '/product'
           },
           {
             name: 'Product 3',
-            value: '1200'
+            value: '1200',
+            route: '/product'
           },
           {
             name: 'Product 4',
-            value: '1200'
+            value: '1200',
+            route: '/product'
           },
           {
             name: 'Product 5',
-            value: '1200'
+            value: '1200',
+            route: '/product'
           },
           {
             name: 'Product 6',
-            value: '1200'
+            value: '1200',
+            route: '/product'
           },
           {
             name: 'Product 7',
-            value: '1200'
+            value: '1200',
+            route: '/product'
           },
           {
             name: 'Product 8',
-            value: '1200'
+            value: '1200',
+            route: '/product'
           },
           {
             name: 'Product 9',
-            value: '1200'
+            value: '1200',
+            route: '/product'
           },
           {
             name: 'Product 10',
-            value: '1200'
+            value: '1200',
+            route: '/product'
           },
           {
             name: 'Product 11',
-            value: '1200'
+            value: '1200',
+            route: '/product'
           },
           {
             name: 'Product 12',
-            value: '1200'
+            value: '1200',
+            route: '/product'
           },
           {
             name: 'Product 13',
-            value: '1200'
+            value: '1200',
+            route: '/product'
           },
           {
             name: 'Product 14',
-            value: '1200'
+            value: '1200',
+            route: '/product'
           },
           {
             name: 'Product 15',
-            value: '1200'
+            value: '1200',
+            route: '/product'
           },
           {
             name: 'Product 16',
-            value: '1200'
+            value: '1200',
+            route: '/product'
           },
         ]
       }

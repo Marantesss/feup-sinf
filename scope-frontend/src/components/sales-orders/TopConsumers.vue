@@ -24,6 +24,11 @@
                   class='mx-4'
                 ></v-text-field>
               </template>
+              <template v-slot:item.consumer='{ item }'>
+                <a href='"/client"'>
+                  {{ item.consumer }}
+                </a>
+              </template>
               <template v-slot:item.totalspent='{ item }'>
                 {{ '€ ' + item.totalspent }}
               </template>

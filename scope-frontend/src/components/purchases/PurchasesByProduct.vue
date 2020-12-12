@@ -47,54 +47,67 @@ export default {
           {
             name: 'Product 1',
             value: '340.1',
+            route: '/product'
           },
           {
             name: 'Product 2',
             value: '341.1',
+            route: '/product'
           },
           {
             name: 'Product 3',
             value: '342.1',
+            route: '/product'
           },
           {
             name: 'Product 4',
             value: '343.1',
+            route: '/product'
           },
           {
             name: 'Product 5',
             value: '344.1',
+            route: '/product'
           },
           {
             name: 'Product 6',
             value: '339.1',
+            route: '/product'
           },
           {
             name: 'Product 7',
             value: '338.1',
+            route: '/product'
           },
           {
             name: 'Product 8',
             value: '337.1',
+            route: '/product'
           },
           {
             name: 'Product 9',
             value: '336.1',
+            route: '/product'
           },
           {
             name: 'Product 10',
             value: '335.1',
+            route: '/product'
           },
           {
             name: 'Product 11',
             value: '334.1',
+            route: '/product'
           },
           {
             name: 'Product 12',
             value: '333.1',
+            route: '/product'
           },
           {
             name: 'Product 13',
             value: '332.1',
+            route: '/product'
           },
         ]
       }

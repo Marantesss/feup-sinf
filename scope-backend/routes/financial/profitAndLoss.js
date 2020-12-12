@@ -39,7 +39,7 @@ router.get('/', async (req, res) => {
     };
 
 
-    // iterate over all equity entries
+    // iterate over all entries
     await Promise.all(form.map(async (entry) => {
       let currentSum = 0;
 

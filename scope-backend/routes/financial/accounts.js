@@ -119,40 +119,4 @@ router.get('/:id/monthly',
   }
 );
 
-
-/**
- * Get specific account's total debit and credit by taxonomy
- * 
- * Query Strings
- *  - startDate
- *  - endDate
- */
-router.get('/taxonomy/:taxo',
-    async (req, res) => {
-      const TaxonmyId = req.params.taxo;
-
-      const startDate = req.query.startDate ? req.query.startDate : '2019-01-01';
-      const endDate = req.query.endDate ? req.query.endDate : '2019-12-31';
-
-      //get id's
-       const Ids = await req.app.knex('account')
-      .select('id')
-      .where('taxonomyCode', TaxonmyId);
-
-       
-    //now sum all amounts in line table that corespond with each account id
-   
-     const  {sumCredit} = await req.app.knex('line')
-     .join('transaction', 'line.transactionId', 'transaction.id')
-     .where('line.accountId', 507)
-     .andWhere('line.type', 'credit')
-     .sum({ sumCredit: 'amount' })
-     .first();
-    console.log("sumcredit: ", sumCredit);
-    return res.json({ status: 200, sumCredit });
-  
-     
-    }
-  );
-
 module.exports = router;

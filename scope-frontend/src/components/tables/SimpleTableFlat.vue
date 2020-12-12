@@ -6,7 +6,7 @@
     <v-data-table
       :headers=data.headers
       :items=data.values
-      items-per-page='10'
+      :items-per-page=10
       :footer-props='{
         showFirstLastPage: true,
       }'>
@@ -28,7 +28,7 @@
 
 <script>
 export default {
-  name: "SimpleTable",
+  name: "SimpleTableFlat",
   props: ['data'],
 }
 </script>

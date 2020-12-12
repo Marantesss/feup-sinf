@@ -63,7 +63,7 @@
 
 <script>
 export default {
-  name: 'Drilldown KPIs',
+  name: 'ProductSales',
   props: [ 'sales' ],
 }
 </script>

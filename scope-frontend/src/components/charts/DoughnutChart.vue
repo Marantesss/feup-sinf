@@ -6,7 +6,7 @@ export default {
   extends: Doughnut,
   props: {
     chartData: {
-      type: Array
+      type: Object
     },/*
     label: {
       type: String

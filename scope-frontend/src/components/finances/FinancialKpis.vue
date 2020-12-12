@@ -50,7 +50,7 @@
 
 <script>
 export default {
-  name: 'Financial KPIs',
+  name: 'FinancialKPIs',
 }
 </script>
 

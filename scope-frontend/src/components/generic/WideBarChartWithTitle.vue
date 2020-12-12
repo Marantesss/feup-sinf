@@ -2,7 +2,7 @@
   <v-col>
     <v-row class='elevation-10 mx-1'>
       <v-col class='pa-2'>
-        <span class='title'>
+        <span>
           {{ title }}
         </span>
         <chart-wrapper style='height: 359px;'
@@ -16,13 +16,11 @@
 import ChartWrapper from '@/components/common/ChartWrapper.vue'
 export default {
   components: { ChartWrapper },
-  name: 'Bar Chart with Title',
-  props: ['title'],
-  data: (() => { 
-    return {
-      title: this.title
-    }
-  }) 
+  name: 'WideBarChartWithTitle',
+  props: {
+    title: String
+  },
+  data: () => ({})
 }
 </script>
 

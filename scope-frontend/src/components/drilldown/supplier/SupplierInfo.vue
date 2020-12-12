@@ -66,7 +66,7 @@
 
 <script>
 export default {
-  name: 'Supplier Info',
+  name: 'SupplierInfo',
   props: [ 'name', 'main' ],
 }
 </script>

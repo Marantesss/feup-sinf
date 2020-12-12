@@ -3,7 +3,7 @@
     <v-row id='core-view-row'>
       <v-col md='6' class='full-height'>
         <v-row class='half-height'>
-          <wide-line-chart-with-title :title="'Sales vs Cost Of Goods Sold'" />
+          <wide-line-chart-with-title title="Sales vs Cost Of Goods Sold" />
         </v-row>
         <v-row class='half-height'>
           <financial-kpis />
@@ -12,7 +12,6 @@
       <v-col md='6' class='full-height single-element'>
         <v-row class='full-height'>
           <balance-sheet />
-          <test />
         </v-row>
       </v-col>
     </v-row>
@@ -29,9 +28,9 @@ export default {
     FinancialKpis,
     BalanceSheet
   },
-  name: 'Accounts',
-  created: (() => { document.title = 'scope - Accounts' }),
-    data: (() => {}),
+  name: 'Finances',
+  created: (() => { document.title = 'scope - Finances' }),
+  data: () => ({})
 }
 </script>
 

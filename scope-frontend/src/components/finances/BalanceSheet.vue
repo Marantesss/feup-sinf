@@ -11,8 +11,8 @@
               :headers='headers'
               :items='entries'
               :search='search'
-              :custom-filter='filterTextSearch'
-              items-per-page='12'
+              :custom-filter='filterOnlyCapsText'
+              :items-per-page=12
               :footer-props='{
                 fixed: true,
                 showFirstLastPage: true,
@@ -56,7 +56,7 @@
 
 <script>
 export default {
-  name: 'Balance Sheet',
+  name: 'BalanceSheet',
   data() {
     return {
       totalDebit: '95,000.00',

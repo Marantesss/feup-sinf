@@ -2,11 +2,10 @@
   <v-container fluid class='grey lighten-5'>
     <v-row id='core-view-row'>
       <sales-kpis />
-      <profits />
       <sales-by-store />
     </v-row>
     <v-row id='core-view-row'>
-      <line-chart-with-title :title="'Sales Over Time'" />
+      <line-chart-with-title title="Sales Over Time" />
       <top-consumers />
     </v-row>
   </v-container>
@@ -24,7 +23,7 @@ export default {
     SalesByStore,
     TopConsumers
   },
-  name: 'Sales Orders',
+  name: 'Sales',
   created: (() => { document.title = 'scope - Sales Orders' }),
 }
 </script>

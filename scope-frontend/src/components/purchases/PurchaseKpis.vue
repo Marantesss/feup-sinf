@@ -51,7 +51,7 @@
 
 <script>
 export default {
-  name: 'Purchases KPIs',
+  name: 'PurchaseKPIs',
 }
 </script>
 

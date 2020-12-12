@@ -27,9 +27,10 @@
 import SimpleTable      from '@/components/tables/SimpleTable'
 import DoughnutWrapper  from '@/components/common/DoughnutWrapper.vue'
 import LineWrapper      from '@/components/common/LineWrapper.vue'
+
 export default {
   components: { SimpleTable, DoughnutWrapper, LineWrapper },
-  name: 'Sales By Product Category',
+  name: 'PurchasesBySupplier',
   data: (() => {
     return {
       purchases: {

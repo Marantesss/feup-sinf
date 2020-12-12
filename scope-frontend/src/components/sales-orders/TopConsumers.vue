@@ -25,7 +25,7 @@
                 ></v-text-field>
               </template>
               <template v-slot:item.consumer='{ item }'>
-                <a href='"/client"'>
+                <a href='/client'>
                   {{ item.consumer }}
                 </a>
               </template>

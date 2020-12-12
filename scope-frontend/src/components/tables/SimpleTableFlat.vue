@@ -10,12 +10,12 @@
       :footer-props='{
         showFirstLastPage: true,
       }'>
-      <template v-slot:item.value='{ item }'>
-        <a href='item.route' v-if='item.route != undefined'>
-          {{ item.value }}
+      <template v-slot:item.name='{ item }'>
+        <a :href='item.route' v-if='item.route != undefined'>
+          {{ item.name }}
         </a>
         <span v-else>
-          {{ item.value }}
+          {{ item.name }}
         </span>
       </template>
       <template v-slot:body.append>

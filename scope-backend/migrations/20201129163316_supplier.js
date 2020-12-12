@@ -4,7 +4,7 @@ exports.up = function (knex) {
     //table with SAFT supplier details except adresses
     table.string('id').notNullable().primary();
     // reference to account
-    table.integer('accountId').unsigned().references('id').inTable('account').onDelete('CASCADE');
+    table.string('accountId').references('id').inTable('account').onDelete('CASCADE');
 
     // reference to address
     table.integer('billingAddress').unsigned().references('id').inTable('address').onDelete('SET NULL');

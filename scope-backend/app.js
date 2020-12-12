@@ -5,8 +5,11 @@ const helmet = require('helmet');
 
 const config = require('./config').express;
 const middlewares = require('./middlewares');
-const indexRouter = require('./routes/index');
-const exampleRouter = require('./routes/example');
+const indexRouter = require('./routes');
+const financialRouter = require('./routes/financial');
+const inventoryRouter = require('./routes/inventory');
+const salesRouter = require('./routes/sales');
+const purchasesRouter = require('./routes/purchases');
 
 const app = express();
 
@@ -21,7 +24,10 @@ app.use(middlewares.timeout);
 
 /* Routers */
 app.use('/', indexRouter);
-app.use('/posts', exampleRouter);
+app.use('/financial', financialRouter);
+app.use('/inventory',inventoryRouter);
+app.use('/sales',salesRouter);
+app.use('/purchases', purchasesRouter);
 app.use(middlewares.notFound);
 
 /* Handlers */

@@ -26,9 +26,9 @@ router.get('/all', (_req, res) => {
                         id: sale.invoiceId,
                         product: sale.description,
                         quantity: sale.quantity,
-                        value: sale.grossValue.amount,
+                        baseValue: sale.grossValue.amount,
                         date: sale.deliveryDate.split("T")[0],
-                        revenue: sale.lineExtensionAmount.amount,
+                        value: sale.lineExtensionAmount.amount,
                         warehouseDescription: sale.warehouseDescription,
                         warehouse: sale.warehouse
                     });

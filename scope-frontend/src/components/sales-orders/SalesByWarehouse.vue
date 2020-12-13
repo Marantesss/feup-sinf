@@ -15,9 +15,7 @@
         </div>
       </v-col>
       <v-col md='4' class='card-table'>
-        <simple-table
-            :data=salesByStore
-        />
+        <simple-table :data=salesByStore />
       </v-col>
     </v-row>
   </v-col>
@@ -42,7 +40,7 @@ export default {
             sortable: false,
             value: 'warehouseDescription',
           },
-          { text: 'Sales', value: 'revenue' },
+          { text: 'Sales', value: 'value' },
         ],
         values: []
       }

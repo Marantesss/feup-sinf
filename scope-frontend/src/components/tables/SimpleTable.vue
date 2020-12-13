@@ -19,7 +19,7 @@
         </span>
       </template>
       <template v-slot:item.value='{ item }'>
-        {{ '€ ' + item.value }}
+        <span v-text="formatCurrency(item.value)"></span>
       </template>
       <template v-slot:body.append>
         <div class='space-filler'>
@@ -30,8 +30,11 @@
 </template>
 
 <script>
+import currencyFormatter from "@/mixins/currencyFormatter";
+
 export default {
   name: "SimpleTable",
+  mixins: [currencyFormatter],
   props: ['data'],
 }
 </script>

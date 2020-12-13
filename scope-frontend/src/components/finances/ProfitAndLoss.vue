@@ -3,7 +3,7 @@
     <v-row no-gutters class="elevation-10 mx-1 main">
       <v-col>
         <div class="px-2 d-flex align-center justify-space-between">
-          <span class="title">Balance Sheet</span>
+          <span class="title">Profit and Loss</span>
           <v-text-field
             v-model="search"
             label="Search"
@@ -16,7 +16,7 @@
               dense
               :loading="loading"
               :headers="headers"
-              :items="balanceSheetData"
+              :items="incomeStatementData"
               :search="search"
               :custom-filter="filterOnlyCapsText"
               :items-per-page="7"
@@ -57,12 +57,9 @@
 
 <script>
 import api from "@/services/api";
-import currencyFormatter from "@/mixins/currencyFormatter";
 
 export default {
-  name: "BalanceSheet",
-
-  mixins: [currencyFormatter],
+  name: "ProfitAndLoss",
 
   methods: {
     filterOnlyCapsText(value, search) {
@@ -76,79 +73,102 @@ export default {
           .indexOf(search.toString().toLocaleUpperCase()) !== -1
       );
     },
+
+    formatCurrency(amount) {
+      let decimalCount = 2;
+      const decimal = ".";
+      const thousands = " ";
+      const moneySign = "€ ";
+      try {
+        decimalCount = Math.abs(decimalCount);
+        decimalCount = isNaN(decimalCount) ? 2 : decimalCount;
+
+        const negativeSign = amount < 0 ? "-" : "";
+
+        let i = parseInt(
+          (amount = Math.abs(Number(amount) || 0).toFixed(decimalCount))
+        ).toString();
+        let j = i.length > 3 ? i.length % 3 : 0;
+
+        return (
+          moneySign +
+          negativeSign +
+          (j ? i.substr(0, j) + thousands : "") +
+          i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + thousands) +
+          (decimalCount
+            ? decimal +
+              Math.abs(amount - i)
+                .toFixed(decimalCount)
+                .slice(2)
+            : "")
+        );
+      } catch (e) {
+        console.log(e);
+      }
+    },
   },
 
   computed: {
-    balanceSheetData: function () {
+    incomeStatementData: function () {
       if (this.loading) {
         return;
       }
       const data = [];
 
-      // assets
-      this.assets.nonCurrentAssets.entries.forEach((entry) => {
+      // revenue
+      this.revenue.entries.forEach((entry) => {
         data.push({
           ...entry,
         });
       });
       data.push({
-        name: "Total Ativos Não Correntes",
+        name: "Receita Total",
+        balance: this.revenue.total,
         total: true,
-        balance: this.assets.nonCurrentAssets.total,
       });
-      this.assets.currentAssets.entries.forEach((entry) => {
+      // expenses
+      this.expenses.entries.forEach((entry) => {
         data.push({
           ...entry,
         });
       });
       data.push({
-        name: "Total Ativos Correntes",
+        name: "Despesa Total",
+        balance: this.expenses.total,
         total: true,
-        balance: this.assets.currentAssets.total,
       });
-      data.push({
-        name: "Total Ativos",
-        total: true,
-        balance: this.assets.total,
-      });
-
-      // liabilities
-      this.liabilities.nonCurrentLiabilities.entries.forEach((entry) => {
+      // depreciation
+      this.depreciation.entries.forEach((entry) => {
         data.push({
           ...entry,
         });
       });
       data.push({
-        name: "Total Passivos Não Correntes",
+        name: "Depreciação Total",
+        balance: this.depreciation.total,
         total: true,
-        balance: this.liabilities.nonCurrentLiabilities.total,
       });
-      this.liabilities.nonCurrentLiabilities.entries.forEach((entry) => {
+      // interest
+      this.interest.entries.forEach((entry) => {
         data.push({
           ...entry,
         });
       });
       data.push({
-        name: "Total Passivos Correntes",
+        name: "Interesse Total",
+        balance: this.interest.total,
         total: true,
-        balance: this.liabilities.currentLiabilities.total,
       });
-      data.push({
-        name: "Total Passivos",
-        total: true,
-        balance: this.liabilities.total,
-      });
-
-      // equity
-      this.equity.entries.forEach((entry) => {
+      // taxes
+      this.taxes.entries.forEach((entry) => {
         data.push({
           ...entry,
         });
       });
       data.push({
-        name: "Total Capital Próprio",
+        name: "Imposto Total",
+        balance: this.taxes.total,
         total: true,
-        balance: this.equity.total,
       });
 
       return data;
@@ -156,12 +176,14 @@ export default {
   },
 
   mounted() {
-    api.getBalanceSheet(
+    api.getProfitAndLoss(
       (res) => {
         if (res.data.status == 200) {
-          this.equity = res.data.equity;
-          this.assets = res.data.assets;
-          this.liabilities = res.data.liabilities;
+          this.revenue = res.data.revenue;
+          this.expenses = res.data.expenses;
+          this.depreciation = res.data.depreciation;
+          this.interest = res.data.interest;
+          this.taxes = res.data.taxes;
         }
         this.loading = false;
       },
@@ -172,9 +194,11 @@ export default {
   },
 
   data: () => ({
-    equity: [],
-    assets: [],
-    liabilities: [],
+    revenue: [],
+    expenses: [],
+    depreciation: [],
+    interest: [],
+    taxes: [],
     loading: true,
     search: "",
     headers: [

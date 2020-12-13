@@ -21,7 +21,9 @@ const routes = {
   login: '/login',
   logout: '/logout',
   stockValue: '/inventory/stock/value',
-  getExample: (example) => (`route/${example}/route`)
+  getBalanceSheet: '/financial/balanceSheet',
+  getProfitAndLoss: '/financial/profitAndLoss',
+  getSalesOverTime: '/financial/salesOverTime',
 };
 
 /**
@@ -81,8 +83,14 @@ const api = {
   stockValue: (data,_cb) => {
     request(routes.stockValue,'get',data,_cb);
   },
-  getExample: (example, _cb) => {
-    request(routes.getExample(example), 'get', null, _cb);
+  getBalanceSheet: (_cb) => {
+    request(routes.getBalanceSheet, 'get', null, _cb);
+  },
+  getProfitAndLoss: (_cb) => {
+    request(routes.getProfitAndLoss, 'get', null, _cb);
+  },
+  getSalesOverTime: (_cb) => {
+    request(routes.getSalesOverTime, 'get', null, _cb);
   },
 };
 

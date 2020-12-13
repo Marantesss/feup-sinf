@@ -26,6 +26,7 @@ const routes = {
   getSalesOverTime: '/financial/salesOverTime',
   grossProfitMargin: '/financial/grossProfitMargin',
   purchases: '/purchases/all',
+  costumers: '/sales/customers/',
   getExample: (example) => (`route/${example}/route`)
 };
 
@@ -90,6 +91,9 @@ const api = {
   },
   purchases:(_cb) =>{
     request(routes.purchases,'get',null,_cb);
+  },
+  costumers:(_cb) =>{
+    request(routes.costumers,'get',null,_cb);
   },
   getExample: (example, _cb) => {
     request(routes.getExample(example), 'get', null, _cb);

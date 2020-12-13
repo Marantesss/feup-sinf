@@ -62,7 +62,6 @@ export default {
 
   mounted() {
     api.purchases((res)=>{
-      console.log(res)
       this.totalPurchaseOrders = res.data.length
 
       this.totalPurchases = res.data.reduce((accumulator,currValue)=>{

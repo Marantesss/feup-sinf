@@ -78,11 +78,11 @@ router.get('/customers', (_req, res) => {
                 customers.push({
                     customerKey: customer.partyKey,
                     name: customer.name,
-                    adress: customer.streetName || " ",
-                    postalZone: customer.postalZone || " ",
-                    city: customer.cityName || " ",
-                    website: customer.websiteUrl || " ",
-                    taxID: customer.companyTaxID || 0,
+                    adress: customer.streetName || "-",
+                    postalZone: customer.postalZone || "-",
+                    city: customer.cityName || "-",
+                    website: customer.websiteUrl || "-",
+                    taxID: customer.companyTaxID || "-",
                     country: customer.countryDescription,
                     
 

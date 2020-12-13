@@ -1,17 +1,16 @@
-import Vue        from 'vue'
-import VueRouter  from 'vue-router'
+import Vue from 'vue'
+import VueRouter from 'vue-router'
 
-import Home       from '@/views/Home.vue'
-import Overview   from '@/views/Overview.vue'
-import Sales      from '@/views/Sales.vue'
-import Purchases  from '@/views/Purchases.vue'
-import Inventory  from '@/views/Inventory.vue'
-import Finances   from '@/views/Finances.vue'
-import Product    from '@/views/drilldown/Product.vue'
-import Client     from '@/views/drilldown/Client.vue'
-import Supplier   from '@/views/drilldown/Supplier.vue'
-import Login      from '@/views/Login.vue'
-import store      from '@/store'
+import Overview from '@/views/Overview.vue'
+import Sales from '@/views/Sales.vue'
+import Purchases from '@/views/Purchases.vue'
+import Inventory from '@/views/Inventory.vue'
+import Finances from '@/views/Finances.vue'
+import Product from '@/views/drilldown/Product.vue'
+import Client from '@/views/drilldown/Client.vue'
+import Supplier from '@/views/drilldown/Supplier.vue'
+import Login from '@/views/Login.vue'
+import store from '@/store'
 
 Vue.use(VueRouter)
 
@@ -26,8 +25,7 @@ const routes = [
   },
   {
     path: '/',
-    name: 'Home',
-    component: Home
+    redirect: '/overview'
   },
   {
     path: '/overview',
@@ -68,6 +66,11 @@ const routes = [
     path: '/supplier',
     name: 'Supplier',
     component: Supplier
+  },
+  // and finally the default route, when none of the above matches:
+  {
+    path: "*",
+    component: Overview
   }
 ]
 
@@ -83,8 +86,8 @@ const router = new VueRouter({
 router.beforeEach((to, from, next) => {
   if (to.name !== 'Login' && !store.state.user.loggedIn) {
     next({ name: 'Login' });
-  } else if(to.name === 'Login' && store.state.user.loggedIn) {
-    next({ name: 'Overview'});
+  } else if (to.name === 'Login' && store.state.user.loggedIn) {
+    next({ name: 'Overview' });
   } else {
     next();
   }

@@ -7,7 +7,7 @@
   </v-app>
 
   <v-app v-else>
-    <Navbar />
+    <Layout />
 
     <v-main>
       <router-view></router-view>
@@ -18,14 +18,14 @@
 </template>
 
 <script>
-import Navbar from "@/components/common/Navbar";
+import Layout from "@/components/common/Layout";
 import Alerts from "@/components/common/Alerts";
 
 export default {
   name: "App",
 
   components: {
-    Navbar,
+    Layout,
     Alerts,
   },
 

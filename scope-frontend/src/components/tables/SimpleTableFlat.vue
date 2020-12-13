@@ -18,9 +18,6 @@
           {{ item.name }}
         </span>
       </template>
-      <template v-slot:item.value='{ item }'>
-        {{ '€ ' + item.value }}
-      </template>
       <template v-slot:body.append>
         <div class='space-filler'>
         </div>
@@ -31,7 +28,7 @@
 
 <script>
 export default {
-  name: "SimpleTable",
+  name: "SimpleTableFlat",
   props: ['data'],
 }
 </script>

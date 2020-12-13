@@ -2,28 +2,35 @@
 import { Doughnut } from "vue-chartjs";
 
 export default {
-  name: " DoughnutChart",
+  name: "DoughnutChart",
   extends: Doughnut,
   props: {
     chartData: {
-      type: Array
-    }/*,
+      type: Object
+    },/*
     label: {
       type: String
-    },ptions: {
-      type: Object
     },
     chartColors: {
       type: Object
     }*/
-
+    options: {
+      type: Object,
+      default: () => {
+        return {
+          responsive: true,
+          maintainAspectRatio: false
+        }
+      }
+    }
   },
   mounted () {
-    this.renderChart(this.chartData)
+    this.renderChart(this.chartData, this.options)
   }
+
 }
  
 </script>
 
 <style>
-</style
+</style>

@@ -48,7 +48,7 @@ import Datepicker from "@/components/common/Datepicker.vue";
 import api from "@/services/api";
 
 export default {
-  name: "Navbar",
+  name: "Layout",
 
   components: {
     Datepicker,
@@ -110,9 +110,9 @@ export default {
         route: "Inventory",
       },
       {
-        icon: "mdi-account-check",
-        text: "Accounts Payable",
-        route: "Accounts",
+        icon: "mdi-cash-usd-outline",
+        text: "Finances",
+        route: "Finances",
       },
     ],
   }),

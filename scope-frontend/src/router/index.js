@@ -1,15 +1,17 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
+import Vue        from 'vue'
+import VueRouter  from 'vue-router'
 
-import Home from '../views/Home.vue'
-import Overview from '../views/Overview.vue'
-import Sales from '../views/Sales.vue'
-import Purchases from '../views/Purchases.vue'
-import Inventory from '../views/Inventory.vue'
-import Accounts from '../views/Accounts.vue'
-import Login from '../views/Login.vue'
-
-import store from '../store';
+import Home       from '@/views/Home.vue'
+import Overview   from '@/views/Overview.vue'
+import Sales      from '@/views/Sales.vue'
+import Purchases  from '@/views/Purchases.vue'
+import Inventory  from '@/views/Inventory.vue'
+import Finances   from '@/views/Finances.vue'
+import Product    from '@/views/drilldown/Product.vue'
+import Client     from '@/views/drilldown/Client.vue'
+import Supplier   from '@/views/drilldown/Supplier.vue'
+import Login      from '@/views/Login.vue'
+import store      from '@/store'
 
 Vue.use(VueRouter)
 
@@ -48,9 +50,24 @@ const routes = [
     component: Inventory
   },
   {
-    path: '/accounts',
-    name: 'Accounts',
-    component: Accounts
+    path: '/finances',
+    name: 'Finances',
+    component: Finances
+  },
+  {
+    path: '/product',
+    name: 'Product',
+    component: Product
+  },
+  {
+    path: '/client',
+    name: 'Client',
+    component: Client
+  },
+  {
+    path: '/supplier',
+    name: 'Supplier',
+    component: Supplier
   }
 ]
 

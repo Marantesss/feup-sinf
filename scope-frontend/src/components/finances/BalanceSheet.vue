@@ -1,8 +1,16 @@
 <template>
-  <v-col class="full-height">
+  <v-col>
     <v-row no-gutters class="elevation-10 mx-1 main">
-      <v-col class="pa-2">
-        <span class="title"> Balance Sheet </span>
+      <v-col>
+        <div class="px-2 d-flex align-center justify-space-between">
+          <span class="title">Balance Sheet</span>
+          <v-text-field
+            style="width: 200px !important"
+            v-model="search"
+            label="Search"
+            class="mx-4"
+          ></v-text-field>
+        </div>
         <v-container class="table-container">
           <div class="table">
             <v-data-table
@@ -12,26 +20,18 @@
               :items="balanceSheetData"
               :search="search"
               :custom-filter="filterOnlyCapsText"
-              :items-per-page="20"
+              :items-per-page="7"
               :footer-props="{
                 fixed: true,
                 showFirstLastPage: true,
               }"
             >
-              <template v-slot:top>
-                <v-text-field
-                  v-model="search"
-                  label="Search"
-                  class="mx-4"
-                ></v-text-field>
-              </template>
-
               <template v-slot:item.balance="{ item }">
                 <span v-if="item.total" class="font-weight-bold">
                   {{ formatCurrency(item.balance) }}
                 </span>
                 <span v-else>
-                  {{ formatCurrency(item.balance)}}
+                  {{ formatCurrency(item.balance) }}
                 </span>
               </template>
 
@@ -46,7 +46,7 @@
               </template>
 
               <template v-slot:body.append>
-                <v-space></v-space>
+                <v-spacer></v-spacer>
               </template>
             </v-data-table>
           </div>
@@ -123,7 +123,7 @@ export default {
         });
       });
       data.push({
-        name: "Total Non Current Assets",
+        name: "Total Ativos Não Correntes",
         total: true,
         balance: this.assets.nonCurrentAssets.total,
       });
@@ -133,12 +133,12 @@ export default {
         });
       });
       data.push({
-        name: "Total Current Assets",
+        name: "Total Ativos Correntes",
         total: true,
         balance: this.assets.currentAssets.total,
       });
       data.push({
-        name: "Total Assets",
+        name: "Total Ativos",
         total: true,
         balance: this.assets.total,
       });
@@ -150,7 +150,7 @@ export default {
         });
       });
       data.push({
-        name: "Total Non Current Liabilities",
+        name: "Total Passivos Não Correntes",
         total: true,
         balance: this.liabilities.nonCurrentLiabilities.total,
       });
@@ -160,12 +160,12 @@ export default {
         });
       });
       data.push({
-        name: "Total Current Liabilities",
+        name: "Total Passivos Correntes",
         total: true,
         balance: this.liabilities.currentLiabilities.total,
       });
       data.push({
-        name: "Total Liabilities",
+        name: "Total Passivos",
         total: true,
         balance: this.liabilities.total,
       });
@@ -177,12 +177,10 @@ export default {
         });
       });
       data.push({
-        name: "Total Equity",
+        name: "Total Capital Próprio",
         total: true,
         balance: this.equity.total,
       });
-
-      console.log(data);
 
       return data;
     },

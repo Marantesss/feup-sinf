@@ -22,6 +22,7 @@ const routes = {
   logout: '/logout',
   stockValue: '/inventory/stock/value',
   getBalanceSheet: '/financial/balanceSheet',
+  getProfitAndLoss: '/financial/profitAndLoss',
 };
 
 /**
@@ -83,6 +84,9 @@ const api = {
   },
   getBalanceSheet: (_cb) => {
     request(routes.getBalanceSheet, 'get', null, _cb);
+  },
+  getProfitAndLoss: (_cb) => {
+    request(routes.getProfitAndLoss, 'get', null, _cb);
   },
 };
 

@@ -1,17 +1,21 @@
 <template>
-  <v-container fluid class='grey lighten-5'>
-    <v-row id='core-view-row'>
-      <v-col md='6' class='full-height'>
-        <v-row class='half-height'>
+  <v-container fluid class="grey lighten-5">
+    <v-row id="core-view-row">
+      <v-col md="6" class="full-height">
+        <v-row class="half-height">
           <wide-line-chart-with-title title="Sales vs Cost Of Goods Sold" />
         </v-row>
-        <v-row class='half-height'>
+        <v-row class="half-height">
           <financial-kpis />
         </v-row>
       </v-col>
-      <v-col md='6' class='full-height single-element'>
-        <v-row class='full-height'>
+
+      <v-col md="6" class="full-height">
+        <v-row class="half-height">
           <balance-sheet />
+        </v-row>
+        <v-row class="half-height">
+          <profit-and-loss />
         </v-row>
       </v-col>
     </v-row>
@@ -19,23 +23,27 @@
 </template>
 
 <script>
-import WideLineChartWithTitle from '@/components/finances/WideLineChartWithTitle.vue'
-import BalanceSheet           from '@/components/finances/BalanceSheet.vue'
-import FinancialKpis          from '@/components/finances/FinancialKpis.vue'
+import WideLineChartWithTitle from "@/components/finances/WideLineChartWithTitle.vue";
+import BalanceSheet from "@/components/finances/BalanceSheet.vue";
+import ProfitAndLoss from "@/components/finances/ProfitAndLoss.vue";
+import FinancialKpis from "@/components/finances/FinancialKpis.vue";
+
 export default {
   components: {
     WideLineChartWithTitle,
     FinancialKpis,
-    BalanceSheet
+    BalanceSheet,
+    ProfitAndLoss
   },
-  name: 'Finances',
-  created: (() => { document.title = 'scope - Finances' }),
-  data: () => ({})
-}
+  name: "Finances",
+  created: () => {
+    document.title = "scope - Finances";
+  },
+  data: () => ({}),
+};
 </script>
 
 <style scoped>
-
 div.container {
   height: 100%;
   padding: 0;
@@ -65,5 +73,4 @@ div.container > .row#core-view-row {
   margin: 0;
   height: 50%;
 }
-
 </style>

@@ -54,10 +54,10 @@ import api from '@/services/api'
 export default {
   name: 'PurchaseKPIs',
   data: () =>({
-    purchaseOrderBacklog: 132,
-    purchaseBacklog: 12345.6,
-    totalPurchaseOrders: 43715,
-    totalPurchases: 16345876
+    purchaseOrderBacklog: "-",
+    purchaseBacklog: "-",
+    totalPurchaseOrders: "-",
+    totalPurchases: "-"
   }),
 
   mounted() {

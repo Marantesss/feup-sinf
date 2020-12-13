@@ -37,14 +37,12 @@ import api from '@/services/api'
 export default {
   name: 'SalesKPIs',
   data: () => ({
-    status: 0,
-    netSales : 0,
-    cogs: 0,
-    grossProfitMargin: 0
+    netSales : "-",
+    cogs: "-",
+    grossProfitMargin: "-"
   }),
   mounted () {
     api.grossProfitMargin((res)=>{
-      this.status = res.data.status;
       this.netSales = res.data.netSales;
       this.cogs = res.data.cogs;
       this.grossProfitMargin = res.data.grossProfitMargin;

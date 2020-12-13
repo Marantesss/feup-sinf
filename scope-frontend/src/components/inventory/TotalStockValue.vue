@@ -33,7 +33,7 @@ export default {
   components: { ChartWrapper },
   name: 'TotalStockValue',
   data: () => ({
-    stockValue : 0
+    stockValue : "-"
   }),
   mounted () {
     api.stockValue((res)=>{

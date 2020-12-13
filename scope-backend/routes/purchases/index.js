@@ -46,11 +46,40 @@ router.get('/all', (_req, res) => {
         message: err.message,
         error: err
       });
-
-
-
     });
 });
+
+router.get('/products', (_req, res) => {
+  console.log("penis")
+
+  jasmin.jasminRequest("get", "/purchases/orders").then((purchasesRaw) => {
+    const products = []
+
+    purchasesRaw.map(
+      (invoice) => {
+
+        invoice.documentLines.map((line) => {
+          products.push({
+            description: line.description,
+            quantity: line.quantity,
+            value: line.lineExtensionAmount,
+            date: line.deliveryDate.split("T")[0]
+          })
+        })
+      }
+    )
+  res.json(products)
+  })
+    .catch(() => {
+      let err = new Error("Failed to retrive purchase invoices for products");
+      err.status = 400;
+      res.json({
+        message: err.message,
+        error: err
+      });
+    });
+
+})
 
 router.use('/supplier', supplierRouter);
 

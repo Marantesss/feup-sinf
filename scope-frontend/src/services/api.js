@@ -29,7 +29,7 @@ const routes = {
   purchases: '/purchases/all',
   costumers: '/sales/customers/',
   sales: '/sales/all',
-  getExample: (example) => (`route/${example}/route`)
+  purchasesbyProduct: '/purchases/products/'
 };
 
 /**
@@ -116,6 +116,9 @@ const api = {
   grossProfitMargin: (_cb) => {
     request(routes.grossProfitMargin, 'get', null, _cb);
   },
+  getPurchasesbyProduct: (_cb) =>{
+    request(routes.purchasesbyProduct, 'get', null, _cb);
+  }
 };
 
 export default api;

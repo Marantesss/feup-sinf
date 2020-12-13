@@ -50,8 +50,6 @@ router.get('/all', (_req, res) => {
 });
 
 router.get('/products', (_req, res) => {
-  console.log("penis")
-
   jasmin.jasminRequest("get", "/purchases/orders").then((purchasesRaw) => {
     const products = []
 
@@ -62,8 +60,9 @@ router.get('/products', (_req, res) => {
           products.push({
             description: line.description,
             quantity: line.quantity,
-            value: line.lineExtensionAmount,
-            date: line.deliveryDate.split("T")[0]
+            value: line.lineExtensionAmount.amount,
+            date: line.deliveryDate.split("T")[0],
+            id: line.purchasesItem
           })
         })
       }

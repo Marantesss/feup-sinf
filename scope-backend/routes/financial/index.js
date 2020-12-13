@@ -7,6 +7,7 @@ const accountsRouter = require('./accounts');
 const balanceSheetRouter = require('./balanceSheet');
 const profitAndLossRouter = require('./profitAndLoss');
 const grossProfitMarginRouter = require('./grossProfitMargin');
+const salesOverTimeRouter = require('./salesOverTime');
 
 // routes are protected with user authentication
 //router.use(authenticate);
@@ -16,5 +17,6 @@ router.use('/accounts', accountsRouter);
 router.use('/balanceSheet', balanceSheetRouter);
 router.use('/profitAndLoss', profitAndLossRouter);
 router.use('/grossProfitMargin', grossProfitMarginRouter);
+router.use('/salesOverTime', salesOverTimeRouter);
 
 module.exports = router;

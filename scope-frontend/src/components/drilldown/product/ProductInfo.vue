@@ -25,7 +25,7 @@ a<template>
                 Cost of Goods Sold
               </div>
               <div class='kpi-big'>
-                {{ main.cogs }}
+                <span v-text="formatCurrency(main.cogs)"></span>
               </div>
             </div>
           </v-col>
@@ -57,8 +57,10 @@ a<template>
 </template>
 
 <script>
+import currencyFormatter from "@/mixins/currencyFormatter";
 export default {
   name: 'ProductInfo',
+  mixins: [currencyFormatter],
   props: [ 'name', 'main' ],
 }
 </script>

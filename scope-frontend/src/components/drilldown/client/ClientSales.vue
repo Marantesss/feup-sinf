@@ -6,8 +6,8 @@
           <div class='kpi-label'>
             Total Sales Value
           </div>
-          <div class='kpi-big money'>
-            {{ sales.totalSalesValue }}
+          <div class='kpi-big'>
+            <span v-text="formatCurrency(sales.totalSalesValue)"></span>
           </div>
         </div>
         <v-row class='secondary-kpis'>
@@ -16,8 +16,8 @@
               <div class='kpi-label'>
                 Average Cost per Sale
               </div>
-              <div class='kpi-big money'>
-                {{ sales.avgCostPerSale }}
+              <div class='kpi-big'>
+                <span v-text="formatCurrency(sales.avgCostPerSale)"></span>
               </div>
             </div>
           </v-col>
@@ -38,8 +38,10 @@
 </template>
 
 <script>
+import currencyFormatter from "@/mixins/currencyFormatter";
 export default {
   name: 'ClientSales',
+  mixins: [currencyFormatter],
   props: [ 'sales' ],
 }
 </script>
@@ -130,10 +132,6 @@ export default {
   height: 90%;
   width: 100%;
   font-size: 3.5em;
-}
-
-.money::before {
-  content: '\20ac\00a0';
 }
 
 </style>

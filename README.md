@@ -36,5 +36,6 @@ If for some reason docker is still not being cooperative, feel free to give up a
 
 - [Diogo Machado](https://github.com/diogosmac)
 - [Gonçalo Marantes](https://github.com/Marantesss)
+- [João Ricardo Cardoso](https://github.com/JoaoRicardoCardoso)
 - [Paulo Marques](https://github.com/pdsam)
 - [Raul Viana](https://github.com/raulviana)

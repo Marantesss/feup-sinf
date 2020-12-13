@@ -8,16 +8,16 @@
               <div class='kpi-label'>
                 Current Selling Price
               </div>
-              <div class='kpi-big money'>
-                {{ sales.currentSellingPrice }}
+              <div class='kpi-big'>
+                <span v-text="formatCurrency(sales.currentSellingPrice)"></span>
               </div>
             </div>
             <div class='kpi'>
               <div class='kpi-label'>
                 Average Cost
               </div>
-              <div class='kpi-big money'>
-                {{ sales.avgCost }}
+              <div class='kpi-big'>
+                <span v-text="formatCurrency(sales.currentSellingPrice)"></span>
               </div>
             </div>
             <div class='kpi'>
@@ -34,16 +34,16 @@
               <div class='kpi-label'>
                 Average Selling Price
               </div>
-              <div class='kpi-big money'>
-                {{ sales.avgSellingPrice }}
+              <div class='kpi-big'>
+                <span v-text="formatCurrency(sales.currentSellingPrice)"></span>
               </div>
             </div>
             <div class='kpi'>
               <div class='kpi-label'>
                 Average Profit Margin
               </div>
-              <div class='kpi-big money'>
-                {{ sales.avgProfitMargin }}
+              <div class='kpi-big'>
+                <span v-text="formatCurrency(sales.currentSellingPrice)"></span>
               </div>
             </div>
             <div class='kpi'>
@@ -62,8 +62,10 @@
 </template>
 
 <script>
+import currencyFormatter from "@/mixins/currencyFormatter";
 export default {
   name: 'ProductSales',
+  mixins: [currencyFormatter],
   props: [ 'sales' ],
 }
 </script>
@@ -129,10 +131,6 @@ export default {
 .kpi .kpi-label {
   font-size: 1.35em;
   padding: 5px 10px;
-}
-
-.money::before {
-  content: '\20ac\00a0';
 }
 
 </style>

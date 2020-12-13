@@ -1,5 +1,5 @@
 <template>
-  <v-col md='6'>
+  <v-col>
     <v-row no-gutters class='elevation-10 mx-1 main'>
       <v-col class='pa-2 top-consumers'>
         <span class='title'>

@@ -11,8 +11,8 @@
               <div class='kpi-title'>
                 Total Purchases
               </div>
-              <div class='kpi-value dolar'>
-                <span>{{totalPurchases}}</span>
+              <div class='kpi-value'>
+                <span v-text="formatCurrency(totalPurchases)"></span>
               </div>
             </v-col>
             <v-col class='kpi right'>
@@ -29,8 +29,8 @@
               <div class='kpi-title'>
                 Purchase Backlog
               </div>
-              <div class='kpi-value dolar'>
-                <span>{{purchaseBacklog}}</span>
+              <div class='kpi-value'>
+                <span v-text="formatCurrency(purchaseBacklog)"></span>
               </div>
             </v-col>
             <v-col class='kpi right'>
@@ -50,9 +50,12 @@
 </template>
 
 <script>
-import api from '@/services/api'
+import api from '@/services/api';
+import currencyFormatter from "@/mixins/currencyFormatter";
+
 export default {
   name: 'PurchaseKPIs',
+  mixins: [currencyFormatter],
   data: () =>({
     purchaseOrderBacklog: "-",
     purchaseBacklog: "-",
@@ -112,11 +115,6 @@ export default {
       > .kpi-title {
         font-weight: 300;
         font-size: 1.5em;
-      }
-      > .dolar {
-        > span::before {
-          content: "\20ac\00a0";
-        }
       }
       > .kpi-value {
         position: absolute;

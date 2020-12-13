@@ -32,7 +32,7 @@ export default {
       main: {
         id: 'P0001',
         upc: '00885911364355',
-        cogs: '5,432.10',
+        cogs: '5432.10',
         suppliers: [
           'F0001',
           'F0003'

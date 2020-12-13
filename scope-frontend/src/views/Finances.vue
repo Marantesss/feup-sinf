@@ -9,7 +9,6 @@
           <financial-kpis />
         </v-row>
       </v-col>
-
       <v-col md="6" class="full-height">
         <v-row class="half-height">
           <balance-sheet />

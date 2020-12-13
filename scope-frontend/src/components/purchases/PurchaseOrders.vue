@@ -30,7 +30,7 @@
                 <v-icon v-else color="red"> mdi-close-circle-outline </v-icon>
               </template>
               <template v-slot:item.details="{ item }">
-                <a :href="item.details"> DETAILS </a>
+                <a :href="item.details" target="_blank"> DETAILS </a>
               </template>
               <template v-slot:body.append>
                 <div class="space-filler"></div>

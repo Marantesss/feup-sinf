@@ -7,7 +7,7 @@
             Total Stock Value
           </div>
           <div class='kpi-big'>
-            12,345.67
+            {{stockValue}}
           </div>
         </div>
         <div class='stock-per-store'>
@@ -26,10 +26,24 @@
 
 <script>
 import ChartWrapper from '@/components/common/ChartWrapper.vue'
+import api from '@/services/api'
+
+
 export default {
   components: { ChartWrapper },
   name: 'TotalStockValue',
+  data: () => ({
+    stockValue : 0
+  }),
+  mounted () {
+    api.stockValue((res)=>{
+     this.stockValue = res.data.stockValue;
+
+    })
+  }
 }
+
+
 </script>
 
 <style scoped>

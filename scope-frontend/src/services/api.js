@@ -80,8 +80,8 @@ const api = {
   logout: (_cb) => {
     request(routes.logout, 'post', null, _cb);
   },
-  stockValue: (data,_cb) => {
-    request(routes.stockValue,'get',data,_cb);
+  stockValue: (_cb) => {
+    request(routes.stockValue,'get',null,_cb);
   },
   getBalanceSheet: (_cb) => {
     request(routes.getBalanceSheet, 'get', null, _cb);

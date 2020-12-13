@@ -2,6 +2,9 @@ const express = require('express');
 const router = express.Router();
 const jasmin = require('../../util/jasmin');
 
+
+const supplierRouter = require('./supplier');
+
 // routes are protected with user authentication
 //router.use(authenticate);
 router.get('/', (_req, res) => {
@@ -38,10 +41,6 @@ router.get('/all', (_req, res) => {
     });
 });
 
-
-router.get('/suppliers', (_req, res) => {
-
-
-});
+router.use('/supplier', supplierRouter);
 
 module.exports = router;

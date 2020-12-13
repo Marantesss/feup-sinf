@@ -20,6 +20,7 @@ const getToken = () => localStorage.getItem('JWT_TOKEN');
 const routes = {
   login: '/login',
   logout: '/logout',
+  stockValue: '/inventory/stock/value',
   getExample: (example) => (`route/${example}/route`)
 };
 
@@ -76,6 +77,9 @@ const api = {
   },
   logout: (_cb) => {
     request(routes.logout, 'post', null, _cb);
+  },
+  stockValue: (data,_cb) => {
+    request(routes.stockValue,'get',data,_cb);
   },
   getExample: (example, _cb) => {
     request(routes.getExample(example), 'get', null, _cb);

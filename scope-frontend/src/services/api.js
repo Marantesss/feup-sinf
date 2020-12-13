@@ -23,6 +23,7 @@ const routes = {
   stockValue: '/inventory/stock/value',
   getBalanceSheet: '/financial/balanceSheet',
   getProfitAndLoss: '/financial/profitAndLoss',
+  getSalesOverTime: '/financial/salesOverTime',
 };
 
 /**
@@ -87,6 +88,9 @@ const api = {
   },
   getProfitAndLoss: (_cb) => {
     request(routes.getProfitAndLoss, 'get', null, _cb);
+  },
+  getSalesOverTime: (_cb) => {
+    request(routes.getSalesOverTime, 'get', null, _cb);
   },
 };
 

@@ -4,7 +4,7 @@ const router = express.Router();
 
 router.get('/:id', async (req, res) => {
     const itemID = req.params.id;
-    console.log('materialscore/materialsitems/${itemID}/extension');
+    //console.log('materialscore/materialsitems/${itemID}/extension');
     jasmin.jasminRequest('get', `materialscore/materialsitems/${itemID}/extension`).then(
         (item) => {
             res.json(item);

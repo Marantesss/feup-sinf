@@ -125,10 +125,6 @@ export default {
   }
 }
 
-</style>
-
-<style lang='scss'>
-
 .top-consumers div.v-input {
   padding-top: 0;
 }

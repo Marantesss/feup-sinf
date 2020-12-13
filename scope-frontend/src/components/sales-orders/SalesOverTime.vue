@@ -77,7 +77,7 @@ export default {
       responsive: true,
       maintainAspectRatio: false,
       legend: {
-        position: "right",
+        display: false,
       },
       plugins: {
         title: {

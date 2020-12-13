@@ -5,12 +5,19 @@
         <span class='title'>
           Sales by Warehouse
         </span>
-        <div class='charts'>
-          <div class='top-half'>
-            <div class='hard-coded-height'><doughnut-wrapper style='height: 176px;' /></div>
-          </div>
-          <div class='bottom-half'>
-            <div class='hard-coded-height'><line-wrapper style='height: 176px;' /></div>
+        <div class='charts d-flex justify-center align-center'>
+          <div class='hard-coded-height'>
+            <v-container v-if="!loading" style='height: 300px;' id='chart-container'>
+              <doughnut-chart :chartData="chartData" :options='options' />
+            </v-container>
+            <div v-else style="height: 100%">
+              <v-progress-circular
+                :size="200"
+                :width="8"
+                indeterminate
+                color="primary"
+              ></v-progress-circular>
+            </div>
           </div>
         </div>
       </v-col>
@@ -23,31 +30,68 @@
 
 <script>
 import SimpleTable      from '@/components/tables/SimpleTable'
-import DoughnutWrapper  from '@/components/common/DoughnutWrapper.vue'
-import LineWrapper      from '@/components/common/LineWrapper.vue'
+import DoughnutChart from '@/components/charts/DoughnutChart.vue'
 import api from '@/services/api'
 
 export default {
-  components: { SimpleTable, DoughnutWrapper, LineWrapper },
+  components: { SimpleTable, DoughnutChart},
   name: 'SalesByWarehouse',
   data: () => ({
-      salesByStore: {
-        title: 'All-Time Sales',
-        headers: [
-          {
-            text: 'Store',
-            align: 'start',
-            sortable: false,
-            value: 'warehouseDescription',
-          },
-          { text: 'Sales', value: 'value' },
-        ],
-        values: []
+    loading: true,
+    chartData: {
+      labels: [],
+      datasets: [
+        {
+          label: 'Data One',
+          backgroundColor: [
+            '#f27878',
+            '#f7b777',
+            '#f5ec71',
+            '#88e382',
+            '#82edf5',
+          ],
+          data: [],
+          fill: false,
+        }
+      ],
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      legend: {
+        position: 'right'
       }
+    },
+    salesByStore: {
+      title: 'All Warehouses',
+      headers: [
+        {
+          text: 'Store',
+          align: 'start',
+          sortable: true,
+          value: 'warehouseDescription',
+        },
+        { text: 'Sales', value: 'value' },
+      ],
+      values: []
+    }
   }),
   mounted () {
     api.getAllSales((res)=>{
-      this.salesByStore.values = res.data.salesList;
+      res.data.salesList.forEach(element => {
+        const key = element.warehouseDescription;
+        let totalValue = this.salesByStore.values.find(x => x.warehouseDescription === key);
+        if (totalValue === undefined) {
+          this.chartData.labels.push(key);
+          this.salesByStore.values.push(element);
+        } else {
+          totalValue.value += element.value;
+        }
+      });
+      this.salesByStore.values.forEach(element => {
+        this.chartData.datasets[0].data.push(element.value);
+      });
+      this.loading = false;
     })
   }  
 }
@@ -65,17 +109,17 @@ export default {
       flex-direction: column;
       > div.charts {
         flex-grow: 1;
-        > div.top-half {
-          display: block;
-          border-bottom: 1px solid #969696;
-        }
-        > div.bottom-half {
-          display: block;
-          padding-top: 5px;
-          border-top: 1px solid #969696;
-        }
       }
     }
+  }
+}
+
+#chart-container {
+  min-height: 0;
+  div {
+    position: relative;
+    max-height: 100%;
+    width: 100%;
   }
 }
 

@@ -23,7 +23,17 @@ router.get('/all', (_req, res) => {
           supplierTaxID: element.sellerSupplierPartyTaxId,
           totalValue: element.payableAmount.amount,
           date: element.exchangeRateDate.split("T")[0],
-          received: element.documentLines[0].quantity == element.documentLines[0].receivedQuantity || false
+          received: element.documentLines.reduce((accumulator, currValue) => {
+            accumulator += currValue.quantity
+            return accumulator;
+          }, 0) == element.documentLines.reduce((accumulator, currValue) => {
+            accumulator += currValue.receivedQuantity
+            return accumulator;
+          }, 0) || false,
+          quantity: element.documentLines.reduce((accumulator, currValue) => {
+            accumulator += currValue.quantity
+            return accumulator;
+          }, 0)
         })
       });
 

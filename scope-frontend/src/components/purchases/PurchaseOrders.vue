@@ -1,46 +1,41 @@
 <template>
-  <v-col md='6'>
-    <v-row no-gutters class='elevation-10 mx-1 main'>
-      <v-col class='pa-2 top-consumers'>
-        <span class='title'>
-          Purchase Orders
-        </span>
-        <v-container class='table-container'>
-          <div class='table'>
+  <v-col md="6">
+    <v-row no-gutters class="elevation-10 mx-1 main">
+      <v-col class="pa-2 top-consumers">
+        <span class="title"> Purchase Orders </span>
+        <v-container class="table-container">
+          <div class="table">
             <v-data-table
-              :headers='headers'
-              :items='entries'
-              :search='search'
-              :custom-filter='filterOnlyCapsText'
-              :items-per-page=8
-              :footer-props='{
+              :headers="headers"
+              :items="entries"
+              :search="search"
+              :custom-filter="filterOnlyCapsText"
+              :items-per-page="8"
+              :footer-props="{
                 fixed: true,
                 showFirstLastPage: true,
-              }'>
+              }"
+            >
               <template v-slot:top>
                 <v-text-field
-                  v-model='search'
-                  label='Search'
-                  class='mx-4'
+                  v-model="search"
+                  label="Search"
+                  class="mx-4"
                 ></v-text-field>
               </template>
-              <template v-slot:item.paid='{ item }'>
-                <v-icon v-if='item.paid' color='green'>
+              <template v-slot:item.paid="{ item }">
+                <v-icon v-if="item.paid" color="green">
                   mdi-check-circle-outline
                 </v-icon>
-                <v-icon v-else color='red'>
-                  mdi-close-circle-outline
-                </v-icon>
+                <v-icon v-else color="red"> mdi-close-circle-outline </v-icon>
               </template>
-              <template v-slot:item.details='{ item }'>
-                <a :href="item.details">
-                  DETAILS
-                </a>
+              <template v-slot:item.details="{ item }">
+                <a :href="item.details"> DETAILS </a>
               </template>
               <template v-slot:body.append>
-                <div class='space-filler'></div>
+                <div class="space-filler"></div>
               </template>
-            </v-data-table>    
+            </v-data-table>
           </div>
         </v-container>
       </v-col>
@@ -49,263 +44,285 @@
 </template>
 
 <script>
+import api from "@/services/api";
 export default {
-  name: 'PurchaseOrders',
+  name: "PurchaseOrders",
   data() {
     return {
-      search: '',
+      search: "",
       icons: {
-        paid: 'mdi-tick-circle-outline',
-        unpaid: 'mdi-highlight-off'
+        paid: "mdi-tick-circle-outline",
+        unpaid: "mdi-highlight-off",
       },
       headers: [
         {
-          text: 'Number',
-          align: 'start',
+          text: "Number",
+          align: "start",
           sortable: true,
-          value: 'number',
-          width: '13%'
+          value: "number",
+          width: "13%",
         },
         {
-          text: 'Date',
-          align: 'start',
+          text: "Date",
+          align: "start",
           sortable: true,
-          value: 'date',
-          width: '15%'
+          value: "date",
+          width: "15%",
         },
         {
-          text: 'Vendor',
-          align: 'start',
+          text: "Vendor",
+          align: "start",
           sortable: false,
-          value: 'vendor',
-          width: '23%'
+          value: "vendor",
+          width: "23%",
         },
         {
-          text: 'Total Products',
-          align: 'start',
+          text: "Total Products",
+          align: "start",
           sortable: true,
-          value: 'numproducts',
-          width: '19.5%'
+          value: "numproducts",
+          width: "19.5%",
         },
         {
-          text: 'Total',
-          aligh: 'start',
+          text: "Total",
+          aligh: "start",
           sortable: true,
-          value: 'total',
-          width: '12.5%'
+          value: "total",
+          width: "12.5%",
         },
         {
-          text: 'Paid',
-          align: 'start',
+          text: "Received",
+          align: "start",
           sortable: true,
-          value: 'paid',
-          width: '11%'
+          value: "paid",
+          width: "11%",
         },
         {
-          text: 'Details',
-          align: 'start',
+          text: "Details",
+          align: "start",
           sortable: false,
-          value: 'details'
-        }
+          value: "details",
+        },
       ],
       entries: [
         {
-          number: '123456789',
-          date: '10 Sep. 2020',
-          vendor: 'Acme Supplier Limited',
-          numproducts: '345',
-          total: '340.1M',
+          number: "123456789",
+          date: "10 Sep. 2020",
+          vendor: "Acme Supplier Limited",
+          numproducts: "345",
+          total: "340.1M",
           paid: false,
-          details: 'https://elgoog.im/breakout/'
+          details: "https://elgoog.im/breakout/",
         },
         {
-          number: '123456789',
-          date: '10 Sep. 2020',
-          vendor: 'Acme Supplier Limited',
-          numproducts: '345',
-          total: '340.1M',
+          number: "123456789",
+          date: "10 Sep. 2020",
+          vendor: "Acme Supplier Limited",
+          numproducts: "345",
+          total: "340.1M",
           paid: true,
-          details: 'https://elgoog.im/breakout/'
+          details: "https://elgoog.im/breakout/",
         },
         {
-          number: '123456789',
-          date: '10 Sep. 2020',
-          vendor: 'Acme Supplier Limited',
-          numproducts: '345',
-          total: '340.1M',
+          number: "123456789",
+          date: "10 Sep. 2020",
+          vendor: "Acme Supplier Limited",
+          numproducts: "345",
+          total: "340.1M",
           paid: true,
-          details: 'https://elgoog.im/breakout/'
+          details: "https://elgoog.im/breakout/",
         },
         {
-          number: '123456789',
-          date: '10 Sep. 2020',
-          vendor: 'Acme Supplier Limited',
-          numproducts: '345',
-          total: '340.1M',
+          number: "123456789",
+          date: "10 Sep. 2020",
+          vendor: "Acme Supplier Limited",
+          numproducts: "345",
+          total: "340.1M",
           paid: true,
-          details: 'https://elgoog.im/breakout/'
+          details: "https://elgoog.im/breakout/",
         },
         {
-          number: '123456789',
-          date: '10 Sep. 2020',
-          vendor: 'Acme Supplier Limited',
-          numproducts: '345',
-          total: '340.1M',
+          number: "123456789",
+          date: "10 Sep. 2020",
+          vendor: "Acme Supplier Limited",
+          numproducts: "345",
+          total: "340.1M",
           paid: true,
-          details: 'https://elgoog.im/breakout/'
+          details: "https://elgoog.im/breakout/",
         },
         {
-          number: '123456789',
-          date: '10 Sep. 2020',
-          vendor: 'Acme Supplier Limited',
-          numproducts: '345',
-          total: '340.1M',
+          number: "123456789",
+          date: "10 Sep. 2020",
+          vendor: "Acme Supplier Limited",
+          numproducts: "345",
+          total: "340.1M",
           paid: true,
-          details: 'https://elgoog.im/breakout/'
+          details: "https://elgoog.im/breakout/",
         },
         {
-          number: '123456789',
-          date: '10 Sep. 2020',
-          vendor: 'Acme Supplier Limited',
-          numproducts: '345',
-          total: '340.1M',
+          number: "123456789",
+          date: "10 Sep. 2020",
+          vendor: "Acme Supplier Limited",
+          numproducts: "345",
+          total: "340.1M",
           paid: true,
-          details: 'https://elgoog.im/breakout/'
+          details: "https://elgoog.im/breakout/",
         },
         {
-          number: '123456789',
-          date: '10 Sep. 2020',
-          vendor: 'Acme Supplier Limited',
-          numproducts: '345',
-          total: '340.1M',
+          number: "123456789",
+          date: "10 Sep. 2020",
+          vendor: "Acme Supplier Limited",
+          numproducts: "345",
+          total: "340.1M",
           paid: true,
-          details: 'https://elgoog.im/breakout/'
+          details: "https://elgoog.im/breakout/",
         },
         {
-          number: '123456789',
-          date: '10 Sep. 2020',
-          vendor: 'Acme Supplier Limited',
-          numproducts: '345',
-          total: '340.1M',
+          number: "123456789",
+          date: "10 Sep. 2020",
+          vendor: "Acme Supplier Limited",
+          numproducts: "345",
+          total: "340.1M",
           paid: true,
-          details: 'https://elgoog.im/breakout/'
+          details: "https://elgoog.im/breakout/",
         },
         {
-          number: '123456789',
-          date: '10 Sep. 2020',
-          vendor: 'Acme Supplier Limited',
-          numproducts: '345',
-          total: '340.1M',
+          number: "123456789",
+          date: "10 Sep. 2020",
+          vendor: "Acme Supplier Limited",
+          numproducts: "345",
+          total: "340.1M",
           paid: true,
-          details: 'https://elgoog.im/breakout/'
+          details: "https://elgoog.im/breakout/",
         },
         {
-          number: '123456789',
-          date: '10 Sep. 2020',
-          vendor: 'Acme Supplier Limited',
-          numproducts: '345',
-          total: '340.1M',
+          number: "123456789",
+          date: "10 Sep. 2020",
+          vendor: "Acme Supplier Limited",
+          numproducts: "345",
+          total: "340.1M",
           paid: true,
-          details: 'https://elgoog.im/breakout/'
+          details: "https://elgoog.im/breakout/",
         },
         {
-          number: '123456789',
-          date: '10 Sep. 2020',
-          vendor: 'Acme Supplier Limited',
-          numproducts: '345',
-          total: '340.1M',
+          number: "123456789",
+          date: "10 Sep. 2020",
+          vendor: "Acme Supplier Limited",
+          numproducts: "345",
+          total: "340.1M",
           paid: true,
-          details: 'https://elgoog.im/breakout/'
+          details: "https://elgoog.im/breakout/",
         },
         {
-          number: '123456789',
-          date: '10 Sep. 2020',
-          vendor: 'Acme Supplier Limited',
-          numproducts: '345',
-          total: '340.1M',
+          number: "123456789",
+          date: "10 Sep. 2020",
+          vendor: "Acme Supplier Limited",
+          numproducts: "345",
+          total: "340.1M",
           paid: true,
-          details: 'https://elgoog.im/breakout/'
+          details: "https://elgoog.im/breakout/",
         },
         {
-          number: '123456789',
-          date: '10 Sep. 2020',
-          vendor: 'Acme Supplier Limited',
-          numproducts: '345',
-          total: '340.1M',
+          number: "123456789",
+          date: "10 Sep. 2020",
+          vendor: "Acme Supplier Limited",
+          numproducts: "345",
+          total: "340.1M",
           paid: true,
-          details: 'https://elgoog.im/breakout/'
+          details: "https://elgoog.im/breakout/",
         },
         {
-          number: '123456789',
-          date: '10 Sep. 2020',
-          vendor: 'Acme Supplier Limited',
-          numproducts: '345',
-          total: '340.1M',
+          number: "123456789",
+          date: "10 Sep. 2020",
+          vendor: "Acme Supplier Limited",
+          numproducts: "345",
+          total: "340.1M",
           paid: true,
-          details: 'https://elgoog.im/breakout/'
+          details: "https://elgoog.im/breakout/",
         },
         {
-          number: '123456789',
-          date: '10 Sep. 2020',
-          vendor: 'Acme Supplier Limited',
-          numproducts: '345',
-          total: '340.1M',
+          number: "123456789",
+          date: "10 Sep. 2020",
+          vendor: "Acme Supplier Limited",
+          numproducts: "345",
+          total: "340.1M",
           paid: true,
-          details: 'https://elgoog.im/breakout/'
+          details: "https://elgoog.im/breakout/",
         },
         {
-          number: '123456789',
-          date: '10 Sep. 2020',
-          vendor: 'Acme Supplier Limited',
-          numproducts: '345',
-          total: '340.1M',
+          number: "123456789",
+          date: "10 Sep. 2020",
+          vendor: "Acme Supplier Limited",
+          numproducts: "345",
+          total: "340.1M",
           paid: true,
-          details: 'https://elgoog.im/breakout/'
+          details: "https://elgoog.im/breakout/",
         },
         {
-          number: '123456789',
-          date: '10 Sep. 2020',
-          vendor: 'Acme Supplier Limited',
-          numproducts: '345',
-          total: '340.1M',
+          number: "123456789",
+          date: "10 Sep. 2020",
+          vendor: "Acme Supplier Limited",
+          numproducts: "345",
+          total: "340.1M",
           paid: true,
-          details: 'https://elgoog.im/breakout/'
+          details: "https://elgoog.im/breakout/",
         },
         {
-          number: '123456789',
-          date: '10 Sep. 2020',
-          vendor: 'Acme Supplier Limited',
-          numproducts: '345',
-          total: '340.1M',
+          number: "123456789",
+          date: "10 Sep. 2020",
+          vendor: "Acme Supplier Limited",
+          numproducts: "345",
+          total: "340.1M",
           paid: true,
-          details: 'https://elgoog.im/breakout/'
+          details: "https://elgoog.im/breakout/",
         },
         {
-          number: '123456789',
-          date: '10 Sep. 2020',
-          vendor: 'Acme Supplier Limited',
-          numproducts: '345',
-          total: '340.1M',
+          number: "123456789",
+          date: "10 Sep. 2020",
+          vendor: "Acme Supplier Limited",
+          numproducts: "345",
+          total: "340.1M",
           paid: true,
-          details: 'https://elgoog.im/breakout/'
-        }
-      ]
-    }
+          details: "https://elgoog.im/breakout/",
+        },
+      ],
+    };
   },
   methods: {
-    filterOnlyCapsText (value, search) {
-      return value != null &&
+    filterOnlyCapsText(value, search) {
+      return (
+        value != null &&
         search != null &&
-        typeof value === 'string' &&
-        value.toString().toLocaleUpperCase().indexOf(
-          search.toString().toLocaleUpperCase()) !== -1
+        typeof value === "string" &&
+        value
+          .toString()
+          .toLocaleUpperCase()
+          .indexOf(search.toString().toLocaleUpperCase()) !== -1
+      );
     },
-  }
-}
+  },
+  mounted() {
+    api.purchases((res) => {
+      this.entries = [];
+      console.log(res.data);
+      res.data.forEach((element) => {
+        const entry = {};
+        (entry.number = element.purchaseID),
+          (entry.date = element.date),
+          (entry.vendor = element.supplierName),
+          (entry.numproducts = element.quantity),
+          (entry.total = element.totalValue),
+          (entry.paid = element.received),
+          (entry.details = "https://elgoog.im/breakout/"); //TODO
+          this.entries.push(entry);
+      });
+
+    });
+  },
+};
 </script>
 
 <style scoped lang='scss'>
-
 .col {
   height: 100%;
   > .row {
@@ -324,11 +341,9 @@ export default {
     width: 100%;
   }
 }
-
 </style>
 
 <style lang='scss'>
-
 .top-consumers div.v-input {
   padding-top: 0;
 }
@@ -378,5 +393,4 @@ div.v-data-table.theme--light {
 div.v-data-footer__select {
   display: none;
 }
-
 </style>

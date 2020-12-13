@@ -9,7 +9,7 @@ router.get('/', async (req, res) => {
             suppliersData.forEach((supplier) => {
                 const accumulator = supplier.documentLines.reduce((accumulator, order) => {
                     accumulator.quantity += order.quantity;
-                    accumulator.totalPrice += order.unitPrice.amount;
+                    accumulator.totalPrice += order.lineExtensionAmount.amount;
                     accumulator.num++;
                     return accumulator;
                 }, { quantity: 0, totalPrice: 0, num: 0 });
@@ -17,7 +17,7 @@ router.get('/', async (req, res) => {
                     supplierName: supplier.sellerSupplierPartyName,
                     supplierKey: supplier.sellerSupplierParty,
                     quantity: accumulator.quantity,
-                    priceRatio: (accumulator.totalPrice / accumulator.num).toFixed(2),
+                    price: accumulator.totalPrice.toFixed(2),
                     taxID: supplier.sellerSupplierPartyTaxId,
                     adress: supplier.sellerSupplierPartyAddress,
                     email: supplier.emailTo

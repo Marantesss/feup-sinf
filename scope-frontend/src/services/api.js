@@ -25,6 +25,7 @@ const routes = {
   getProfitAndLoss: '/financial/profitAndLoss',
   getSalesOverTime: '/financial/salesOverTime',
   grossProfitMargin: '/financial/grossProfitMargin',
+  suppliers: '/purchases/supplier/',
   purchases: '/purchases/all',
   costumers: '/sales/customers/',
   getExample: (example) => (`route/${example}/route`)
@@ -106,7 +107,10 @@ const api = {
   },
   grossProfitMargin: (_cb) => {
     request(routes.grossProfitMargin,'get',null,_cb);
-  }
+  },
+  getSuppliers: (_cb) => {
+    request(routes.suppliers,'get',null,_cb);
+  },
 };
 
 export default api;

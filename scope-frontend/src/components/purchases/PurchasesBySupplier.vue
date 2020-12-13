@@ -27,6 +27,7 @@
 import SimpleTable      from '@/components/tables/SimpleTable'
 import DoughnutWrapper  from '@/components/common/DoughnutWrapper.vue'
 import LineWrapper      from '@/components/common/LineWrapper.vue'
+import api from '@/services/api'
 
 export default {
   components: { SimpleTable, DoughnutWrapper, LineWrapper },
@@ -113,8 +114,24 @@ export default {
         ]
       }
     }
-  })  
+  }),
+  mounted () {
+    api.getSuppliers((res)=>{
+      this.purchases.values = []
+      res.data.forEach(element => {
+        const value = {}
+        value.name = element.supplierName
+        value.value = element.price
+        value.route = '/supplier'
+        this.purchases.values.push(value)
+      });
+
+    });
+  }
 }
+
+
+
 </script>
 
 <style scoped lang='scss'>

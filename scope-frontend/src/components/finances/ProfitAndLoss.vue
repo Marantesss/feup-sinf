@@ -116,6 +116,61 @@ export default {
       }
       const data = [];
 
+      // revenue
+      this.revenue.entries.forEach((entry) => {
+        data.push({
+          ...entry,
+        });
+      });
+      data.push({
+        name: "Receita Total",
+        balance: this.revenue.total,
+        total: true,
+      });
+      // expenses
+      this.expenses.entries.forEach((entry) => {
+        data.push({
+          ...entry,
+        });
+      });
+      data.push({
+        name: "Despesa Total",
+        balance: this.expenses.total,
+        total: true,
+      });
+      // depreciation
+      this.depreciation.entries.forEach((entry) => {
+        data.push({
+          ...entry,
+        });
+      });
+      data.push({
+        name: "Depreciação Total",
+        balance: this.depreciation.total,
+        total: true,
+      });
+      // interest
+      this.interest.entries.forEach((entry) => {
+        data.push({
+          ...entry,
+        });
+      });
+      data.push({
+        name: "Interesse Total",
+        balance: this.interest.total,
+        total: true,
+      });
+      // taxes
+      this.taxes.entries.forEach((entry) => {
+        data.push({
+          ...entry,
+        });
+      });
+      data.push({
+        name: "Imposto Total",
+        balance: this.taxes.total,
+        total: true,
+      });
 
       return data;
     },
@@ -128,6 +183,7 @@ export default {
           this.revenue = res.data.revenue;
           this.expenses = res.data.expenses;
           this.depreciation = res.data.depreciation;
+          this.interest = res.data.interest;
           this.taxes = res.data.taxes;
         }
         this.loading = false;

@@ -25,7 +25,7 @@
 
 <script>
 import SimpleTable      from '@/components/tables/SimpleTable'
-import DoughnutWrapper  from '@/components/common/DoughnutWrapper.vue'
+import DoughnutWrapper  from '@/components/purchases/PurchasesBySupplierDoughnut'
 import LineWrapper      from '@/components/common/LineWrapper.vue'
 import api from '@/services/api'
 

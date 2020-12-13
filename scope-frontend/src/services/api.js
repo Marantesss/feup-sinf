@@ -28,6 +28,7 @@ const routes = {
   suppliers: '/purchases/supplier/',
   purchases: '/purchases/all',
   costumers: '/sales/customers/',
+  sales: '/sales/all',
   getExample: (example) => (`route/${example}/route`)
 };
 
@@ -62,6 +63,7 @@ const request = (path, method, data, _cb) => {
 
     const res = { data: { status: 'error' } };
     _cb(res);
+  }
 
   if (method.toLowerCase() === 'get') {
     axios.get(API_URL + path, { headers }).then(_cb).catch(errorHandler);
@@ -85,16 +87,22 @@ const api = {
     request(routes.logout, 'post', null, _cb);
   },
   stockValue: (_cb) => {
-    request(routes.stockValue,'get',null,_cb);
+    request(routes.stockValue, 'get', null, _cb);
   },
   getBalanceSheet: (_cb) => {
     request(routes.getBalanceSheet, 'get', null, _cb);
   },
-  purchases:(_cb) =>{
-    request(routes.purchases,'get',null,_cb);
+  getSuppliers: (_cb) => {
+    request(routes.suppliers, 'get', null, _cb);
   },
-  costumers:(_cb) =>{
-    request(routes.costumers,'get',null,_cb);
+  purchases: (_cb) => {
+    request(routes.purchases, 'get', null, _cb);
+  },
+  costumers: (_cb) => {
+    request(routes.costumers, 'get', null, _cb);
+  },
+  getAllSales: (_cb) => {
+    request(routes.sales, 'get', null, _cb);
   },
   getExample: (example, _cb) => {
     request(routes.getExample(example), 'get', null, _cb);
@@ -106,10 +114,7 @@ const api = {
     request(routes.getSalesOverTime, 'get', null, _cb);
   },
   grossProfitMargin: (_cb) => {
-    request(routes.grossProfitMargin,'get',null,_cb);
-  },
-  getSuppliers: (_cb) => {
-    request(routes.suppliers,'get',null,_cb);
+    request(routes.grossProfitMargin, 'get', null, _cb);
   },
 };
 

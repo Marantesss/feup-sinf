@@ -2,7 +2,7 @@
   <v-container fluid class='grey lighten-5'>
     <v-row id='core-view-row'>
       <sales-kpis />
-      <sales-by-store />
+      <sales-by-warehouse />
     </v-row>
     <v-row id='core-view-row'>
       <line-chart-with-title title="Sales Over Time" />
@@ -14,13 +14,13 @@
 <script>
 import SalesKpis          from '@/components/sales-orders/SalesKpis.vue'
 import LineChartWithTitle from '@/components/generic/LineChartWithTitle.vue'
-import SalesByStore       from '@/components/generic/SalesByStore.vue'
+import SalesByWarehouse       from '@/components/sales-orders/SalesByWarehouse.vue'
 import TopConsumers       from '@/components/sales-orders/TopConsumers.vue'
 export default {
   components: {
     SalesKpis,
     LineChartWithTitle,
-    SalesByStore,
+    SalesByWarehouse,
     TopConsumers
   },
   name: 'Sales',

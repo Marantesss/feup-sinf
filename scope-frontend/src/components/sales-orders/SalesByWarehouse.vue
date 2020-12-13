@@ -3,7 +3,7 @@
     <v-row no-gutters class='elevation-10 mx-1'>
       <v-col md='8' class='left-col pa-2'>
         <span class='title'>
-          Sales by Store
+          Sales by Warehouse
         </span>
         <div class='charts'>
           <div class='top-half'>
@@ -27,11 +27,12 @@
 import SimpleTable      from '@/components/tables/SimpleTable'
 import DoughnutWrapper  from '@/components/common/DoughnutWrapper.vue'
 import LineWrapper      from '@/components/common/LineWrapper.vue'
+import api from '@/services/api'
+
 export default {
   components: { SimpleTable, DoughnutWrapper, LineWrapper },
-  name: 'SalesByStore',
-  data: (() => {
-    return {
+  name: 'SalesByWarehouse',
+  data: () => ({
       salesByStore: {
         title: 'All-Time Sales',
         headers: [
@@ -39,67 +40,18 @@ export default {
             text: 'Store',
             align: 'start',
             sortable: false,
-            value: 'name',
+            value: 'warehouseDescription',
           },
-          { text: 'Sales', value: 'value' },
+          { text: 'Sales', value: 'revenue' },
         ],
-        values: [
-          {
-            name: 'Store 1',
-            value: '340.1'
-          },
-          {
-            name: 'Store 2',
-            value: '341.1'
-          },
-          {
-            name: 'Store 3',
-            value: '342.1'
-          },
-          {
-            name: 'Store 4',
-            value: '343.1'
-          },
-          {
-            name: 'Store 5',
-            value: '344.1'
-          },
-          {
-            name: 'Store 6',
-            value: '339.1'
-          },
-          {
-            name: 'Store 7',
-            value: '338.1'
-          },
-          {
-            name: 'Store 8',
-            value: '337.1'
-          },
-          {
-            name: 'Store 9',
-            value: '336.1'
-          },
-          {
-            name: 'Store 10',
-            value: '335.1'
-          },
-          {
-            name: 'Store 11',
-            value: '334.1'
-          },
-          {
-            name: 'Store 12',
-            value: '333.1'
-          },
-          {
-            name: 'Store 13',
-            value: '332.1'
-          },
-        ]
+        values: []
       }
-    }
-  })  
+  }),
+  mounted () {
+    api.getAllSales((res)=>{
+      this.salesByStore.values = res.data.salesList;
+    })
+  }  
 }
 </script>
 

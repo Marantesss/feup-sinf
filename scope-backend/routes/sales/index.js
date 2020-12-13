@@ -29,15 +29,10 @@ router.get('/all', (_req, res) => {
                         value: sale.grossValue.amount,
                         date: sale.deliveryDate.split("T")[0],
                         revenue: sale.lineExtensionAmount.amount,
-                        warehouseDiscription: sale.warehouseDescription,
+                        warehouseDescription: sale.warehouseDescription,
                         warehouse: sale.warehouse
                     });
-
-
                 })
-
-
-
             })
 
             response.salesList = salesList.sort((a, b) => {

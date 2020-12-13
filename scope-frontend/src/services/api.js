@@ -24,6 +24,7 @@ const routes = {
   getBalanceSheet: '/financial/balanceSheet',
   getProfitAndLoss: '/financial/profitAndLoss',
   getSalesOverTime: '/financial/salesOverTime',
+  grossProfitMargin: '/financial/grossProfitMargin',
 };
 
 /**
@@ -92,6 +93,9 @@ const api = {
   getSalesOverTime: (_cb) => {
     request(routes.getSalesOverTime, 'get', null, _cb);
   },
+  grossProfitMargin: (_cb) => {
+    request(routes.grossProfitMargin,'get',null,_cb);
+  }
 };
 
 export default api;

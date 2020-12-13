@@ -5,7 +5,6 @@
         <div class="px-2 d-flex align-center justify-space-between">
           <span class="title">Profit and Loss</span>
           <v-text-field
-            style="width: 200px !important"
             v-model="search"
             label="Search"
             class="mx-4"

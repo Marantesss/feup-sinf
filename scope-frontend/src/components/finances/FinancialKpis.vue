@@ -20,7 +20,7 @@
           </v-row>
           <v-row class="kpi-row bottom">
             <v-col class="kpi left">
-              <div class="kpi-title">Accounts Receivable</div>
+              <div class="kpi-title">Net Income</div>
               <div class="kpi-value">
                 <span v-text="formatCurrency(netIncome)"></span>
               </div>

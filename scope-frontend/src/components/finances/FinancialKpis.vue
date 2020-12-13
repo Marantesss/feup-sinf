@@ -22,13 +22,7 @@
             <v-col class="kpi left">
               <div class="kpi-title">Accounts Receivable</div>
               <div class="kpi-value">
-                <span v-text="formatCurrency(12345.67)"></span>
-              </div>
-            </v-col>
-            <v-col class="kpi right">
-              <div class="kpi-title">Accounts Payable</div>
-              <div class="kpi-value">
-                <span v-text="formatCurrency(12345.67)"></span>
+                <span v-text="formatCurrency(netIncome)"></span>
               </div>
             </v-col>
           </v-row>
@@ -53,6 +47,7 @@ export default {
         if (res.data.status == 200) {
           this.ebit = res.data.ebit;
           this.ebitda = res.data.ebitda;
+          this.netIncome = res.data.netIncome;
         }
         this.loading = false;
       },
@@ -65,6 +60,7 @@ export default {
   data: () => ({
     ebit: 0,
     ebitda: 0,
+    netIncome: 0,
   }),
 };
 </script>

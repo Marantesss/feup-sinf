@@ -12,7 +12,7 @@
         </div>
         <div class='stock-per-store'>
           <span class='title'>
-            Stock Per Store
+            Stock Per Warehouse
           </span>
           <div class='rest' />
           <chart-wrapper style='height: 270px;'

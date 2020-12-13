@@ -25,6 +25,8 @@ const routes = {
   getProfitAndLoss: '/financial/profitAndLoss',
   getSalesOverTime: '/financial/salesOverTime',
   grossProfitMargin: '/financial/grossProfitMargin',
+  purchases: '/purchases/all',
+  getExample: (example) => (`route/${example}/route`)
 };
 
 /**
@@ -58,7 +60,6 @@ const request = (path, method, data, _cb) => {
 
     const res = { data: { status: 'error' } };
     _cb(res);
-  };
 
   if (method.toLowerCase() === 'get') {
     axios.get(API_URL + path, { headers }).then(_cb).catch(errorHandler);
@@ -86,6 +87,12 @@ const api = {
   },
   getBalanceSheet: (_cb) => {
     request(routes.getBalanceSheet, 'get', null, _cb);
+  },
+  purchases:(_cb) =>{
+    request(routes.purchases,'get',null,_cb);
+  },
+  getExample: (example, _cb) => {
+    request(routes.getExample(example), 'get', null, _cb);
   },
   getProfitAndLoss: (_cb) => {
     request(routes.getProfitAndLoss, 'get', null, _cb);

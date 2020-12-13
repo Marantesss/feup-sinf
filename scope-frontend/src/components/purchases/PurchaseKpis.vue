@@ -12,7 +12,7 @@
                 Total Purchases
               </div>
               <div class='kpi-value dolar'>
-                <span>16,345,876</span>
+                <span>{{totalPurchases}}</span>
               </div>
             </v-col>
             <v-col class='kpi right'>
@@ -20,7 +20,7 @@
                 Total Purchase Orders
               </div>
               <div class='kpi-value'>
-                <span>43,715</span>
+                <span>{{totalPurchaseOrders}}</span>
               </div>
             </v-col>
           </v-row>
@@ -30,7 +30,7 @@
                 Purchase Backlog
               </div>
               <div class='kpi-value dolar'>
-                <span>12,345.67</span>
+                <span>{{purchaseBacklog}}</span>
               </div>
             </v-col>
             <v-col class='kpi right'>
@@ -38,7 +38,7 @@
                 Purchase Orders Backlog
               </div>
               <div class='kpi-value'>
-                <span>132</span>
+                <span>{{purchaseOrderBacklog}}</span>
               </div>
             </v-col>
           </v-row>
@@ -50,8 +50,39 @@
 </template>
 
 <script>
+import api from '@/services/api'
 export default {
   name: 'PurchaseKPIs',
+  data: () =>({
+    purchaseOrderBacklog: 132,
+    purchaseBacklog: 12345.6,
+    totalPurchaseOrders: 43715,
+    totalPurchases: 16345876
+  }),
+
+  mounted() {
+    api.purchases((res)=>{
+      console.log(res)
+      this.totalPurchaseOrders = res.data.length
+
+      this.totalPurchases = res.data.reduce((accumulator,currValue)=>{
+        accumulator+= currValue.totalValue;
+        return accumulator;
+      },0);
+
+      const obj = {purchaseOrderBacklog: 0, purchaseBacklog:0}
+
+      res.data.forEach(element => {
+        if(!element.received){
+        obj.purchaseOrderBacklog += 1;
+        obj.purchaseBacklog +=  element.totalValue;
+        }
+      });
+      this.purchaseOrderBacklog = obj.purchaseOrderBacklog;
+      this.purchaseBacklog = obj.purchaseBacklog;
+
+    })
+  }
 }
 </script>
 

@@ -23,6 +23,7 @@ router.get('/all', (_req, res) => {
           supplierTaxID: element.sellerSupplierPartyTaxId,
           totalValue: element.payableAmount.amount,
           date: element.exchangeRateDate.split("T")[0],
+          received: element.documentLines[0].quantity == element.documentLines[0].receivedQuantity || false
         })
       });
 

@@ -117,6 +117,7 @@ export default {
 
   mounted() {
     api.getPurchasesbyProduct((res)=>{
+      res.data.reverse()
       this.purchases.values = []
       console.log(res)
       res.data.map((element)=>{

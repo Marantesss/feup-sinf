@@ -122,6 +122,7 @@ export default {
   },
   mounted() {
     api.purchases((res) => {
+      res.data.reverse()
       res.data.forEach((element) => {
         const entry = {};
         (entry.number = element.purchaseID),
@@ -130,7 +131,7 @@ export default {
           (entry.numproducts = element.quantity),
           (entry.total = element.totalValue),
           (entry.paid = element.received),
-          (entry.details = "https://elgoog.im/breakout/"); //TODO
+          (entry.details = "https://my.jasminsoftware.com/243057/243057-0001/#/purchases/orders/editstandardorder?id=" + element.purchaseID); //TODO
           this.entries.push(entry);
       });
 

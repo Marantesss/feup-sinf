@@ -118,11 +118,12 @@ export default {
   mounted () {
     api.getSuppliers((res)=>{
       this.purchases.values = []
+      res.data.reverse()
       res.data.forEach(element => {
         const value = {}
         value.name = element.supplierName
         value.value = element.price
-        value.route = '/supplier'
+        value.route = '/supplier/' + element.supplierKey
         this.purchases.values.push(value)
       });
 

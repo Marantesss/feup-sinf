@@ -36,9 +36,7 @@
 
       <v-spacer></v-spacer>
 
-      <v-btn text rounded :loading="loading" @click="submit">
-        Logout
-      </v-btn>
+      <v-btn text rounded :loading="loading" @click="submit"> Logout </v-btn>
     </v-app-bar>
   </div>
 </template>

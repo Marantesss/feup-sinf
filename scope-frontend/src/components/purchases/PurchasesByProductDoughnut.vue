@@ -55,7 +55,7 @@ export default {
   ),
 
   mounted() {
-    api.getPurchasesbyProduct((res)=>{
+    api.getPurchasesByProduct((res)=>{
         this.chartData.labels = []
         this.chartData.datasets[0].data = []
         res.data.forEach(element => {

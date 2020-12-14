@@ -53,17 +53,17 @@ const routes = [
     component: Finances
   },
   {
-    path: '/product',
+    path: '/product/:id',
     name: 'Product',
     component: Product
   },
   {
-    path: '/client',
+    path: '/client/:id',
     name: 'Client',
     component: Client
   },
   {
-    path: '/supplier',
+    path: '/supplier/:id',
     name: 'Supplier',
     component: Supplier
   },

@@ -45,7 +45,7 @@ export default {
   },
 
   mounted() {
-    api.getPurchasesbyProduct((res)=>{
+    api.getPurchasesByProduct((res)=>{
       res.data.forEach(element => {
         const key = element.description;
         let totalValue = this.purchases.values.find(x => x.description === key);

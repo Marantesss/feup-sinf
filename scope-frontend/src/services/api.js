@@ -29,9 +29,9 @@ const routes = {
   purchases: '/purchases/all',
   costumers: '/sales/customers/',
   sales: '/sales/all',
-  purchasesbyProduct: '/purchases/products/',
+  purchasesByProduct: '/purchases/products/',
   inventory: '/inventory/stock/',
-  product: 'inventory/product/'
+  product: (productId) => `/inventory/product/${productId}`,
 };
 
 /**
@@ -106,9 +106,6 @@ const api = {
   getAllSales: (_cb) => {
     request(routes.sales, 'get', null, _cb);
   },
-  getExample: (example, _cb) => {
-    request(routes.getExample(example), 'get', null, _cb);
-  },
   getProfitAndLoss: (_cb) => {
     request(routes.getProfitAndLoss, 'get', null, _cb);
   },
@@ -118,14 +115,14 @@ const api = {
   grossProfitMargin: (_cb) => {
     request(routes.grossProfitMargin, 'get', null, _cb);
   },
-  getPurchasesbyProduct: (_cb) =>{
-    request(routes.purchasesbyProduct, 'get', null, _cb);
+  getPurchasesByProduct: (_cb) =>{
+    request(routes.purchasesByProduct, 'get', null, _cb);
   },
   getInventory: (_cb) =>{
     request(routes.inventory, 'get', null, _cb);
   },
-  getProduct:(data,_cb )=>{
-    request(routes.product + data, 'get', null, _cb);
+  getProduct:(id ,_cb )=>{
+    request(routes.product(id), 'get', null, _cb);
   },
 };
 

@@ -2,7 +2,7 @@
   <v-col md="6">
     <v-row no-gutters class="elevation-10 mx-1 main">
       <v-col class="pa-2 top-consumers">
-        <span class="title"> Purchase Orders </span>
+        <span class="title"> All Stock </span>
         <v-container class="table-container">
           <div class="table">
             <v-data-table
@@ -23,19 +23,10 @@
                   class="mx-4"
                 ></v-text-field>
               </template>
-              <template v-slot:item.vendor="{ item }">
-                <router-link :to="item.vendorroute">
-                  {{ item.vendor }}
+              <template v-slot:item.name="{ item }">
+                <router-link :to="item.route">
+                  {{ item.name }}
                 </router-link>
-              </template>
-              <template v-slot:item.paid="{ item }">
-                <v-icon v-if="item.paid" color="green">
-                  mdi-check-circle-outline
-                </v-icon>
-                <v-icon v-else color="red"> mdi-close-circle-outline </v-icon>
-              </template>
-              <template v-slot:item.details="{ item }">
-                <a :href="item.details" target="_blank"> DETAILS </a>
               </template>
               <template v-slot:body.append>
                 <div class="space-filler"></div>
@@ -50,8 +41,11 @@
 
 <script>
 import api from "@/services/api";
+
 export default {
-  name: "PurchaseOrders",
+  components: {
+  },
+  name: 'AllStock',
   data() {
     return {
       search: "",
@@ -67,77 +61,43 @@ export default {
           value: "number"
         },
         {
-          text: "Date",
+          text: "Name",
           align: "start",
           sortable: true,
-          value: "date"
+          value: "name"
         },
         {
-          text: "Vendor",
+          text: "Unit",
           align: "start",
           sortable: true,
-          value: "vendor"
+          value: "baseUnitDescription"
         },
         {
-          text: "Num Products",
+          text: "Stock",
           align: "start",
           sortable: true,
-          value: "numproducts"
-        },
-        {
-          text: "Total",
-          aligh: "start",
-          sortable: true,
-          value: "total"
-        },
-        {
-          text: "Received",
-          align: "start",
-          sortable: true,
-          value: "paid"
-        },
-        {
-          text: "Details",
-          align: "start",
-          sortable: false,
-          value: "details"
+          value: "stock"
         },
       ],
       entries: [],
     };
   },
-  methods: {
-    filterOnlyCapsText(value, search) {
-      return (
-        value != null &&
-        search != null &&
-        typeof value === "string" &&
-        value
-          .toString()
-          .toLocaleUpperCase()
-          .indexOf(search.toString().toLocaleUpperCase()) !== -1
-      );
-    },
-  },
-  mounted() {
-    api.purchases((res) => {
-      res.data.forEach((element) => {
-        const entry = {};
-        entry.number = element.purchaseID.substr(0, 8)+'...';
-        entry.date = element.date;
-        entry.vendorroute = '/supplier/' + element.supplierID;
-        entry.vendor = element.supplierName.length > 20
-          ? element.supplierName.substr(0, 17) + '...'
-          : element.supplierName;
-        entry.numproducts = element.quantity;
-        entry.total = '€ ' + element.totalValue;
-        entry.paid = element.received;
-        entry.details = "https://my.jasminsoftware.com/243057/243057-0001/#/purchases/orders/editstandardorder?id=" + element.purchaseID;
-        this.entries.push(entry);
-      });
-    });
-  },
-};
+
+  mounted () {
+    api.getInventory((res)=>{
+      res.data.materialItems.map((element)=>{
+        this.entries.push({
+          number: element.itemKey,          
+          name: element.description.length > 40 ? element.description.substr(0,40-1) +'...' : element.description,
+          baseUnitDescription: element.baseUnitDescription,
+          stock: element.warehouses.reduce((accumulator,currValue)=>{accumulator+=currValue.stock; return accumulator},0),
+          route: '/product/' + element.itemKey,
+        })
+      })
+    })
+  }
+
+}
 </script>
 
 <style scoped lang='scss'>

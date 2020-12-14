@@ -13,18 +13,18 @@
         </div>
       </v-col>
       <v-col md='4' class='card-table'>
-        <simple-table-flat :data=lowStockItems />
+        <simple-table :data=lowStockItems />
       </v-col>
     </v-row>
   </v-col>
 </template>
 
 <script>
-import SimpleTableFlat      from '@/components/tables/SimpleTableFlat'
-import ChartWrapper          from '@/components/inventory/MissingItensChart.vue'
+import SimpleTable      from '@/components/tables/SimpleTable'
+import ChartWrapper     from '@/components/inventory/MissingItensChart.vue'
 import api from "@/services/api";
 export default {
-  components: { SimpleTableFlat, ChartWrapper },
+  components: { SimpleTable, ChartWrapper },
   name: 'LowStockItems',
   data: (() => {
     return {
@@ -38,7 +38,7 @@ export default {
             value: 'name',
             width: '57.5%'
           },
-          { text: 'Total Value', value: 'sales' },
+          { text: 'Total Value', value: 'value' },
         ],
         values: []
       }
@@ -50,7 +50,7 @@ export default {
       res.data.materialItems.map((element)=>{
         this.lowStockItems.values.push({
           name: element.description.length > 19 ? element.description.substr(0,19-4) +'...' : element.description,
-          sales: element.warehouses.reduce((accumulator,currValue)=>{accumulator+=currValue.stock* currValue.basePrice; return accumulator},0),
+          value: element.warehouses.reduce((accumulator,currValue)=>{accumulator+=currValue.stock* currValue.basePrice; return accumulator},0),
           route: '/product/' + element.itemKey,
         })
       })

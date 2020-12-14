@@ -30,7 +30,7 @@ export default {
   name: 'PurchasesBySupplier',
   data: () => ({
     purchases: {
-      title: 'All-Time Purchases',
+      title: 'All Suppliers',
       headers: [
         {
           text: 'Supplier',
@@ -49,8 +49,8 @@ export default {
         const key = element.supplierName;
         let totalValue = this.purchases.values.find(x => x.supplierName === key);
         if (totalValue === undefined) {
-          element.route = "/supplier/" + element.supplierKey
-          this.purchases.values.push(element)
+          element.route = "/supplier/" + element.supplierKey;
+          this.purchases.values.push(element);
         } else {
           totalValue.value += element.value;
         }

@@ -28,7 +28,7 @@ export default {
   data: () => {
     return {
       purchases: {
-        title: "All-Time Purchases",
+        title: "All Products",
         headers: [
           {
             text: "Product",
@@ -49,8 +49,8 @@ export default {
         const key = element.description;
         let totalValue = this.purchases.values.find(x => x.description === key);
         if (totalValue === undefined) {
-          element.route = '/product/' + element.id
-          this.purchases.values.push(element)
+          element.route = '/product/' + element.id;
+          this.purchases.values.push(element);
         } else {
           totalValue.value += element.value;
         }

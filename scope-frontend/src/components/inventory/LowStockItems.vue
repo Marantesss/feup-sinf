@@ -5,12 +5,8 @@
         <span class='title'>
           Low Stock Items
         </span>
-        <div class='charts d-flex justify-center align-center'>
-          <div class='hard-coded-height'>
-            <chart-wrapper style='height: 270px;'
-              :stackedX=true :stackedY=true />
-          </div>
-        </div>
+        <chart-wrapper  style='height: 359px;'
+          :stackedX=false :stackedY=false />
       </v-col>
       <v-col md='4' class='card-table'>
         <simple-table :data=lowStockItems />

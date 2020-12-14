@@ -13,19 +13,30 @@ router.get('/', async (req, res) => {
                     accumulator.num++;
                     return accumulator;
                 }, { quantity: 0, totalPrice: 0, num: 0 });
-                suppliers.push({
-                    supplierName: supplier.sellerSupplierPartyName,
-                    supplierKey: supplier.sellerSupplierParty,
-                    quantity: accumulator.quantity,
-                    value: accumulator.totalPrice.toFixed(2),
-                    taxID: supplier.sellerSupplierPartyTaxId,
-                    adress: supplier.sellerSupplierPartyAddress,
-                    email: supplier.emailTo,
-                    id: supplier.seriesNumber
 
-                });
+
+                const aux = suppliers.find((aux) => { return aux.supplierKey ==supplier.sellerSupplierParty })
+                if(aux != undefined){
+                    aux.quantity += parseInt(accumulator.quantity)
+                    aux.value += parseInt(accumulator.totalPrice.toFixed(2))
+            }
+                else{
+                    suppliers.push({
+                        supplierName: supplier.sellerSupplierPartyName,
+                        supplierKey: supplier.sellerSupplierParty,
+                        quantity: parseInt(accumulator.quantity),
+                        value: parseInt(accumulator.totalPrice.toFixed(2)),
+                        taxID: supplier.sellerSupplierPartyTaxId,
+                        adress: supplier.sellerSupplierPartyAddress,
+                        email: supplier.emailTo,
+                        id: supplier.seriesNumber
+    
+                    });
+                    
+                }
 
             });
+            
             res.json(suppliers);
         }
     ).catch(

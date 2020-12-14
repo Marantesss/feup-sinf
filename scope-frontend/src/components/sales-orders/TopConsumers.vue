@@ -1,9 +1,9 @@
 <template>
-  <v-col md='6'>
+  <v-col>
     <v-row no-gutters class='elevation-10 mx-1 main'>
       <v-col class='pa-2 top-consumers'>
         <span class='title'>
-          Top Consumers
+          All Consumers
         </span>
         <v-container class='table-container'>
           <div class='table'>
@@ -24,13 +24,13 @@
                   class='mx-4'
                 ></v-text-field>
               </template>
-              <template v-slot:item.consumer='{ item }'>
-                <a href='/client'>
-                  {{ item.consumer }}
-                </a>
+              <template v-slot:item.name='{ item }'>
+                <router-link :to="item.route">
+                  {{ item.name }}
+                </router-link>
               </template>
               <template v-slot:item.totalspent='{ item }'>
-                {{ '€ ' + item.totalspent }}
+                {{ '€ ' + item.adress }}
               </template>
               <template v-slot:body.append>
                 <div class='space-filler'></div>
@@ -44,6 +44,7 @@
 </template>
 
 <script>
+import api from '@/services/api'
 export default {
   name: 'TopConsumers',
   data() {
@@ -53,153 +54,35 @@ export default {
         {
           text: 'Consumer',
           align: 'start',
-          sortable: false,
-          value: 'consumer',
-          width: '45%',
+          sortable: true,
+          value: 'name',
+          width: '60%',
         },
         {
-          text: 'Total Spent',
+          text: 'City',
           align: 'start',
           sortable: true,
-          value: 'totalspent',
-          width: '30%',
+          value: 'city',
+          width: '20%',
         },
         {
-          text: 'Num Purchases',
+          text: 'Taxpayer Number',
           align: 'start',
           sortable: true,
-          value: 'numpurchases',
-          width: '25%',
+          value: 'taxID',
+          width: '20%',
         },
       ],
-      entries: [
-        {
-          consumer: 'Consumidor M.',
-          totalspent: '12,345.67',
-          numpurchases: '8'
-        },
-        {
-          consumer: 'Consumidor M.',
-          totalspent: '12,345.67',
-          numpurchases: '8'
-        },
-        {
-          consumer: 'Consumidor M.',
-          totalspent: '12,345.67',
-          numpurchases: '8'
-        },
-        {
-          consumer: 'Consumidor M.',
-          totalspent: '12,345.67',
-          numpurchases: '8'
-        },
-        {
-          consumer: 'Consumidor M.',
-          totalspent: '12,345.67',
-          numpurchases: '8'
-        },
-        {
-          consumer: 'Consumidor M.',
-          totalspent: '12,345.67',
-          numpurchases: '8'
-        },
-        {
-          consumer: 'Consumidor M.',
-          totalspent: '12,345.67',
-          numpurchases: '8'
-        },
-        {
-          consumer: 'Consumidor M.',
-          totalspent: '12,345.67',
-          numpurchases: '8'
-        },
-        {
-          consumer: 'Consumidor M.',
-          totalspent: '12,345.67',
-          numpurchases: '8'
-        },
-        {
-          consumer: 'Consumidor M.',
-          totalspent: '12,345.67',
-          numpurchases: '8'
-        },
-        {
-          consumer: 'Consumidor M.',
-          totalspent: '12,345.67',
-          numpurchases: '8'
-        },
-        {
-          consumer: 'Consumidor M.',
-          totalspent: '12,345.67',
-          numpurchases: '8'
-        },
-        {
-          consumer: 'Consumidor M.',
-          totalspent: '12,345.67',
-          numpurchases: '8'
-        },
-        {
-          consumer: 'Consumidor M.',
-          totalspent: '12,345.67',
-          numpurchases: '8'
-        },
-        {
-          consumer: 'Consumidor M.',
-          totalspent: '12,345.67',
-          numpurchases: '8'
-        },
-        {
-          consumer: 'Consumidor M.',
-          totalspent: '12,345.67',
-          numpurchases: '8'
-        },
-        {
-          consumer: 'Consumidor M.',
-          totalspent: '12,345.67',
-          numpurchases: '8'
-        },
-        {
-          consumer: 'Consumidor M.',
-          totalspent: '12,345.67',
-          numpurchases: '8'
-        },
-        {
-          consumer: 'Consumidor M.',
-          totalspent: '12,345.67',
-          numpurchases: '8'
-        },
-        {
-          consumer: 'Consumidor M.',
-          totalspent: '12,345.67',
-          numpurchases: '8'
-        },
-        {
-          consumer: 'Consumidor M.',
-          totalspent: '12,345.67',
-          numpurchases: '8'
-        },
-        {
-          consumer: 'Consumidor M.',
-          totalspent: '12,345.67',
-          numpurchases: '8'
-        },
-        {
-          consumer: 'Consumidor M.',
-          totalspent: '12,345.67',
-          numpurchases: '8'
-        },
-        {
-          consumer: 'Consumidor M.',
-          totalspent: '12,345.67',
-          numpurchases: '8'
-        },
-        {
-          consumer: 'Consumidor M.',
-          totalspent: '12,345.67',
-          numpurchases: '8'
-        },
-      ]
+      entries: []
     }
+  },
+  mounted () {
+    api.costumers((res)=>{
+      res.data.forEach(element => {
+        element.route = '/client/' + element.customerKey
+      });
+      this.entries = res.data;
+    })
   },
   methods: {
     filterOnlyCapsText (value, search) {
@@ -209,7 +92,7 @@ export default {
         value.toString().toLocaleUpperCase().indexOf(
           search.toString().toLocaleUpperCase()) !== -1
     },
-  }
+  },
 }
 </script>
 
@@ -233,10 +116,6 @@ export default {
     width: 100%;
   }
 }
-
-</style>
-
-<style lang='scss'>
 
 .top-consumers div.v-input {
   padding-top: 0;

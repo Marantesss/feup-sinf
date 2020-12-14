@@ -1,7 +1,7 @@
 <template>
   <v-container fluid class='grey lighten-5'>
     <v-row id='core-view-row'>
-      <products-stock-variation />
+      <all-stock />
       <low-stock-items />
     </v-row>
     <v-row id='core-view-row'>
@@ -12,13 +12,13 @@
 </template>
 
 <script>
-import ProductsStockVariation from '@/components/inventory/ProductsStockVariation.vue'
+import AllStock               from '@/components/inventory/AllStock.vue'
 import LowStockItems          from '@/components/inventory/LowStockItems.vue'
 import TotalStockValue        from '@/components/inventory/TotalStockValue.vue'
 import MostValuableItems      from '@/components/inventory/MostValuableItems.vue'
 export default {
   components: {
-    ProductsStockVariation,
+    AllStock,
     LowStockItems,
     TotalStockValue,
     MostValuableItems

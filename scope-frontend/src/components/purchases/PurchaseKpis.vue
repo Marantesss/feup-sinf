@@ -11,8 +11,8 @@
               <div class='kpi-title'>
                 Total Purchases
               </div>
-              <div class='kpi-value dolar'>
-                <span>16,345,876</span>
+              <div class='kpi-value'>
+                <span v-text="formatCurrency(totalPurchases)"></span>
               </div>
             </v-col>
             <v-col class='kpi right'>
@@ -20,7 +20,7 @@
                 Total Purchase Orders
               </div>
               <div class='kpi-value'>
-                <span>43,715</span>
+                <span>{{totalPurchaseOrders}}</span>
               </div>
             </v-col>
           </v-row>
@@ -29,8 +29,8 @@
               <div class='kpi-title'>
                 Purchase Backlog
               </div>
-              <div class='kpi-value dolar'>
-                <span>12,345.67</span>
+              <div class='kpi-value'>
+                <span v-text="formatCurrency(purchaseBacklog)"></span>
               </div>
             </v-col>
             <v-col class='kpi right'>
@@ -38,7 +38,7 @@
                 Purchase Orders Backlog
               </div>
               <div class='kpi-value'>
-                <span>132</span>
+                <span>{{purchaseOrderBacklog}}</span>
               </div>
             </v-col>
           </v-row>
@@ -50,8 +50,41 @@
 </template>
 
 <script>
+import api from '@/services/api';
+import currencyFormatter from "@/mixins/currencyFormatter";
+
 export default {
   name: 'PurchaseKPIs',
+  mixins: [currencyFormatter],
+  data: () =>({
+    purchaseOrderBacklog: "-",
+    purchaseBacklog: "-",
+    totalPurchaseOrders: "-",
+    totalPurchases: "-"
+  }),
+
+  mounted() {
+    api.purchases((res)=>{
+      this.totalPurchaseOrders = res.data.length
+
+      this.totalPurchases = res.data.reduce((accumulator,currValue)=>{
+        accumulator+= currValue.totalValue;
+        return accumulator;
+      },0);
+
+      const obj = {purchaseOrderBacklog: 0, purchaseBacklog:0}
+
+      res.data.forEach(element => {
+        if(!element.received){
+        obj.purchaseOrderBacklog += 1;
+        obj.purchaseBacklog +=  element.totalValue;
+        }
+      });
+      this.purchaseOrderBacklog = obj.purchaseOrderBacklog;
+      this.purchaseBacklog = obj.purchaseBacklog;
+
+    })
+  }
 }
 </script>
 
@@ -82,11 +115,6 @@ export default {
       > .kpi-title {
         font-weight: 300;
         font-size: 1.5em;
-      }
-      > .dolar {
-        > span::before {
-          content: "\20ac\00a0";
-        }
       }
       > .kpi-value {
         position: absolute;

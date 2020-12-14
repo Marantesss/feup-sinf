@@ -11,9 +11,9 @@
         showFirstLastPage: true,
       }'>
       <template v-slot:item.name='{ item }'>
-        <a :href='item.route' v-if='item.route != undefined'>
+        <router-link :to='item.route' v-if='item.route != undefined'>
           {{ item.name }}
-        </a>
+        </router-link>
         <span v-else>
           {{ item.name }}
         </span>

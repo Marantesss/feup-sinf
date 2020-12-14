@@ -24,6 +24,16 @@ const routes = {
   getBalanceSheet: '/financial/balanceSheet',
   getProfitAndLoss: '/financial/profitAndLoss',
   getSalesOverTime: '/financial/salesOverTime',
+  grossProfitMargin: '/financial/grossProfitMargin',
+  suppliers: '/purchases/supplier/',
+  purchases: '/purchases/all',
+  costumers: '/sales/customers/',
+  costumer: (clientId) => `/sales/customers/${clientId}`,
+  sales: '/sales/all',
+  purchasesByProduct: '/purchases/products/',
+  supplier: (supplierId) => `/purchases/supplier/${supplierId}`,
+  inventory: '/inventory/stock/',
+  product: (productId) => `/inventory/product/${productId}`,
 };
 
 /**
@@ -57,7 +67,7 @@ const request = (path, method, data, _cb) => {
 
     const res = { data: { status: 'error' } };
     _cb(res);
-  };
+  }
 
   if (method.toLowerCase() === 'get') {
     axios.get(API_URL + path, { headers }).then(_cb).catch(errorHandler);
@@ -80,17 +90,47 @@ const api = {
   logout: (_cb) => {
     request(routes.logout, 'post', null, _cb);
   },
-  stockValue: (data,_cb) => {
-    request(routes.stockValue,'get',data,_cb);
+  stockValue: (_cb) => {
+    request(routes.stockValue, 'get', null, _cb);
   },
   getBalanceSheet: (_cb) => {
     request(routes.getBalanceSheet, 'get', null, _cb);
+  },
+  getSuppliers: (_cb) => {
+    request(routes.suppliers, 'get', null, _cb);
+  },
+  purchases: (_cb) => {
+    request(routes.purchases, 'get', null, _cb);
+  },
+  costumers: (_cb) => {
+    request(routes.costumers, 'get', null, _cb);
+  },
+  getCostumer: (id, _cb) => {
+    request(routes.costumer(id), 'get', null, _cb);
+  },
+  getAllSales: (_cb) => {
+    request(routes.sales, 'get', null, _cb);
   },
   getProfitAndLoss: (_cb) => {
     request(routes.getProfitAndLoss, 'get', null, _cb);
   },
   getSalesOverTime: (_cb) => {
     request(routes.getSalesOverTime, 'get', null, _cb);
+  },
+  grossProfitMargin: (_cb) => {
+    request(routes.grossProfitMargin, 'get', null, _cb);
+  },
+  getPurchasesByProduct: (_cb) => {
+    request(routes.purchasesByProduct, 'get', null, _cb);
+  },
+  getSupplier: (id, _cb) => {
+    request(routes.supplier(id), 'get', null, _cb);
+  },
+  getInventory: (_cb) => {
+    request(routes.inventory, 'get', null, _cb);
+  },
+  getProduct: (id, _cb) => {
+    request(routes.product(id), 'get', null, _cb);
   },
 };
 

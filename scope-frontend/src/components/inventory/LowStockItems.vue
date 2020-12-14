@@ -5,30 +5,26 @@
         <span class='title'>
           Low Stock Items
         </span>
-        <div class='charts'>
-          <div class='top-half'>
-            <div class='hard-coded-height'><doughnut-wrapper style='height: 176px;' /></div>
-          </div>
-          <div class='bottom-half'>
-            <div class='hard-coded-height'><line-wrapper style='height: 176px;' /></div>
+        <div class='charts d-flex justify-center align-center'>
+          <div class='hard-coded-height'>
+            <chart-wrapper style='height: 270px;'
+              :stackedX=true :stackedY=true />
           </div>
         </div>
       </v-col>
       <v-col md='4' class='card-table'>
-        <simple-table-flat
-            :data=lowStockItems
-        />
+        <simple-table :data=lowStockItems />
       </v-col>
     </v-row>
   </v-col>
 </template>
 
 <script>
-import SimpleTableFlat      from '@/components/tables/SimpleTableFlat'
-import DoughnutWrapper      from '@/components/common/DoughnutWrapper'
-import LineWrapper          from '@/components/common/LineWrapper'
+import SimpleTable      from '@/components/tables/SimpleTable'
+import ChartWrapper     from '@/components/inventory/MissingItensChart.vue'
+import api from "@/services/api";
 export default {
-  components: { SimpleTableFlat, DoughnutWrapper, LineWrapper },
+  components: { SimpleTable, ChartWrapper },
   name: 'LowStockItems',
   data: (() => {
     return {
@@ -36,83 +32,30 @@ export default {
         title: 'Current Stock',
         headers: [
           {
-            text: 'Item',
+            text: 'Product Name',
             align: 'start',
-            sortable: false,
+            sortable: true,
             value: 'name',
+            width: '57.5%'
           },
-          { text: 'Sales', value: 'sales' },
+          { text: 'Total Value', value: 'value' },
         ],
-        values: [
-          {
-            name: 'Item 1',
-            sales: '340',
-            route: '/product'
-          },
-          {
-            name: 'Item 2',
-            sales: '341',
-            route: '/product'
-          },
-          {
-            name: 'Item 3',
-            sales: '342',
-            route: '/product'
-          },
-          {
-            name: 'Item 4',
-            sales: '343',
-            route: '/product'
-          },
-          {
-            name: 'Item 5',
-            sales: '344',
-            route: '/product'
-          },
-          {
-            name: 'Item 6',
-            sales: '339',
-            route: '/product'
-          },
-          {
-            name: 'Item 7',
-            sales: '338',
-            route: '/product'
-          },
-          {
-            name: 'Item 8',
-            sales: '337',
-            route: '/product'
-          },
-          {
-            name: 'Item 9',
-            sales: '336',
-            route: '/product'
-          },
-          {
-            name: 'Item 10',
-            sales: '335',
-            route: '/product'
-          },
-          {
-            name: 'Item 11',
-            sales: '334',
-            route: '/product'
-          },
-          {
-            name: 'Item 12',
-            sales: '333',
-            route: '/product'
-          },
-          {
-            name: 'Item 13',
-            sales: '332',
-            route: '/product'
-          },
-        ]
+        values: []
       }
     }
-  })  
+  }),
+  mounted (){
+    api.getInventory((res) =>{ 
+      this.lowStockItems.values = []
+      res.data.materialItems.map((element)=>{
+        this.lowStockItems.values.push({
+          name: element.description.length > 19 ? element.description.substr(0,19-4) +'...' : element.description,
+          value: element.warehouses.reduce((accumulator,currValue)=>{accumulator+=currValue.stock* currValue.basePrice; return accumulator},0),
+          route: '/product/' + element.itemKey,
+        })
+      })
+    })
+  }
 }
 </script>
 
@@ -128,15 +71,6 @@ export default {
       flex-direction: column;
       > div.charts {
         flex-grow: 1;
-        > div.top-half {
-          display: block;
-          border-bottom: 1px solid #969696;
-        }
-        > div.bottom-half {
-          display: block;
-          padding-top: 5px;
-          border-top: 1px solid #969696;
-        }
       }
     }
   }

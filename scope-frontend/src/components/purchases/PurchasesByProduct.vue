@@ -1,123 +1,68 @@
 <template>
-  <v-col md='6'>
-    <v-row no-gutters class='elevation-10 mx-1'>
-      <v-col md='8' class='left-col pa-2'>
-        <span class='title'>
+  <v-col md="6">
+    <v-row no-gutters class="elevation-10 mx-1">
+      <v-col md="8" class="left-col pa-2">
+        <span class="title">
           Purchases By Product
         </span>
-        <div class='charts'>
-          <div class='top-half'>
-            <div class='hard-coded-height'><doughnut-wrapper style='height: 176px;' /></div>
-          </div>
-          <div class='bottom-half'>
-            <div class='hard-coded-height'><line-wrapper style='height: 176px;' /></div>
+        <div class="charts d-flex justify-center align-center">
+          <div class="hard-coded-height">
+            <doughnut-wrapper style="height: 300px" />
           </div>
         </div>
       </v-col>
-      <v-col md='4' class='card-table'>
-        <simple-table
-            :data=purchases
-        />
+      <v-col md="4" class="card-table">
+        <simple-table :data="purchases" />
       </v-col>
     </v-row>
   </v-col>
 </template>
 
 <script>
-import SimpleTable      from '@/components/tables/SimpleTable'
-import DoughnutWrapper  from '@/components/common/DoughnutWrapper.vue'
-import LineWrapper      from '@/components/common/LineWrapper.vue'
+import SimpleTable from "@/components/tables/SimpleTable";
+import DoughnutWrapper from "@/components//purchases/PurchasesByProductDoughnut";
+import api from "@/services/api";
 export default {
-  components: { SimpleTable, DoughnutWrapper, LineWrapper },
-  name: 'PurchasesByProduct',
-  data: (() => {
+  components: { SimpleTable, DoughnutWrapper},
+  name: "PurchasesByProduct",
+  data: () => {
     return {
       purchases: {
-        title: 'All-Time Purchases',
+        title: "All Products",
         headers: [
           {
-            text: 'Product',
-            align: 'start',
-            sortable: false,
-            value: 'name',
+            text: "Product",
+            align: "start",
+            sortable: true,
+            value: "name",
+            width: '57.5%'
           },
-          { text: 'Purchases', value: 'value' },
+          { text: "Purchases", value: "value" },
         ],
-        values: [
-          {
-            name: 'Product 1',
-            value: '340.1',
-            route: '/product'
-          },
-          {
-            name: 'Product 2',
-            value: '341.1',
-            route: '/product'
-          },
-          {
-            name: 'Product 3',
-            value: '342.1',
-            route: '/product'
-          },
-          {
-            name: 'Product 4',
-            value: '343.1',
-            route: '/product'
-          },
-          {
-            name: 'Product 5',
-            value: '344.1',
-            route: '/product'
-          },
-          {
-            name: 'Product 6',
-            value: '339.1',
-            route: '/product'
-          },
-          {
-            name: 'Product 7',
-            value: '338.1',
-            route: '/product'
-          },
-          {
-            name: 'Product 8',
-            value: '337.1',
-            route: '/product'
-          },
-          {
-            name: 'Product 9',
-            value: '336.1',
-            route: '/product'
-          },
-          {
-            name: 'Product 10',
-            value: '335.1',
-            route: '/product'
-          },
-          {
-            name: 'Product 11',
-            value: '334.1',
-            route: '/product'
-          },
-          {
-            name: 'Product 12',
-            value: '333.1',
-            route: '/product'
-          },
-          {
-            name: 'Product 13',
-            value: '332.1',
-            route: '/product'
-          },
-        ]
-      }
-    }
-  })  
-}
+        values: [],
+      },
+    };
+  },
+
+  mounted() {
+    api.getPurchasesByProduct((res)=>{
+      res.data.forEach(element => {
+        const key = element.description;
+        let totalValue = this.purchases.values.find(x => x.description === key);
+        if (totalValue === undefined) {
+          element.name = key.length > 20 ? key.substr(0,20-4) +'...' : key,
+          element.route = '/product/' + element.id;
+          this.purchases.values.push(element);
+        } else {
+          totalValue.value += element.value;
+        }
+      });
+    })
+  },
+};
 </script>
 
 <style scoped lang='scss'>
-
 .col {
   height: 100%;
   > .row {
@@ -128,18 +73,8 @@ export default {
       flex-direction: column;
       > div.charts {
         flex-grow: 1;
-        > div.top-half {
-          display: block;
-          border-bottom: 1px solid #969696;
-        }
-        > div.bottom-half {
-          display: block;
-          padding-top: 5px;
-          border-top: 1px solid #969696;
-        }
       }
     }
   }
 }
-
 </style>

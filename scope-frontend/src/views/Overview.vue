@@ -5,7 +5,7 @@
       <purchase-kpis />
     </v-row>
     <v-row id='core-view-row'>
-      <sales-by-product-category/>
+      <total-stock-value />
       <financial-kpis />
     </v-row>
   </v-container>
@@ -15,12 +15,12 @@
 import SalesKpis          from '@/components/sales-orders/SalesKpis.vue'
 import PurchaseKpis           from '@/components/purchases/PurchaseKpis.vue'
 import FinancialKpis          from '@/components/finances/FinancialKpis.vue'
-import SalesByProductCategory from '@/components/generic/SalesByProductCategory.vue'
+import TotalStockValue        from '@/components/inventory/TotalStockValue.vue'
 export default {
   components: { 
     SalesKpis,
     PurchaseKpis,
-    SalesByProductCategory,
+    TotalStockValue,
     FinancialKpis
   },
   name: 'Overview',

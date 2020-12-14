@@ -11,15 +11,15 @@
         showFirstLastPage: true,
       }'>
       <template v-slot:item.name='{ item }'>
-        <a :href='item.route' v-if='item.route != undefined'>
+        <router-link :to='item.route' v-if='item.route != undefined'>
           {{ item.name }}
-        </a>
+        </router-link>
         <span v-else>
           {{ item.name }}
         </span>
       </template>
       <template v-slot:item.value='{ item }'>
-        {{ '€ ' + item.value }}
+        <span v-text="formatCurrency(item.value)"></span>
       </template>
       <template v-slot:body.append>
         <div class='space-filler'>
@@ -30,8 +30,11 @@
 </template>
 
 <script>
+import currencyFormatter from "@/mixins/currencyFormatter";
+
 export default {
   name: "SimpleTable",
+  mixins: [currencyFormatter],
   props: ['data'],
 }
 </script>

@@ -7,12 +7,12 @@
             Total Stock Value
           </div>
           <div class='kpi-big'>
-            12,345.67
+            <span v-text="formatCurrency(stockValue)"></span>
           </div>
         </div>
         <div class='stock-per-store'>
           <span class='title'>
-            Stock Per Store
+            Stock Per Warehouse
           </span>
           <div class='rest' />
           <chart-wrapper style='height: 270px;'
@@ -25,11 +25,27 @@
 </template>
 
 <script>
-import ChartWrapper from '@/components/common/ChartWrapper.vue'
+//import ChartWrapper from '@/components/inventory/StockPerWarehouseChart.vue'
+import ChartWrapper from '@/components/inventory/StockPerWarehouseDoughnut.vue'
+import api from '@/services/api'
+import currencyFormatter from "@/mixins/currencyFormatter"
+
 export default {
   components: { ChartWrapper },
   name: 'TotalStockValue',
+  mixins: [currencyFormatter],
+  data: () => ({
+    stockValue : "-"
+  }),
+  mounted () {
+    api.stockValue((res)=>{
+     this.stockValue = res.data.stockValue;
+
+    })
+  }
 }
+
+
 </script>
 
 <style scoped>
@@ -49,10 +65,6 @@ export default {
 .kpi-label {
   padding-left: 0.25em;
   font-weight: 300;
-}
-
-.kpi-big:before {
-  content: "\20ac\00a0";
 }
 
 .main-kpi .kpi-label {

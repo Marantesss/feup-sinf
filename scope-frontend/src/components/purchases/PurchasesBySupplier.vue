@@ -5,18 +5,15 @@
         <span class='title'>
           Purchases By Supplier
         </span>
-        <div class='charts'>
-          <div class='top-half'>
-            <div class='hard-coded-height'><doughnut-wrapper style='height: 176px;' /></div>
-          </div>
-          <div class='bottom-half'>
-            <div class='hard-coded-height'><line-wrapper style='height: 176px;' /></div>
+        <div class='charts d-flex justify-center align-center'>
+          <div class='hard-coded-height'>
+            <doughnut-wrapper style='height: 300px;' />
           </div>
         </div>
       </v-col>
       <v-col md='4' class='card-table'>
         <simple-table
-            :data=purchases
+          :data=purchases
         />
       </v-col>
     </v-row>
@@ -25,96 +22,47 @@
 
 <script>
 import SimpleTable      from '@/components/tables/SimpleTable'
-import DoughnutWrapper  from '@/components/common/DoughnutWrapper.vue'
-import LineWrapper      from '@/components/common/LineWrapper.vue'
+import DoughnutWrapper  from '@/components/purchases/PurchasesBySupplierDoughnut'
+import api from '@/services/api'
 
 export default {
-  components: { SimpleTable, DoughnutWrapper, LineWrapper },
+  components: { SimpleTable, DoughnutWrapper },
   name: 'PurchasesBySupplier',
-  data: (() => {
-    return {
-      purchases: {
-        title: 'All-Time Purchases',
-        headers: [
-          {
-            text: 'Supplier',
-            align: 'start',
-            sortable: false,
-            value: 'name',
-          },
-          { text: 'Purchases', value: 'value' },
-        ],
-        values: [
-          {
-            name: 'Supplier 1',
-            value: '340.1',
-            route: '/supplier'
-          },
-          {
-            name: 'Supplier 2',
-            value: '341.1',
-            route: '/supplier'
-          },
-          {
-            name: 'Supplier 3',
-            value: '342.1',
-            route: '/supplier'
-          },
-          {
-            name: 'Supplier 4',
-            value: '343.1',
-            route: '/supplier'
-          },
-          {
-            name: 'Supplier 5',
-            value: '344.1',
-            route: '/supplier'
-          },
-          {
-            name: 'Supplier 6',
-            value: '339.1',
-            route: '/supplier'
-          },
-          {
-            name: 'Supplier 7',
-            value: '338.1',
-            route: '/supplier'
-          },
-          {
-            name: 'Supplier 8',
-            value: '337.1',
-            route: '/supplier'
-          },
-          {
-            name: 'Supplier 9',
-            value: '336.1',
-            route: '/supplier'
-          },
-          {
-            name: 'Supplier 10',
-            value: '335.1',
-            route: '/supplier'
-          },
-          {
-            name: 'Supplier 11',
-            value: '334.1',
-            route: '/supplier'
-          },
-          {
-            name: 'Supplier 12',
-            value: '333.1',
-            route: '/supplier'
-          },
-          {
-            name: 'Supplier 13',
-            value: '332.1',
-            route: '/supplier'
-          },
-        ]
-      }
+  data: () => ({
+    purchases: {
+      title: 'All Suppliers',
+      headers: [
+        {
+          text: 'Supplier',
+          align: 'start',
+          sortable: true,
+          value: 'name',
+          width: '59%'
+        },
+        { text: 'Purchases', value: 'value' },
+      ],
+      values: []
     }
-  })  
+  }),
+  mounted () {
+    api.getSuppliers((res)=>{
+      res.data.forEach(element => {
+        const key = element.supplierName;
+        let totalValue = this.purchases.values.find(x => x.supplierName === key);
+        if (totalValue === undefined) {
+          element.name = key.length > 21 ? key.substr(0,21-4) +'...' : key,
+          element.route = "/supplier/" + element.supplierKey;
+          this.purchases.values.push(element);
+        } else {
+          totalValue.value += element.value;
+        }
+      });
+    });
+  }
 }
+
+
+
 </script>
 
 <style scoped lang='scss'>
@@ -129,15 +77,6 @@ export default {
       flex-direction: column;
       > div.charts {
         flex-grow: 1;
-        > div.top-half {
-          display: block;
-          border-bottom: 1px solid #969696;
-        }
-        > div.bottom-half {
-          display: block;
-          padding-top: 5px;
-          border-top: 1px solid #969696;
-        }
       }
     }
   }

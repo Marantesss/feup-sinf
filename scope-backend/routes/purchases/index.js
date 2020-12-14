@@ -19,10 +19,22 @@ router.get('/all', (_req, res) => {
       purchasesRaw.forEach((element) => {
         purchasesList.push({
           purchaseID: element.documentLines[0].orderId,
+          supplierID: element.sellerSupplierParty,
           supplierName: element.sellerSupplierPartyName,
           supplierTaxID: element.sellerSupplierPartyTaxId,
           totalValue: element.payableAmount.amount,
           date: element.exchangeRateDate.split("T")[0],
+          received: element.documentLines.reduce((accumulator, currValue) => {
+            accumulator += currValue.quantity
+            return accumulator;
+          }, 0) == element.documentLines.reduce((accumulator, currValue) => {
+            accumulator += currValue.receivedQuantity
+            return accumulator;
+          }, 0) || false,
+          quantity: element.documentLines.reduce((accumulator, currValue) => {
+            accumulator += currValue.quantity
+            return accumulator;
+          }, 0)
         })
       });
 
@@ -35,11 +47,39 @@ router.get('/all', (_req, res) => {
         message: err.message,
         error: err
       });
-
-
-
     });
 });
+
+router.get('/products', (_req, res) => {
+  jasmin.jasminRequest("get", "/purchases/orders").then((purchasesRaw) => {
+    const products = []
+
+    purchasesRaw.map(
+      (invoice) => {
+
+        invoice.documentLines.map((line) => {
+          products.push({
+            description: line.description,
+            quantity: line.quantity,
+            value: line.lineExtensionAmount.amount,
+            date: line.deliveryDate.split("T")[0],
+            id: line.purchasesItem
+          })
+        })
+      }
+    )
+  res.json(products)
+  })
+    .catch(() => {
+      let err = new Error("Failed to retrive purchase invoices for products");
+      err.status = 400;
+      res.json({
+        message: err.message,
+        error: err
+      });
+    });
+
+})
 
 router.use('/supplier', supplierRouter);
 

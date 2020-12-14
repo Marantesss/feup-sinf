@@ -205,7 +205,7 @@ export default {
       {
         text: "Name",
         align: "start",
-        sortable: false,
+        sortable: true,
         value: "name",
         width: "75%",
       },
@@ -215,38 +215,6 @@ export default {
         sortable: true,
         value: "balance",
         width: "25%",
-      },
-    ],
-    entries: [
-      {
-        account: "01",
-        description: "Ah que bem",
-        debit: "0.00",
-        credit: "0.00",
-      },
-      {
-        account: "01",
-        description: "Bh que bem",
-        debit: "0.00",
-        credit: "0.00",
-      },
-      {
-        account: "01",
-        description: "Ch que bem",
-        debit: "0.00",
-        credit: "0.00",
-      },
-      {
-        account: "01",
-        description: "Dh que bem",
-        debit: "0.00",
-        credit: "0.00",
-      },
-      {
-        account: "01",
-        description: "Eh que bem",
-        debit: "0.00",
-        credit: "0.00",
       },
     ],
   }),

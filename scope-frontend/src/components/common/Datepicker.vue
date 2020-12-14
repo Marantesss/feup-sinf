@@ -2,7 +2,7 @@
   <v-card class="mt-5" color="#18414a" elevation="0" tile>
     <v-col class="d-flex justify-space-between align-center">
       <v-icon class="">mdi-timelapse</v-icon>
-      <v-carousel height="50" hide-delimiters show-arrows-on-hover :continuous=false>
+      <v-carousel v-model="currentIndex" height="50" hide-delimiters show-arrows-on-hover :continuous=false>
         <v-carousel-item
           v-for="year in years" :key="year"
         >
@@ -26,6 +26,7 @@ export default {
   name: "Datepicker",
 
   data: () => ({
+    currentIndex: 3,
     years: [
       '2016',
       '2017',

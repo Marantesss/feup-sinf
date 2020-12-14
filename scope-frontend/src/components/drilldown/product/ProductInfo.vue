@@ -25,7 +25,7 @@ a<template>
                 Cost of Goods Sold
               </div>
               <div class='kpi-big'>
-                {{ main.cogs }}
+                <span v-text="formatCurrency(main.cogs)"></span>
               </div>
             </div>
           </v-col>
@@ -44,7 +44,7 @@ a<template>
               </div>
               <div class='kpi-big'>
                 <span v-for='(s, index) in main.suppliers' :key='s'>
-                  <a href="/supplier">{{ s }}</a>
+                  <router-link :to="'/supplier/1'">{{ s }}</router-link>
                   <span v-if='index+1 < main.suppliers.length'>,&nbsp;</span>
                 </span>
               </div>
@@ -57,8 +57,10 @@ a<template>
 </template>
 
 <script>
+import currencyFormatter from "@/mixins/currencyFormatter";
 export default {
   name: 'ProductInfo',
+  mixins: [currencyFormatter],
   props: [ 'name', 'main' ],
 }
 </script>

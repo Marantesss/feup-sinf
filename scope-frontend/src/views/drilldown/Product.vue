@@ -32,36 +32,43 @@ export default {
 
   mounted() {
     const productId = this.$route.params.id;
-    
+
     if (!productId) {
       this.$router.back();
     }
-    
-    api.getProduct(productId,
-    (res) => {
-      console.log(res);
-    });
+
+    api.getProduct(
+      productId,
+      (res) => {
+        if (res.status == 200) {
+          this.name = res.data.product;
+          this.main.id = res.data.productKey;
+        }
+        console.log(res.data);
+      },
+      (err) => {
+        console.log(`balance sheet error: ${err}`);
+      }
+    );
   },
 
-  data() {
-    return {
-      name: "Porter Cable 3-Amp Oscillating",
-      main: {
-        id: "P0001",
-        upc: "00885911364355",
-        cogs: "5432.10",
-        suppliers: ["F0001", "F0003"],
-      },
-      sales: {
-        currentSellingPrice: "345.99",
-        avgSellingPrice: "325.79",
-        avgCost: "245.90",
-        avgProfitMargin: "79.89",
-        totalSold: "1234",
-        totalInStock: "45",
-      },
-    };
-  },
+  data: () => ({
+    name: "",
+    main: {
+      id: "",
+      upc: "0",
+      cogs: "00.0",
+      suppliers: ["F0001", "F0003"],
+    },
+    sales: {
+      currentSellingPrice: "00.00",
+      avgSellingPrice: "00.00",
+      avgCost: "00.00",
+      avgProfitMargin: "00.00",
+      totalSold: "0",
+      totalInStock: "0",
+    },
+  }),
 };
 </script>
 

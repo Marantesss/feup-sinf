@@ -115,13 +115,13 @@ const api = {
   grossProfitMargin: (_cb) => {
     request(routes.grossProfitMargin, 'get', null, _cb);
   },
-  getPurchasesByProduct: (_cb) =>{
+  getPurchasesByProduct: (_cb) => {
     request(routes.purchasesByProduct, 'get', null, _cb);
   },
-  getInventory: (_cb) =>{
+  getInventory: (_cb) => {
     request(routes.inventory, 'get', null, _cb);
   },
-  getProduct:(id ,_cb )=>{
+  getProduct: (id, _cb) => {
     request(routes.product(id), 'get', null, _cb);
   },
 };

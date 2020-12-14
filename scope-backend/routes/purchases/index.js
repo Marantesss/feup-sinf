@@ -58,13 +58,21 @@ router.get('/products', (_req, res) => {
       (invoice) => {
 
         invoice.documentLines.map((line) => {
+          const aux = products.find((aux) => {
+            return aux.id == line.purchasesItem
+          })
+          if(aux == undefined){
           products.push({
             description: line.description,
-            quantity: line.quantity,
-            value: line.lineExtensionAmount.amount,
+            quantity: parseInt(line.quantity),
+            value: parseFloat(line.lineExtensionAmount.amount),
             date: line.deliveryDate.split("T")[0],
             id: line.purchasesItem
-          })
+          })}
+          else {
+            aux.value += parseFloat(line.lineExtensionAmount.amount),
+            aux.quantity += parseInt(line.quantity)
+          }
         })
       }
     )

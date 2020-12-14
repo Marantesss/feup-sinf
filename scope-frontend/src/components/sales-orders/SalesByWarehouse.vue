@@ -49,6 +49,10 @@ export default {
             '#f5ec71',
             '#88e382',
             '#82edf5',
+            '#7979e5',
+            '#ad70f4',
+            '#ce75ef',
+            '#fb96db'
           ],
           data: [],
           fill: false,

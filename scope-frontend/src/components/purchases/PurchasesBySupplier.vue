@@ -5,18 +5,15 @@
         <span class='title'>
           Purchases By Supplier
         </span>
-        <div class='charts'>
-          <div class='top-half'>
-            <div class='hard-coded-height'><doughnut-wrapper style='height: 176px;' /></div>
-          </div>
-          <div class='bottom-half'>
-            <div class='hard-coded-height'><line-wrapper style='height: 176px;' /></div>
+        <div class='charts d-flex justify-center align-center'>
+          <div class='hard-coded-height'>
+            <doughnut-wrapper style='height: 300px;' />
           </div>
         </div>
       </v-col>
       <v-col md='4' class='card-table'>
         <simple-table
-            :data=purchases
+          :data=purchases
         />
       </v-col>
     </v-row>
@@ -26,11 +23,10 @@
 <script>
 import SimpleTable      from '@/components/tables/SimpleTable'
 import DoughnutWrapper  from '@/components/purchases/PurchasesBySupplierDoughnut'
-import LineWrapper      from '@/components/common/LineWrapper.vue'
 import api from '@/services/api'
 
 export default {
-  components: { SimpleTable, DoughnutWrapper, LineWrapper },
+  components: { SimpleTable, DoughnutWrapper },
   name: 'PurchasesBySupplier',
   data: (() => {
     return {
@@ -45,80 +41,13 @@ export default {
           },
           { text: 'Purchases', value: 'value' },
         ],
-        values: [
-          {
-            name: 'Supplier 1',
-            value: '340.1',
-            route: '/supplier'
-          },
-          {
-            name: 'Supplier 2',
-            value: '341.1',
-            route: '/supplier'
-          },
-          {
-            name: 'Supplier 3',
-            value: '342.1',
-            route: '/supplier'
-          },
-          {
-            name: 'Supplier 4',
-            value: '343.1',
-            route: '/supplier'
-          },
-          {
-            name: 'Supplier 5',
-            value: '344.1',
-            route: '/supplier'
-          },
-          {
-            name: 'Supplier 6',
-            value: '339.1',
-            route: '/supplier'
-          },
-          {
-            name: 'Supplier 7',
-            value: '338.1',
-            route: '/supplier'
-          },
-          {
-            name: 'Supplier 8',
-            value: '337.1',
-            route: '/supplier'
-          },
-          {
-            name: 'Supplier 9',
-            value: '336.1',
-            route: '/supplier'
-          },
-          {
-            name: 'Supplier 10',
-            value: '335.1',
-            route: '/supplier'
-          },
-          {
-            name: 'Supplier 11',
-            value: '334.1',
-            route: '/supplier'
-          },
-          {
-            name: 'Supplier 12',
-            value: '333.1',
-            route: '/supplier'
-          },
-          {
-            name: 'Supplier 13',
-            value: '332.1',
-            route: '/supplier'
-          },
-        ]
+        values: []
       }
     }
   }),
   mounted () {
     api.getSuppliers((res)=>{
       this.purchases.values = []
-      res.data.reverse()
       res.data.forEach(element => {
         const value = {}
         value.name = element.supplierName
@@ -147,15 +76,6 @@ export default {
       flex-direction: column;
       > div.charts {
         flex-grow: 1;
-        > div.top-half {
-          display: block;
-          border-bottom: 1px solid #969696;
-        }
-        > div.bottom-half {
-          display: block;
-          padding-top: 5px;
-          border-top: 1px solid #969696;
-        }
       }
     }
   }

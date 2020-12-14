@@ -74,7 +74,7 @@ export default {
           align: "start",
           sortable: false,
           value: "vendor",
-          width: "23%",
+          width: "18%",
         },
         {
           text: "Total Products",
@@ -95,7 +95,7 @@ export default {
           align: "start",
           sortable: true,
           value: "paid",
-          width: "11%",
+          width: "16%",
         },
         {
           text: "Details",
@@ -122,7 +122,6 @@ export default {
   },
   mounted() {
     api.purchases((res) => {
-      res.data.reverse()
       res.data.forEach((element) => {
         const entry = {};
         (entry.number = element.purchaseID),

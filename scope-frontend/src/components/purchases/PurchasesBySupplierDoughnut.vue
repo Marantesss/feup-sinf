@@ -1,7 +1,15 @@
 <template>
-  <v-container id='chart-container'>
-    <doughnut-chart v-if="loaded" :chartData="chartData" :options='options' />
+  <v-container v-if="loaded" id='chart-container'>
+    <doughnut-chart  :chartData="chartData" :options='options' />
   </v-container>
+  <div v-else style="height: 100%">
+    <v-progress-circular
+      :size="200"
+      :width="8"
+      indeterminate
+      color="primary"
+    ></v-progress-circular>
+  </div>
 </template>
 
 <script>
@@ -16,16 +24,7 @@ export default {
      {
        loaded: false,
       chartData: {
-        labels: ['Store 1',
-          'Store 2',
-          'Store 3',
-          'Store 4',
-          'Store 5',
-          'Store 6',
-          'Store 7',
-          'Store 8',
-          'Store 9',
-        ],
+        labels: [],
         datasets: [
           {
             label: 'Data One',
@@ -40,7 +39,7 @@ export default {
               '#ce75ef',
               '#fb96db'
             ],
-            data: [40, 20],
+            data: [],
             fill: false,
           },
         ],
@@ -57,7 +56,6 @@ export default {
 
   mounted() {
     api.getSuppliers((res)=>{
-        console.log(res)
         this.chartData.labels = []
         this.chartData.datasets[0].data = []
         res.data.forEach(element => {

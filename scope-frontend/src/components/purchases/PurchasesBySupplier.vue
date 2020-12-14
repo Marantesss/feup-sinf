@@ -28,34 +28,33 @@ import api from '@/services/api'
 export default {
   components: { SimpleTable, DoughnutWrapper },
   name: 'PurchasesBySupplier',
-  data: (() => {
-    return {
-      purchases: {
-        title: 'All-Time Purchases',
-        headers: [
-          {
-            text: 'Supplier',
-            align: 'start',
-            sortable: false,
-            value: 'name',
-          },
-          { text: 'Purchases', value: 'value' },
-        ],
-        values: []
-      }
+  data: () => ({
+    purchases: {
+      title: 'All-Time Purchases',
+      headers: [
+        {
+          text: 'Supplier',
+          align: 'start',
+          sortable: false,
+          value: 'supplierName',
+        },
+        { text: 'Purchases', value: 'value' },
+      ],
+      values: []
     }
   }),
   mounted () {
     api.getSuppliers((res)=>{
-      this.purchases.values = []
       res.data.forEach(element => {
-        const value = {}
-        value.name = element.supplierName
-        value.value = element.price
-        value.route = '/supplier/' + element.supplierKey
-        this.purchases.values.push(value)
+        const key = element.supplierName;
+        let totalValue = this.purchases.values.find(x => x.supplierName === key);
+        if (totalValue === undefined) {
+          element.route = "/supplier/" + element.supplierKey
+          this.purchases.values.push(element)
+        } else {
+          totalValue.value += element.value;
+        }
       });
-
     });
   }
 }

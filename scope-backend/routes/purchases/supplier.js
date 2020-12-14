@@ -17,7 +17,7 @@ router.get('/', async (req, res) => {
                     supplierName: supplier.sellerSupplierPartyName,
                     supplierKey: supplier.sellerSupplierParty,
                     quantity: accumulator.quantity,
-                    price: accumulator.totalPrice.toFixed(2),
+                    value: accumulator.totalPrice.toFixed(2),
                     taxID: supplier.sellerSupplierPartyTaxId,
                     adress: supplier.sellerSupplierPartyAddress,
                     email: supplier.emailTo

@@ -34,7 +34,7 @@ export default {
             text: "Product",
             align: "start",
             sortable: false,
-            value: "name",
+            value: "description",
           },
           { text: "Purchases", value: "value" },
         ],
@@ -45,14 +45,16 @@ export default {
 
   mounted() {
     api.getPurchasesbyProduct((res)=>{
-      this.purchases.values = []
-      res.data.map((element)=>{
-        this.purchases.values.push({
-          name: element.description,
-          value: element.value,
-          route: "/product/" + element.id,
-        })
-      })
+      res.data.forEach(element => {
+        const key = element.description;
+        let totalValue = this.purchases.values.find(x => x.description === key);
+        if (totalValue === undefined) {
+          element.route = '/product/' + element.id
+          this.purchases.values.push(element)
+        } else {
+          totalValue.value += element.value;
+        }
+      });
     })
   },
 };

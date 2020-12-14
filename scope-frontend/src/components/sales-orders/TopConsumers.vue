@@ -73,22 +73,14 @@ export default {
           width: '20%',
         },
       ],
-      entries: [
-        {
-          customerKey: "0",
-          name: "0",
-          adress: "0",
-          postalZone: "0",
-          city: "0",
-          website: "0",
-          taxID: "0",
-          country: "0",
-        }
-      ]
+      entries: []
     }
   },
   mounted () {
     api.costumers((res)=>{
+      res.data.forEach(element => {
+        element.route = '/client/' + element.customerKey
+      });
       this.entries = res.data;
     })
   },

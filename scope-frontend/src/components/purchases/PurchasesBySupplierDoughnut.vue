@@ -60,7 +60,7 @@ export default {
         this.chartData.datasets[0].data = []
         res.data.forEach(element => {
           this.chartData.labels.push(element.supplierName.length > 22 ? element.supplierName.substr(0, 22-1) + '...': element.supplierName)
-          this.chartData.datasets[0].data.push(element.price)
+          this.chartData.datasets[0].data.push(element.value)
         });
         this.loaded = true
     })

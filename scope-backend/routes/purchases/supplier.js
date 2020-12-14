@@ -20,7 +20,8 @@ router.get('/', async (req, res) => {
                     value: accumulator.totalPrice.toFixed(2),
                     taxID: supplier.sellerSupplierPartyTaxId,
                     adress: supplier.sellerSupplierPartyAddress,
-                    email: supplier.emailTo
+                    email: supplier.emailTo,
+                    id: supplier.seriesNumber
 
                 });
 

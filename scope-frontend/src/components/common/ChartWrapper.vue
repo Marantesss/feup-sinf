@@ -34,11 +34,6 @@ export default {
         ],
         datasets: [
           {
-            label: 'Sales',
-            backgroundColor: '#ffc857',
-            data: [40, 20, 10, 55, 32, 32, 12, 54, 30, 20, 30, 40],
-          },
-          {
             label: 'Purchases',
             backgroundColor: '#4caf50',
             data: [40, 20, 10, 55, 32, 32, 12, 54, 30, 20, 30, 40],

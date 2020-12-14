@@ -39,8 +39,7 @@ export default {
           },
           { text: 'Total Value', value: 'sales' },
         ],
-        values: [
-        ]
+        values: []
       }
     }
   }),

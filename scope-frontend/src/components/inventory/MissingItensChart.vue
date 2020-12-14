@@ -23,9 +23,9 @@ export default {
         labels: [],
         datasets: [
           {
-            label: "Sales",
+            label: "Missing Items",
             backgroundColor: "#ffc857",
-            data: [40, 20, 10, 55, 32, 32, 12, 54, 30, 20, 30, 40],
+            data: [],
           },
         ],
       },

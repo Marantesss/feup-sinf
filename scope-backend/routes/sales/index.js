@@ -111,7 +111,7 @@ router.get('/customers/:id', (req, res) => {
                 customers.push({
                     customerKey: customer.partyKey,
                     name: customer.name,
-                    adress: customer.streetName || "-",
+                    address: customer.streetName || "-",
                     postalZone: customer.postalZone || "-",
                     city: customer.cityName || "-",
                     website: customer.websiteUrl || "-",

@@ -1,7 +1,7 @@
 <template>
   <v-col md="6">
     <v-row no-gutters class="elevation-10 mx-1 main">
-      <v-col class="pa-2 top-consumers">
+      <v-col class="pa-2 all-stock">
         <span class="title"> All Stock </span>
         <v-container class="table-container">
           <div class="table">
@@ -9,7 +9,7 @@
               :headers="headers"
               :items="entries"
               :search="search"
-              :items-per-page="5"
+              :items-per-page="8"
               :footer-props="{
                 fixed: true,
                 showFirstLastPage: true,
@@ -119,11 +119,11 @@ export default {
   }
 }
 
-.top-consumers div.v-input {
+.all-stock div.v-input {
   padding-top: 0;
 }
 
-.top-consumers div.v-data-table {
+.all-stock div.v-data-table {
   > div.v-input {
     flex-grow: 0;
   }
@@ -134,15 +134,15 @@ export default {
   }
 }
 
-.top-consumers div.v-input__slot {
+.all-stock div.v-input__slot {
   margin: 0;
 }
 
-.top-consumers div.v-text-field__details {
+.all-stock div.v-text-field__details {
   display: none;
 }
 
-.top-consumers div.v-data-table__wrapper {
+.all-stock div.v-data-table__wrapper {
   height: 280px;
   width: 100%;
   > table {
@@ -168,4 +168,58 @@ div.v-data-table.theme--light {
 div.v-data-footer__select {
   display: none;
 }
+</style>
+
+<style lang='scss'>
+
+.all-stock div.v-input {
+  padding-top: 0;
+}
+
+.all-stock div.v-data-table {
+  > div.v-input {
+    flex-grow: 0;
+  }
+  > div.v-data-footer {
+    width: 100%;
+    justify-content: center;
+    align-self: flex-end;
+  }
+}
+
+.all-stock div.v-input__slot {
+  margin: 0;
+}
+
+.all-stock div.v-text-field__details {
+  display: none;
+}
+
+.all-stock div.v-data-table__wrapper {
+  height: 280px;
+  width: 100%;
+  > table {
+    height: 280px;
+    width: 100%;
+    th.text-start {
+      height: 32px;
+    }
+    td.text-start {
+      height: 31px;
+      font-size: 0.7em;
+    }
+    .space-filler {
+      flex-grow: 1;
+    }
+  }
+}
+
+div.v-data-table.theme--light {
+  background-color: transparent;
+}
+
+div.v-data-footer__select {
+  display: none;
+}
+
 </style>

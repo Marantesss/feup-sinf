@@ -56,14 +56,14 @@ export default {
           align: 'start',
           sortable: true,
           value: 'name',
-          width: '60%',
+          width: '50%',
         },
         {
           text: 'City',
           align: 'start',
           sortable: true,
           value: 'city',
-          width: '20%',
+          width: '30%',
         },
         {
           text: 'Taxpayer Number',
@@ -80,6 +80,7 @@ export default {
     api.costumers((res)=>{
       res.data.forEach(element => {
         element.route = '/client/' + element.customerKey
+        element.name = element.name.length > 47 ? element.name.substring(0, 47-3) + '...' : element.name
       });
       this.entries = res.data;
     })
@@ -117,6 +118,10 @@ export default {
   }
 }
 
+</style>
+
+<style lang='scss'>
+
 .top-consumers div.v-input {
   padding-top: 0;
 }
@@ -143,14 +148,14 @@ export default {
 .top-consumers div.v-data-table__wrapper {
   height: 280px;
   width: 100%;
-  > table {
+  table {
     height: 280px;
     width: 100%;
-    .text-start {
-      height: 31px !important;
-      max-height: 31px !important;
+    th.text-start {
+      height: 32px;
     }
     td.text-start {
+      height: 31px;
       font-size: 0.7em;
     }
     .space-filler {

@@ -25,7 +25,8 @@
 </template>
 
 <script>
-import ChartWrapper from '@/components/inventory/StockPerWarehouseChart.vue'
+//import ChartWrapper from '@/components/inventory/StockPerWarehouseChart.vue'
+import ChartWrapper from '@/components/inventory/StockPerWarehouseDoughnut.vue'
 import api from '@/services/api'
 import currencyFormatter from "@/mixins/currencyFormatter"
 

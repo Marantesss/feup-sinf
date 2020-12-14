@@ -43,6 +43,18 @@ export default {
         if (res.status == 200) {
           this.name = res.data.product;
           this.main.id = res.data.productKey;
+
+          let sum = 0;
+          let size = res.data.costOfGoods.length;
+          for (const cog of res.data.costOfGoods) {
+            console.log(cog)
+            if (cog === 0) {
+              size -= 1;
+            } else {
+              sum += cog;
+            }
+          }
+          this.main.cogs = sum / size;
         }
         console.log(res.data);
       },
@@ -58,13 +70,13 @@ export default {
       id: "",
       upc: "0",
       cogs: "00.0",
-      suppliers: ["F0001", "F0003"],
+      suppliers: [],
     },
     sales: {
       currentSellingPrice: "00.00",
       avgSellingPrice: "00.00",
       avgCost: "00.00",
-      avgProfitMargin: "00.00",
+      avgProfitMargin: "0",
       totalSold: "0",
       totalInStock: "0",
     },

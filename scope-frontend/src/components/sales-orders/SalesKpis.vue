@@ -12,7 +12,7 @@
         </div>
         <div class='main-kpi'>
           <div class='kpi-label'>
-            Total Cost of Good Solds
+            Total Cost of Goods Sold
           </div>
           <div class='kpi-big'>
             <span v-text="formatCurrency(cogs)"></span>

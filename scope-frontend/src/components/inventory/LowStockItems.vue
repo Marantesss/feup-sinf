@@ -5,20 +5,15 @@
         <span class='title'>
           Low Stock Items
         </span>
-        <div class='charts'>
-          <div class='top-half'>
-            <div class='hard-coded-height'><doughnut-wrapper style='height: 176px;' /></div>
-          </div>
-          <div class='bottom-half'>
-            <div class='hard-coded-height'><chart-wrapper style='height: 270px;'
-            :stackedX=true :stackedY=true /></div>
+        <div class='charts d-flex justify-center align-center'>
+          <div class='hard-coded-height'>
+            <chart-wrapper style='height: 270px;'
+              :stackedX=true :stackedY=true />
           </div>
         </div>
       </v-col>
       <v-col md='4' class='card-table'>
-        <simple-table-flat
-            :data=lowStockItems
-        />
+        <simple-table-flat :data=lowStockItems />
       </v-col>
     </v-row>
   </v-col>
@@ -26,11 +21,10 @@
 
 <script>
 import SimpleTableFlat      from '@/components/tables/SimpleTableFlat'
-import DoughnutWrapper      from '@/components/common/DoughnutWrapper'
 import ChartWrapper          from '@/components/inventory/MissingItensChart.vue'
 import api from "@/services/api";
 export default {
-  components: { SimpleTableFlat, DoughnutWrapper, ChartWrapper },
+  components: { SimpleTableFlat, ChartWrapper },
   name: 'LowStockItems',
   data: (() => {
     return {
@@ -77,15 +71,6 @@ export default {
       flex-direction: column;
       > div.charts {
         flex-grow: 1;
-        > div.top-half {
-          display: block;
-          border-bottom: 1px solid #969696;
-        }
-        > div.bottom-half {
-          display: block;
-          padding-top: 5px;
-          border-top: 1px solid #969696;
-        }
       }
     }
   }

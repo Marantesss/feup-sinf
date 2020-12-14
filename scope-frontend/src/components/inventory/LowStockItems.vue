@@ -27,6 +27,7 @@
 import SimpleTableFlat      from '@/components/tables/SimpleTableFlat'
 import DoughnutWrapper      from '@/components/common/DoughnutWrapper'
 import LineWrapper          from '@/components/common/LineWrapper'
+import api from "@/services/api";
 export default {
   components: { SimpleTableFlat, DoughnutWrapper, LineWrapper },
   name: 'LowStockItems',
@@ -36,12 +37,12 @@ export default {
         title: 'Current Stock',
         headers: [
           {
-            text: 'Item',
+            text: 'Product Name',
             align: 'start',
             sortable: true,
             value: 'name',
           },
-          { text: 'Sales', value: 'sales' },
+          { text: 'Total Value', value: 'sales' },
         ],
         values: [
           {
@@ -112,7 +113,21 @@ export default {
         ]
       }
     }
-  })  
+  }),
+  mounted (){
+    api.getInventory((res) =>{ 
+      this.lowStockItems.values = []
+      console.log(res)
+      res.data.materialItems.map((element)=>{
+        console.log(element)
+        this.lowStockItems.values.push({
+          name: element.description.length > 20 ? element.description.substr(0,20-1) +'...' : element.description,
+          sales: element.warehouses.reduce((accumulator,currValue)=>{accumulator+=currValue.stock* currValue.basePrice; return accumulator},0),
+          route: '/product/' + element.itemKey,
+        })
+      })
+    })
+  }
 }
 </script>
 

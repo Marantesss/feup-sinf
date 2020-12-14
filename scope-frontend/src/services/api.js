@@ -30,6 +30,7 @@ const routes = {
   costumers: '/sales/customers/',
   sales: '/sales/all',
   purchasesByProduct: '/purchases/products/',
+  supplier: (supplierId) => `/purchases/supplier/${supplierId}`,
   inventory: '/inventory/stock/',
   product: (productId) => `/inventory/product/${productId}`,
 };
@@ -117,6 +118,9 @@ const api = {
   },
   getPurchasesByProduct: (_cb) => {
     request(routes.purchasesByProduct, 'get', null, _cb);
+  },
+  getSupplier: (id, _cb) => {
+    request(routes.supplier(id), 'get', null, _cb);
   },
   getInventory: (_cb) => {
     request(routes.inventory, 'get', null, _cb);

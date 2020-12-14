@@ -32,7 +32,18 @@ export default {
     return {
       current: {
         title: 'Item Value',
-        headers: []
+        headers: [
+          {
+            text: 'Item Name',
+            align: 'start',
+            value: 'name',
+          },
+          { 
+            text: 'Value',
+            value: 'value' 
+          },
+        ],
+        values: []
       }
     }
   },
@@ -43,7 +54,7 @@ export default {
           //this.chartData.labels.push(element.description.length > 22 ? element.description.substr(0, 22-1) + '...': element.description)
           name: element.description.length > 20 ? element.description.substr(0,20-1) +'...' : element.description,
           value: element.warehouses.reduce((accumulator,currValue)=>{accumulator+=currValue.basePrice; return accumulator},0),
-          route: '/product/' + element.itemKey,
+          route: '/product' + element.itemKey,
         })
       })
     })

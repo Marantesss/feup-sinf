@@ -48,18 +48,17 @@ export default {
     }
   },
 
-mounted () {
-
-  api.getInventory((res)=>{
-    res.data.materialItems.map((element)=>{
-      this.current.values.push({
-        name: element.description.length > 20 ? element.description.substr(0,20-1) +'...' : element.description,
-        value: element.warehouses.reduce((accumulator,currValue)=>{accumulator+=currValue.stock; return accumulator},0),
-        route: '/product/' + element.itemKey,
+  mounted () {
+    api.getInventory((res)=>{
+      res.data.materialItems.map((element)=>{
+        this.current.values.push({
+          name: element.description.length > 20 ? element.description.substr(0,20-1) +'...' : element.description,
+          value: element.warehouses.reduce((accumulator,currValue)=>{accumulator+=currValue.stock; return accumulator},0),
+          route: '/product/' + element.itemKey,
+        })
       })
     })
-  })
-}
+  }
 
 }
 </script>

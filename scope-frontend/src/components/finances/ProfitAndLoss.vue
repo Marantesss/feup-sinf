@@ -217,38 +217,6 @@ export default {
         width: "25%",
       },
     ],
-    entries: [
-      {
-        account: "01",
-        description: "Ah que bem",
-        debit: "0.00",
-        credit: "0.00",
-      },
-      {
-        account: "01",
-        description: "Bh que bem",
-        debit: "0.00",
-        credit: "0.00",
-      },
-      {
-        account: "01",
-        description: "Ch que bem",
-        debit: "0.00",
-        credit: "0.00",
-      },
-      {
-        account: "01",
-        description: "Dh que bem",
-        debit: "0.00",
-        credit: "0.00",
-      },
-      {
-        account: "01",
-        description: "Eh que bem",
-        debit: "0.00",
-        credit: "0.00",
-      },
-    ],
   }),
 };
 </script>

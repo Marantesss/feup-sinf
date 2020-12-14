@@ -23,6 +23,11 @@
                   class="mx-4"
                 ></v-text-field>
               </template>
+              <template v-slot:item.vendor="{ item }">
+                <a :href="item.vendorroute">
+                  {{ item.vendor }}
+                </a>
+              </template>
               <template v-slot:item.paid="{ item }">
                 <v-icon v-if="item.paid" color="green">
                   mdi-check-circle-outline
@@ -59,49 +64,43 @@ export default {
           text: "Number",
           align: "start",
           sortable: true,
-          value: "number",
-          width: "13%",
+          value: "number"
         },
         {
           text: "Date",
           align: "start",
           sortable: true,
-          value: "date",
-          width: "15%",
+          value: "date"
         },
         {
           text: "Vendor",
           align: "start",
-          sortable: false,
-          value: "vendor",
-          width: "18%",
+          sortable: true,
+          value: "vendor"
         },
         {
-          text: "Total Products",
+          text: "Num Products",
           align: "start",
           sortable: true,
-          value: "numproducts",
-          width: "19.5%",
+          value: "numproducts"
         },
         {
           text: "Total",
           aligh: "start",
           sortable: true,
-          value: "total",
-          width: "12.5%",
+          value: "total"
         },
         {
           text: "Received",
           align: "start",
           sortable: true,
-          value: "paid",
-          width: "16%",
+          value: "paid"
         },
         {
           text: "Details",
           align: "start",
           sortable: false,
-          value: "details",
+          value: "details"
         },
       ],
       entries: [],
@@ -124,16 +123,18 @@ export default {
     api.purchases((res) => {
       res.data.forEach((element) => {
         const entry = {};
-        (entry.number = element.purchaseID),
-          (entry.date = element.date),
-          (entry.vendor = element.supplierName),
-          (entry.numproducts = element.quantity),
-          (entry.total = element.totalValue),
-          (entry.paid = element.received),
-          (entry.details = "https://my.jasminsoftware.com/243057/243057-0001/#/purchases/orders/editstandardorder?id=" + element.purchaseID); //TODO
-          this.entries.push(entry);
+        entry.number = element.purchaseID.substr(0, 8)+'...';
+        entry.date = element.date;
+        entry.vendorroute = '/supplier/' + element.supplierID;
+        entry.vendor = element.supplierName.length > 20
+          ? element.supplierName.substr(0, 17) + '...'
+          : element.supplierName;
+        entry.numproducts = element.quantity;
+        entry.total = '€ ' + element.totalValue;
+        entry.paid = element.received;
+        entry.details = "https://my.jasminsoftware.com/243057/243057-0001/#/purchases/orders/editstandardorder?id=" + element.purchaseID;
+        this.entries.push(entry);
       });
-
     });
   },
 };

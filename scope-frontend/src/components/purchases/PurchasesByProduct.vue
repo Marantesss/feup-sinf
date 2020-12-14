@@ -33,8 +33,9 @@ export default {
           {
             text: "Product",
             align: "start",
-            sortable: false,
-            value: "description",
+            sortable: true,
+            value: "name",
+            width: '57.5%'
           },
           { text: "Purchases", value: "value" },
         ],
@@ -49,6 +50,7 @@ export default {
         const key = element.description;
         let totalValue = this.purchases.values.find(x => x.description === key);
         if (totalValue === undefined) {
+          element.name = key.length > 20 ? key.substr(0,20-4) +'...' : key,
           element.route = '/product/' + element.id;
           this.purchases.values.push(element);
         } else {

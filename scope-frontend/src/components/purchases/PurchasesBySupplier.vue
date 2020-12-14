@@ -35,8 +35,9 @@ export default {
         {
           text: 'Supplier',
           align: 'start',
-          sortable: false,
-          value: 'supplierName',
+          sortable: true,
+          value: 'name',
+          width: '59%'
         },
         { text: 'Purchases', value: 'value' },
       ],
@@ -49,6 +50,7 @@ export default {
         const key = element.supplierName;
         let totalValue = this.purchases.values.find(x => x.supplierName === key);
         if (totalValue === undefined) {
+          element.name = key.length > 21 ? key.substr(0,21-4) +'...' : key,
           element.route = "/supplier/" + element.supplierKey;
           this.purchases.values.push(element);
         } else {

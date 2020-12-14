@@ -70,7 +70,7 @@ const routes = [
   // and finally the default route, when none of the above matches:
   {
     path: "*",
-    component: Overview
+    redirect: '/overview'
   }
 ]
 

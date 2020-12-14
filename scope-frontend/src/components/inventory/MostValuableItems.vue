@@ -20,6 +20,7 @@
 <script>
 import SimpleTable  from '@/components/tables/SimpleTable.vue'
 import ChartWrapper from '@/components/common/ChartWrapper.vue'
+import api from "@/services/api";
 
 export default {
   components: { 
@@ -126,7 +127,27 @@ export default {
         ]
       }
     }
-  }
+  },
+  mounted () {
+
+  api.getInventory((res)=>{
+    this.current.values = []
+    res.data.materialItems.map((element)=>{
+      this.current.values.push({
+        name: element.description,
+        value: Math.round(element.warehouses.reduce((accumulator,currValue)=>{accumulator+=currValue.basePrice; return accumulator},0)),
+        route: '/product' + element.itemKey,
+
+
+      })
+
+
+    })
+
+  })
+
+
+}
 }
 </script>
 

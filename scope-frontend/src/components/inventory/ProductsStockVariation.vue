@@ -20,6 +20,7 @@
 <script>
 import SimpleTableFlat  from '@/components/tables/SimpleTableFlat'
 import ChartWrapper from '@/components/common/ChartWrapper'
+import api from "@/services/api";
 
 export default {
   components: { 
@@ -126,7 +127,29 @@ export default {
         ]
       }
     }
-  }
+  },
+
+mounted () {
+
+  api.getInventory((res)=>{
+    this.current.values = []
+    res.data.materialItems.map((element)=>{
+      this.current.values.push({
+        name: element.description,
+        value: element.warehouses.reduce((accumulator,currValue)=>{accumulator+=currValue.stock; return accumulator},0),
+        route: '/product' + element.itemKey,
+
+
+      })
+
+
+    })
+
+  })
+
+
+}
+
 }
 </script>
 

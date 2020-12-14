@@ -19,6 +19,7 @@ router.get('/all', (_req, res) => {
       purchasesRaw.forEach((element) => {
         purchasesList.push({
           purchaseID: element.documentLines[0].orderId,
+          supplierID: element.sellerSupplierParty,
           supplierName: element.sellerSupplierPartyName,
           supplierTaxID: element.sellerSupplierPartyTaxId,
           totalValue: element.payableAmount.amount,

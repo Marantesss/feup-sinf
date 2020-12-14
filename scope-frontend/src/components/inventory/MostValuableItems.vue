@@ -32,123 +32,22 @@ export default {
     return {
       current: {
         title: 'Item Value',
-        headers: [
-          {
-            text: 'Item Name',
-            align: 'start',
-            value: 'name',
-          },
-          { 
-            text: 'Value',
-            value: 'value' 
-          },
-        ],
-        values: [
-          {
-            name: 'Product 1',
-            value: '1200',
-            route: '/product'
-          },
-          {
-            name: 'Product 2',
-            value: '1200',
-            route: '/product'
-          },
-          {
-            name: 'Product 3',
-            value: '1200',
-            route: '/product'
-          },
-          {
-            name: 'Product 4',
-            value: '1200',
-            route: '/product'
-          },
-          {
-            name: 'Product 5',
-            value: '1200',
-            route: '/product'
-          },
-          {
-            name: 'Product 6',
-            value: '1200',
-            route: '/product'
-          },
-          {
-            name: 'Product 7',
-            value: '1200',
-            route: '/product'
-          },
-          {
-            name: 'Product 8',
-            value: '1200',
-            route: '/product'
-          },
-          {
-            name: 'Product 9',
-            value: '1200',
-            route: '/product'
-          },
-          {
-            name: 'Product 10',
-            value: '1200',
-            route: '/product'
-          },
-          {
-            name: 'Product 11',
-            value: '1200',
-            route: '/product'
-          },
-          {
-            name: 'Product 12',
-            value: '1200',
-            route: '/product'
-          },
-          {
-            name: 'Product 13',
-            value: '1200',
-            route: '/product'
-          },
-          {
-            name: 'Product 14',
-            value: '1200',
-            route: '/product'
-          },
-          {
-            name: 'Product 15',
-            value: '1200',
-            route: '/product'
-          },
-          {
-            name: 'Product 16',
-            value: '1200',
-            route: '/product'
-          },
-        ]
+        headers: []
       }
     }
   },
   mounted () {
-
-  api.getInventory((res)=>{
-    this.current.values = []
-    res.data.materialItems.map((element)=>{
-      this.current.values.push({
-        //this.chartData.labels.push(element.description.length > 22 ? element.description.substr(0, 22-1) + '...': element.description)
-        name: element.description.length > 20 ? element.description.substr(0,20-1) +'...' : element.description,
-        value: element.warehouses.reduce((accumulator,currValue)=>{accumulator+=currValue.basePrice; return accumulator},0),
-        route: '/product' + element.itemKey,
-
-
+    api.getInventory((res)=>{
+      res.data.materialItems.map((element)=>{
+        this.current.values.push({
+          //this.chartData.labels.push(element.description.length > 22 ? element.description.substr(0, 22-1) + '...': element.description)
+          name: element.description.length > 20 ? element.description.substr(0,20-1) +'...' : element.description,
+          value: element.warehouses.reduce((accumulator,currValue)=>{accumulator+=currValue.basePrice; return accumulator},0),
+          route: '/product/' + element.itemKey,
+        })
       })
-
-
     })
-
-  })
-
-
-}
+  }
 }
 </script>
 

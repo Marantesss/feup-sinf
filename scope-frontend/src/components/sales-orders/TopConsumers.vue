@@ -24,8 +24,8 @@
                   class='mx-4'
                 ></v-text-field>
               </template>
-              <template v-slot:item.consumer='{ item }'>
-                <router-link :to="'/client/1'">
+              <template v-slot:item.name='{ item }'>
+                <router-link :to="item.route">
                   {{ item.name }}
                 </router-link>
               </template>

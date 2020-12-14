@@ -28,6 +28,7 @@ const routes = {
   suppliers: '/purchases/supplier/',
   purchases: '/purchases/all',
   costumers: '/sales/customers/',
+  costumer: (clientId) => `/sales/customers/${clientId}`,
   sales: '/sales/all',
   purchasesByProduct: '/purchases/products/',
   supplier: (supplierId) => `/purchases/supplier/${supplierId}`,
@@ -103,6 +104,9 @@ const api = {
   },
   costumers: (_cb) => {
     request(routes.costumers, 'get', null, _cb);
+  },
+  getCostumer: (id, _cb) => {
+    request(routes.costumer(id), 'get', null, _cb);
   },
   getAllSales: (_cb) => {
     request(routes.sales, 'get', null, _cb);

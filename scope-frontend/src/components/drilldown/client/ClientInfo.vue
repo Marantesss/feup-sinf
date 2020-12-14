@@ -139,7 +139,7 @@ export default {
   align-items: center;
   height: 100%;
   width: 100%;
-  font-size: 2.5em;
+  font-size: 1.5em;
 }
 
 .secondary-kpi .kpi-label {

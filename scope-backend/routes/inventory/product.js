@@ -12,13 +12,19 @@ router.get('/:id', async (req, res) => {
             //const aux = item.find((element) => {element.itemKey == 1})
             item.forEach((element)=>{
                 if(element.itemKey != itemID){
-                    console.log("Nope:", element.itemKey)
                     return
                 }
                 else{
 
                     response.product = element.description,
                     response.productKey = req.params.id,
+                    response.upc = element.barcode,
+                    response.description = element.complementaryDescription,
+                    response.costOfGoods= []
+                    element.materialsItemWarehouses.forEach((warehouse)=>{
+                        response.costOfGoods.push(warehouse.calculatedUnitCost.amount) 
+
+                    })
                     response.json = element
 
 

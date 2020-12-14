@@ -205,7 +205,7 @@ export default {
       {
         text: "Name",
         align: "start",
-        sortable: false,
+        sortable: true,
         value: "name",
         width: "75%",
       },

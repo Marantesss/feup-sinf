@@ -9,7 +9,6 @@
               :headers="headers"
               :items="entries"
               :search="search"
-              :custom-filter="filterOnlyCapsText"
               :items-per-page="5"
               :footer-props="{
                 fixed: true,

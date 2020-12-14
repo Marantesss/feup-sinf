@@ -25,9 +25,9 @@
                 ></v-text-field>
               </template>
               <template v-slot:item.consumer='{ item }'>
-                <a href='/client'>
+                <router-link :to="'/client/1'">
                   {{ item.name }}
-                </a>
+                </router-link>
               </template>
               <template v-slot:item.totalspent='{ item }'>
                 {{ '€ ' + item.adress }}

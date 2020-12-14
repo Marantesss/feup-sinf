@@ -24,9 +24,9 @@
                 ></v-text-field>
               </template>
               <template v-slot:item.vendor="{ item }">
-                <a :href="item.vendorroute">
+                <router-link :to="item.vendorroute">
                   {{ item.vendor }}
-                </a>
+                </router-link>
               </template>
               <template v-slot:item.paid="{ item }">
                 <v-icon v-if="item.paid" color="green">

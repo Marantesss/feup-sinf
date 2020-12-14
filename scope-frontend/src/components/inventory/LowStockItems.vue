@@ -49,7 +49,7 @@ export default {
       this.lowStockItems.values = []
       res.data.materialItems.map((element)=>{
         this.lowStockItems.values.push({
-          name: element.description.length > 20 ? element.description.substr(0,20-4) +'...' : element.description,
+          name: element.description.length > 19 ? element.description.substr(0,19-4) +'...' : element.description,
           sales: element.warehouses.reduce((accumulator,currValue)=>{accumulator+=currValue.stock* currValue.basePrice; return accumulator},0),
           route: '/product/' + element.itemKey,
         })

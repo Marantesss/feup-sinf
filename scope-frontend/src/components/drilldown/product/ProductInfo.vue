@@ -44,7 +44,7 @@ a<template>
               </div>
               <div class='kpi-big'>
                 <span v-for='(s, index) in main.suppliers' :key='s'>
-                  <a href="/supplier">{{ s }}</a>
+                  <router-link :to="'/supplier/1'">{{ s }}</router-link>
                   <span v-if='index+1 < main.suppliers.length'>,&nbsp;</span>
                 </span>
               </div>

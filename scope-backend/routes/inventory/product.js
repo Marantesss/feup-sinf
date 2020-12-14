@@ -4,10 +4,31 @@ const router = express.Router();
 
 router.get('/:id', async (req, res) => {
     const itemID = req.params.id;
-    //console.log('materialscore/materialsitems/${itemID}/extension');
-    jasmin.jasminRequest('get', `materialscore/materialsitems/${itemID}/extension`).then(
+    const response = {}
+    //jasmin.jasminRequest('get', `materialscore/materialsitems/${itemID}/extension`).then(
+    jasmin.jasminRequest('get', `materialscore/materialsitems`).then(
         (item) => {
-            res.json(item);
+            const response = {}
+            //const aux = item.find((element) => {element.itemKey == 1})
+            item.forEach((element)=>{
+                if(element.itemKey != itemID){
+                    console.log("Nope:", element.itemKey)
+                    return
+                }
+                else{
+
+                    response.product = element.description,
+                    response.productKey = req.params.id,
+                    response.json = element
+
+
+                }
+
+
+            })
+
+
+            res.json(response);
         }
 
     ).catch(

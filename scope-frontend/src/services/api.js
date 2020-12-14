@@ -30,7 +30,8 @@ const routes = {
   costumers: '/sales/customers/',
   sales: '/sales/all',
   purchasesbyProduct: '/purchases/products/',
-  inventory: '/inventory/stock'
+  inventory: '/inventory/stock/',
+  product: 'inventory/product/'
 };
 
 /**
@@ -122,6 +123,9 @@ const api = {
   },
   getInventory: (_cb) =>{
     request(routes.inventory, 'get', null, _cb);
+  },
+  getProduct:(data,_cb )=>{
+    request(routes.product + data, 'get', null, _cb);
   },
 };
 

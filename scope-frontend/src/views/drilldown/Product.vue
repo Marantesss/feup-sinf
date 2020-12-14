@@ -18,6 +18,7 @@
 import ProductInfo            from '@/components/drilldown/product/ProductInfo.vue'
 import ProductSales           from '@/components/drilldown/product/ProductSales.vue'
 import LineChartWithTitle     from '@/components/generic/LineChartWithTitle.vue'
+import api from '@/services/api'
 export default {
   components: {
     ProductInfo,
@@ -47,6 +48,11 @@ export default {
         totalInStock: '45'
       },
     }
+  },
+  mounted () {
+    api.getProduct(1,(res)=>{
+      console.log(res)
+    })
   }
 };
 </script>

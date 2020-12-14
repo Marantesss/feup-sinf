@@ -13,9 +13,6 @@ export default {
   components: {
     BarChart,
   },
-  // computed() {
-
-  // },
   data() {
     return {
       loaded: false,
@@ -56,25 +53,28 @@ export default {
   },
   mounted() {
     api.getInventory((res) => {
-      this.chartData.datasets[0].data = [];
+      var auxarray = [];
       res.data.materialItems.forEach((element) => {
-        const stock = element.warehouses.reduce((acc, currV) => {
+        var obj = {}
+        obj.description = element.description;
+        obj.stock = element.warehouses.reduce((acc,currV)=>{
           acc += currV.stock;
           return acc;
-        }, 0);
-
+        },0);
         if (element.minStock != null) {
-          if (element.minStock > stock) {
-            this.chartData.datasets[0].data.push(
-              element.minStock - stock
-            );
-            this.chartData.labels.push(
-              element.description.length > 20
-                ? element.description.substr(0, 20 - 1) + "..."
-                : element.description
-            );
+          if (element.minStock > obj.stock) {
+            obj.value = element.minStock - obj.stock;
+            auxarray.push(obj);
           }
         }
+      });
+      auxarray.sort(function(a, b){return b.value-a.value});
+      auxarray = auxarray.slice(0,5);
+      auxarray.forEach(element => {
+        this.chartData.labels.push(element.description.length > 10
+                ? element.description.substr(0, 10 - 1) + "..."
+                : element.description);
+        this.chartData.datasets[0].data.push(element.value);
       });
       this.loaded = true;
     });

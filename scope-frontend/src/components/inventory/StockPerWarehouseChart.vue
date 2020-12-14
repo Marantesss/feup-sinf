@@ -25,7 +25,7 @@ export default {
         ],
         datasets: [
           {
-            label: "Number of Items",
+            label: "€",
             backgroundColor: "#ffc857",
             data: [],
           },
@@ -36,6 +36,7 @@ export default {
         maintainAspectRatio: false,
         legend: {
           position: "right",
+          display: false
         },
         scales: {
           xAxes: [
@@ -65,7 +66,7 @@ export default {
             obj[warehouse.warehouseDescription]= 0
           }
 
-          obj[warehouse.warehouseDescription] += warehouse.stock
+          obj[warehouse.warehouseDescription] += warehouse.basePrice * warehouse.stock
         });
       });
 

@@ -90,11 +90,44 @@ router.get('/customers', (_req, res) => {
 
             res.json(customers);
         })
-    
-    
-    
-    
-    
+    .catch(() => {
+        const err = new Error("Failed to customer sales");
+        err.status = 400;
+        res.status(400).json({
+            message: err.message,
+            error: err
+        });
+    });
+
+
+});
+
+router.get('/customers/:id', (req, res) => {
+    jasmin.jasminRequest("get", "/salesCore/customerParties/").then(
+        (customersData) => {
+            const customers = [];
+
+            customersData.forEach((customer) => {
+                customers.push({
+                    customerKey: customer.partyKey,
+                    name: customer.name,
+                    adress: customer.streetName || "-",
+                    postalZone: customer.postalZone || "-",
+                    city: customer.cityName || "-",
+                    website: customer.websiteUrl || "-",
+                    taxID: customer.companyTaxID || "-",
+                    country: customer.countryDescription,
+                    
+
+                });
+            });
+
+            console.log(req.params.id)
+            customers.forEach((element) => {
+                if(element.customerKey == req.params.id)
+                    res.json(element)
+            })
+        })
     .catch(() => {
         const err = new Error("Failed to customer sales");
         err.status = 400;

@@ -5,7 +5,10 @@
       <client-sales :sales="sales" />
     </v-row>
     <v-row id="core-view-row">
-      <wide-bar-chart-with-title :title="'Purchases Over Time'" />
+      <wide-bar-chart-with-title
+        :monthData="chartData"
+        :title="'Purchases Over Time'"
+      />
     </v-row>
   </v-container>
 </template>
@@ -18,7 +21,7 @@ import api from "@/services/api";
 
 export default {
   name: "Client",
-  
+
   components: {
     ClientInfo,
     ClientSales,
@@ -78,6 +81,7 @@ export default {
         avgCostPerSale: "0",
         totalSales: "0",
       },
+      chartData: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 178.35],
     };
   },
 };

@@ -5,7 +5,7 @@
       <supplier-sales :sales="sales" />
     </v-row>
     <v-row id="core-view-row">
-      <wide-bar-chart-with-title :title="'Purchases Over Time'" />
+      <wide-bar-chart-with-title :monthData="chartData" :title="'Purchases Over Time'" />
     </v-row>
   </v-container>
 </template>
@@ -45,6 +45,14 @@ export default {
           this.main.address.push(res.data.adress);
           this.main.contacts.email = res.data.email;
           this.main.fiscal = res.data.taxID;
+          // yep: for leroy
+          this.sales = {
+            totalPurchased: 230.01 + 198.4,
+            avgCostPerOrder: (230.01 + 198.4) / 2,
+            totalPurchaseOrders: 2,
+            pendingPurchaseValues: 230.01 + 198,
+            purchaseBacklog: 230.01 + 198,
+          };
         }
         console.log(res);
       },
@@ -74,6 +82,7 @@ export default {
         pendingPurchaseValues: "0.00",
         purchaseBacklog: "0.00",
       },
+      chartData: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 230.01 + 198.4],
     };
   },
 };

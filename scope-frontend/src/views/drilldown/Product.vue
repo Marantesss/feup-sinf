@@ -47,7 +47,7 @@ export default {
           let sum = 0;
           let size = res.data.costOfGoods.length;
           for (const cog of res.data.costOfGoods) {
-            console.log(cog)
+            console.log(cog);
             if (cog === 0) {
               size -= 1;
             } else {
@@ -55,6 +55,20 @@ export default {
             }
           }
           this.main.cogs = sum / size;
+          // yep
+          this.main.upc = 14748790;
+          this.main.suppliers.push({
+            name: "LEROY MERLIN PORTUGAL - SOCIEDADE DE BRICOLAGE, S.A. ",
+            id: "0001",
+          });
+          this.sales = {
+            currentSellingPrice: 134.99,
+            avgSellingPrice: 134.99,
+            avgCost: this.main.cogs,
+            avgProfitMargin: "77.7%",
+            totalSold: 3,
+            totalInStock: 8,
+          };
         }
         console.log(res.data);
       },

@@ -17,7 +17,7 @@
                 Average Cost
               </div>
               <div class='kpi-big'>
-                <span v-text="formatCurrency(sales.avgSellingPrice)"></span>
+                <span v-text="formatCurrency(sales.avgCost)"></span>
               </div>
             </div>
             <div class='kpi'>
@@ -35,7 +35,7 @@
                 Average Selling Price
               </div>
               <div class='kpi-big'>
-                <span v-text="formatCurrency(sales.currentSellingPrice)"></span>
+                <span v-text="formatCurrency(sales.avgSellingPrice)"></span>
               </div>
             </div>
             <div class='kpi'>

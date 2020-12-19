@@ -42,9 +42,9 @@ a<template>
               <div class='kpi-label'>
                 Suppliers
               </div>
-              <div class='kpi-big'>
+              <div class='text-center'>
                 <span v-for='(s, index) in main.suppliers' :key='s'>
-                  <router-link :to="'/supplier/1'">{{ s }}</router-link>
+                  <router-link :to="`/supplier/${s.id}`">{{ s.name }}</router-link>
                   <span v-if='index+1 < main.suppliers.length'>,&nbsp;</span>
                 </span>
               </div>

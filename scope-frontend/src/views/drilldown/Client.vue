@@ -47,6 +47,10 @@ export default {
           this.main.address.push(res.data.address);
           this.main.address.push(res.data.city);
           this.main.address.push(res.data.country);
+          // yep
+          this.sales.totalSalesValue = 178.35;
+          this.sales.avgCostPerSale = 32.56;
+          this.sales.totalSales = 1;
         }
         console.log(res.data);
       },

@@ -5,8 +5,8 @@
       <product-sales :sales="sales" />
     </v-row>
     <v-row id="core-view-row">
-      <line-chart-with-title :title="'Purchases vs Sales'" />
-      <line-chart-with-title :title="'Product\'s Price Variation'" />
+      <line-chart-with-title :monthData="salesData" :title="'Purchases vs Sales'" />
+      <line-chart-with-title :monthData="productPriceData" :title="'Product\'s Price Variation'" />
     </v-row>
   </v-container>
 </template>
@@ -94,6 +94,8 @@ export default {
       totalSold: "0",
       totalInStock: "0",
     },
+    salesData: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3],
+    productPriceData: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 134.99],
   }),
 };
 </script>
